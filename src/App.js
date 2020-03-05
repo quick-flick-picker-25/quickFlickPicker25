@@ -16,7 +16,7 @@ class App extends Component {
   //       'api_key': '8341ba99fae06408554c7e8411e4a4f9'
   //     }
   //  }).then((response) => { console.log(response) });;
-    axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=8341ba99fae06408554c7e8411e4a4f9&language=en-US').then((response)=>{console.log(response)});
+    // axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=8341ba99fae06408554c7e8411e4a4f9&language=en-US').then((response)=>{console.log(response)});
     return (
       <div className="App">
         <Lists />

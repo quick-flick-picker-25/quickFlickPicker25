@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from './firebase';
 
 class Lists extends Component {
     constructor () {
         super ()
         this.state = {
-            dbRef: firebase.database().ref()
+            dbRef: firebase.database().ref(),
             usersList: [],
         }
     }
@@ -15,6 +15,8 @@ class Lists extends Component {
         //on value change collect data
         this.state.dbRef.on('value', (response) => {
             const data = response.val();
+
+            console.log(response);
             //make empty array
             const stateToSet = []
             //loop through our data
