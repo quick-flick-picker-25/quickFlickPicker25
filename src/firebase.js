@@ -1,17 +1,23 @@
 // firebase.js
 import firebase from 'firebase';
 
-// Initialize Firebase
-// USE YOUR CONFIG OBJECT
-const config = {
-	apiKey: "YOUR-API-KET",
-	authDomain: "bookshelf-8d68a.firebaseapp.com",
-	databaseURL: "https://bookshelf-8d68a.firebaseio.com",
-	projectId: "bookshelf-8d68a",
-	storageBucket: "bookshelf-8d68a.appspot.com",
-	messagingSenderId: "548100999451"
-};
-firebase.initializeApp(config);
+  const firebaseConfig = {
+    apiKey: "AIzaSyAmkko3XAdO0l3amrDc4VMBv9e0xuCfEbo",
+    authDomain: "quickflickpicker.firebaseapp.com",
+    databaseURL: "https://quickflickpicker.firebaseio.com",
+    projectId: "quickflickpicker",
+    storageBucket: "quickflickpicker.appspot.com",
+    messagingSenderId: "981312277648",
+    appId: "1:981312277648:web:489979be7011747edd9c15"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
-// this exports the CONFIGURED version of firebase
 export default firebase;
+
+
+
+
+
+
+
