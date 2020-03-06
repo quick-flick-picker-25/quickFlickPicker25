@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // import firebase from './firebase';
+import {
+    BrowserRouter as Router,
+    Route, Link
+} from 'react-router-dom';
+import MovieDetails from './MovieDetails';
+
 
 class MovieSearch extends Component {
     constructor() {
@@ -50,12 +56,15 @@ class MovieSearch extends Component {
                         {
                             this.state.movies.map((movie) => {
                                 return (
-                                    <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                    <Link key={movie.id} to={`/movies/${movie.id}`}>
+                                        <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                    </Link>
                                 );
                             })
                         }
                     </ul>
                 }
+                <Route path="/movies/:movieID" component={MovieDetails} />
             </div>
         );
     }
