@@ -20,8 +20,6 @@ class App extends Component {
     // update own state with one from child component
     this.setState({
       userLists: lists,
-    }, ()=>{
-      console.log(this.state.userLists);
     })
   }
 
