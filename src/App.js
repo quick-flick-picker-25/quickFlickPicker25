@@ -4,6 +4,7 @@ import axios from 'axios';
 import firebase from './firebase'
 import './App.css';
 import Lists from './Lists';
+import MovieSearch from './MovieSearch';
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
     return (
       <div className="App">
         <Lists updateParentListFunc = {this.handleGetLists}/>
+        <MovieSearch />
       </div>
     );
   }
