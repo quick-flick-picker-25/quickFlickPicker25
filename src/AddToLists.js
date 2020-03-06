@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import './addToLists.css';
+import GetMovieDetails from './GetMovieDetails';
 
 class AddToLists extends Component{
     constructor(){
@@ -8,6 +9,8 @@ class AddToLists extends Component{
 
         this.state = {
             userLists: [],
+            movieDetails: null,
+            testState: false,
         }
     }
 
@@ -32,6 +35,28 @@ class AddToLists extends Component{
         event.preventDefault();
     }
 
+    clickHandler = (event) => {
+        event.preventDefault();
+        const dbRef = firebase.database().ref(event.target.text)
+        const movieInfo = this.state.movieDetails
+        const genres = movieInfo.genres.map((genre) => {
+            return genre.name
+        })
+        const details = {
+            id:movieInfo.id,
+            title:movieInfo.title,
+            runtime:movieInfo.runtime,
+            genre:genres
+        }
+        dbRef.push(details)
+    }
+
+    getMovieDetails = (movieDetails) => {
+        this.setState({
+            movieDetails: movieDetails,
+        })
+    }
+
     render(){
         const userLists = this.state.userLists;
         return(
@@ -44,7 +69,9 @@ class AddToLists extends Component{
                         {userLists.map((list) => {
                             return (
                                 <li>
-                                    {list.key}
+                                    <GetMovieDetails movieID={this.props.movieId} 
+                                    movieDetails={this.getMovieDetails} />
+                                    <a href="" onClick={this.clickHandler}>{list.key}</a>
                                 </li>
                             )
                         })}

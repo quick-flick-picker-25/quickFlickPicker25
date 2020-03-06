@@ -53,7 +53,7 @@ console.log(response)
                             this.state.movies.map((movie) => {
                                 return (
                                     <li key={movie.id} className="listMenu">
-                                        <AddToLists />
+                                        <AddToLists movieId={movie.id}/>
                                         <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
                                     </li>
                                 );

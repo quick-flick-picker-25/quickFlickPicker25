@@ -24,5 +24,6 @@ right: 0;
   }
 
   li{
-      width:fit-content
+      width:fit-content;
+      font-size: 2rem;
   }
