@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AddToLists from './AddToLists';
+import './addToLists.css'
 // import firebase from './firebase';
 
 class MovieSearch extends Component {
@@ -26,7 +28,7 @@ class MovieSearch extends Component {
                 query: this.state.keyword,
             }
         }).then((response) => {
-
+console.log(response)
             const movies = response.data.results;
             this.setState({
                 movies,
@@ -50,7 +52,10 @@ class MovieSearch extends Component {
                         {
                             this.state.movies.map((movie) => {
                                 return (
-                                    <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                    <li key={movie.id} className="listMenu">
+                                        <AddToLists />
+                                        <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                    </li>
                                 );
                             })
                         }

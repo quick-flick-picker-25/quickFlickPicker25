@@ -1,0 +1,28 @@
+ul {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+    /* color: inherit; */
+  }
+  .addToLists {
+position: absolute;
+right: 0;
+}
+  .listMenu {
+    position: relative;
+  }
+
+  .listMenu:active ul.listSubMenu,
+  .listMenu:focus-within ul.listSubMenu {
+    display: block;
+  }
+  ul.listSubMenu {
+    display: none;
+    position: absolute;
+    right: 0;
+  }
+
+  li{
+      width:fit-content
+  }
