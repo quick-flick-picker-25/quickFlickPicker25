@@ -5,6 +5,29 @@ import './App.css';
 import Lists from './Lists';
 
 class App extends Component {
+<<<<<<< HEAD
+=======
+
+  constructor(){
+    super();
+
+    this.state = {
+      userLists: [],
+    }
+  }
+
+  // make a function to update state globally (in parent)
+  handleGetLists = (lists) => {
+    // update own state with one from child
+    this.setState({
+      userLists: lists,
+    }, ()=>{
+      console.log(this.state.userLists);
+    })
+  }
+
+
+>>>>>>> e9704369cb1b7d4758ec06954faa54366d0f5580
   render() {
     
   //  axios({
