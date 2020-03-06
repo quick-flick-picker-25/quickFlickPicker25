@@ -17,6 +17,7 @@ class App extends Component {
 
   // make a function to update state globally (in parent)
   handleGetLists = (lists) => {
+    // update own state with one from child
     this.setState({
       userLists: lists,
     }, ()=>{
