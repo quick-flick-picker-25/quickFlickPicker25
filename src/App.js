@@ -5,6 +5,10 @@ import firebase from './firebase'
 import './App.css';
 import Lists from './Lists';
 import MovieSearch from './MovieSearch';
+import {
+  BrowserRouter as Router,
+  Route, Link
+} from 'react-router-dom';
 
 class App extends Component {
 
@@ -27,10 +31,12 @@ class App extends Component {
 
   render() {
     return (
+    <Router>
       <div className="App">
         <Lists updateParentListFunc = {this.handleGetLists}/>
-        <MovieSearch />
+        <Route path="/" component={MovieSearch} />
       </div>
+    </Router>  
     );
   }
 }
