@@ -9,6 +9,7 @@ import {
   BrowserRouter as Router,
   Route, Link
 } from 'react-router-dom';
+import MovieDetails from './MovieDetails';
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
       <div className="App">
         <Lists updateParentListFunc = {this.handleGetLists}/>
         <Route path="/" component={MovieSearch} />
+        <Route path="/movies/:movieID" component={MovieDetails} />
       </div>
     </Router>  
     );

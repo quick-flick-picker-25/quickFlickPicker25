@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {
+    BrowserRouter as Router,
+    Route, Link
+} from 'react-router-dom';
 
 
 
@@ -24,17 +28,16 @@ class MovieDetails extends Component {
             this.setState({
                 movie: movie,
             })
-            console.log(this.state.movie);
-            
+
+            console.log(movie)
         })
     }
 
     render(){
-
-        // console.log(this.state.movie);
         return (
             <section className="movieDetails">
-                
+                <Link to="/">Back to results</Link>
+                <h1>{this.state.movie.title}</h1>
             </section>
         )
     }

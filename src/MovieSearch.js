@@ -5,7 +5,7 @@ import {
     BrowserRouter as Router,
     Route, Link
 } from 'react-router-dom';
-import MovieDetails from './MovieDetails';
+
 
 
 class MovieSearch extends Component {
@@ -55,6 +55,7 @@ class MovieSearch extends Component {
                     <ul>
                         {
                             this.state.movies.map((movie) => {
+                                
                                 return (
                                     <Link key={movie.id} to={`/movies/${movie.id}`}>
                                         <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
@@ -64,7 +65,7 @@ class MovieSearch extends Component {
                         }
                     </ul>
                 }
-                <Route path="/movies/:movieID" component={MovieDetails} />
+
             </div>
         );
     }
