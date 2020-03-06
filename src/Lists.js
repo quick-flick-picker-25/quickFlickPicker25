@@ -71,7 +71,7 @@ class Lists extends Component {
             <div>
                 <h2>Your Lists</h2>
                 <form action="" onSubmit={this.handleUserListName}>
-                    <label htmlFor="listName"></label>
+                    <label htmlFor="listName">Please enter a list name</label>
                     <input onChange={this.handleUserInput} type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
                     <button type="submit">Submit</button>
                 </form>
