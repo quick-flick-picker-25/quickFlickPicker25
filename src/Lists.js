@@ -60,7 +60,7 @@ class Lists extends Component {
         })
     }
 
-    // make a function that deletes the list
+    // make a function that deletes the specific list
     handleDeleteList = (listToDelete) => {
         // deletes the list
         this.state.dbRef.child(listToDelete).remove();
