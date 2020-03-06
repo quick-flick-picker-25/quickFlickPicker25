@@ -5,7 +5,7 @@ class Lists extends Component {
     constructor () {
         super ()
         this.state = {
-            dbRef: firebase.database().ref()
+            dbRef: firebase.database().ref(),
             usersList: [],
         }
     }
