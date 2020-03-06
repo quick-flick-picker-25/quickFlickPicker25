@@ -16,8 +16,6 @@ class Lists extends Component {
         //on value change collect data
         this.state.dbRef.on('value', (response) => {
             const data = response.val();
-
-            console.log(data);
             //make empty array
             const stateToSet = []
             //loop through our data
@@ -32,6 +30,8 @@ class Lists extends Component {
             //set state to our array
             this.setState({
                 usersList: stateToSet,
+            }, ()=>{
+                this.props.updateParentListFunc(this.state.usersList);
             })
         })
     }
@@ -60,6 +60,12 @@ class Lists extends Component {
         })
     }
 
+    // make a function that deletes the list
+    handleDeleteList = (listToDelete) => {
+        // deletes the list
+        this.state.dbRef.child(listToDelete).remove();
+    }
+
     render() {
         return (
             <div>
@@ -68,6 +74,19 @@ class Lists extends Component {
                     <input onChange={this.handleUserInput} type="text" placeholder="New list name" value={this.state.userListName}/>
                     <button type="submit">Submit</button>
                 </form>
+                <ul>
+                    {
+                        this.state.usersList.map((list)=>{
+                            return(
+                                <li key={list.key}>
+                                    <h3>{list.key}</h3>
+                                    <button>see list.</button>
+                                    <button onClick={()=>{this.handleDeleteList(list.key)}}>delete list.</button>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
             </div>
         )
     }
