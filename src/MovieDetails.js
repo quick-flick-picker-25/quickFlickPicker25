@@ -14,11 +14,15 @@ class MovieDetails extends Component {
         this.state = {
             movie: {},
             movieGenre: [],
-            credits: {}
+            credits: {},
+            directors: [],
+            cast: [],
+            videoLink:'',
         }
     }
 
     componentDidMount = () => {
+        // get movie details
         axios ({
             url: `https://api.themoviedb.org/3/movie/${this.props.match.params.movieID}`,
             params: {
@@ -31,10 +35,9 @@ class MovieDetails extends Component {
                 movie: movie,
                 movieGenre: movie.genres,
             })
-
-            console.log(this.state.movieGenre)
         })
 
+        // get cast and crew
         axios({
             url: `https://api.themoviedb.org/3/movie/${this.props.match.params.movieID}/credits`,
             params: {
@@ -43,17 +46,42 @@ class MovieDetails extends Component {
         }).then(response => {
             const  credits = response.data;
 
-            const director = credits.filter((job) => {
-                
+            // if the job is directing, return to the new array
+            const director = credits.crew.filter((crew) => {
+                if(crew.job === 'Director'){
+                    return crew;
+                }
+            })
+
+            // take only first couple cast members
+            const cast = credits.cast.filter((castMember, index) => {
+                if(index <= 4){
+                    return castMember;
+                }
             })
             
+            // set state
+            this.setState({
+                directors: director,
+                cast: cast,
+            })
 
-            // this.setState({
-            //     movie: movie,
-            //     movieGenre: movie.genres,
-            // })
+            // console.log();
+            // console.log(this.state.movie);
+        })
 
-            // console.log(this.state.movie)
+        // get video link
+        axios ({
+            url: `https://api.themoviedb.org/3/movie/${this.props.match.params.movieID}/videos`,
+            params: {
+                api_key: '8341ba99fae06408554c7e8411e4a4f9',
+            }
+        }).then(response => {
+            const videos = response.data;
+
+            this.setState({
+                videoLink: `https://www.youtube.com/embed/${videos.results[0].key}`
+            })
         })
 
     }
@@ -74,20 +102,40 @@ class MovieDetails extends Component {
                     <h1>{this.state.movie.title}</h1>
                     <div className="genres">
                         <h2>Genres</h2>
-                        {/* {
-                            this.state.movie.genres.map((genre, index) => {
+                        {
+                            this.state.movieGenre.map((genre, index) => {
                                 return (
                                     <p key={index}>{genre.name}</p>
                                 )
                             })
-                        } */}
+                        }
                     </div>
                     <div className="director">
                         <h2>Director</h2>
-                     <p>{this.state.movie.director}</p>
+                        {
+                            this.state.directors.map((director)=>{
+                                return(
+                                    <p key={director.credit_id}>{director.name}</p>
+                                )
+                            })
+                        }
+                    </div>
+                    <div className="cast">
+                        <h2>Cast</h2>
+                        {
+                            this.state.cast.map((actor)=>{
+                                return(
+                                    <p key={actor.credit_id}>{actor.name}</p>
+                                )
+                            })
+                        }
                     </div>
                 </div>
-
+                <div className="description">
+                    <h2>Description</h2>
+                    <p>{this.state.movie.overview}</p>
+                </div>
+                <a className="watchVideo" href={this.state.videoLink}>Watch Trailer</a>
             </section>
         )
     }

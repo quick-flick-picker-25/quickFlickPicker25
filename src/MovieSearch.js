@@ -5,6 +5,7 @@ import {
     BrowserRouter as Router,
     Route, Link
 } from 'react-router-dom';
+import brokenImage from "./brokenLink-01.png";
 
 
 
@@ -58,7 +59,7 @@ class MovieSearch extends Component {
                                 
                                 return (
                                     <Link key={movie.id} to={`/movies/${movie.id}`}>
-                                        <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                        { movie.poster_path === null ?  <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />}
                                     </Link>
                                 );
                             })
