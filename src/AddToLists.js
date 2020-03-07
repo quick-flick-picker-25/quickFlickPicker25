@@ -33,21 +33,44 @@ class AddToLists extends Component{
     handleReload = (event) =>{
         event.preventDefault();
     }
+    checkIfMovieExist =(dbRef, movieId) =>{
+        const stateToBeSet = [];
+        dbRef.on('value', (response) => {
+            const dataFromDb = response.val();
+            for (let key in dataFromDb) {
+                if (dataFromDb[key] === 'list 3') {
+                    continue;
+                }
+                stateToBeSet.push(dataFromDb[key].id)
+            }
+        });
+        console.log(stateToBeSet);
+        if(stateToBeSet.indexOf(movieId)>-1) {
+            return true;
+        }
+        return false;
 
+    }
     clickHandler = (event) => {
         event.preventDefault();
-        const dbRef = firebase.database().ref(event.target.text)
-        const movieInfo = this.state.movieDetails
-        const genres = movieInfo.genres.map((genre) => {
-            return genre.name
-        })
-        const details = {
-            id:movieInfo.id,
-            title:movieInfo.title,
-            runtime:movieInfo.runtime,
-            genre:genres
+        const dbRef = firebase.database().ref(event.target.text);
+        const movieInfo = this.state.movieDetails;
+        if(this.checkIfMovieExist(dbRef, movieInfo.id))
+        {
+            alert('The movie is already in the list');
         }
-        dbRef.push(details)
+        else {
+            const genres = movieInfo.genres.map((genre) => {
+                return genre.name
+            })
+            const details = {
+                id: movieInfo.id,
+                title: movieInfo.title,
+                runtime: movieInfo.runtime,
+                genre: genres
+            }
+            dbRef.push(details)
+        }
     }
 
     getMovieDetails = (movieDetails) => {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import AddToLists from './AddToLists';
-import './addToLists.css'
+import './addToLists.css';
+import MovieDetails from './MovieDetails';
 // import firebase from './firebase';
 import {
     BrowserRouter as Router,
@@ -35,12 +36,19 @@ class MovieSearch extends Component {
                 query: this.state.keyword,
             }
         }).then((response) => {
-console.log(response)
             const movies = response.data.results;
+            const filteredMovies=movies.filter((movie)=>{
+                return (movie.poster_path !== null && movie.genre_ids.length>0)
+            })
             this.setState({
-                movies,
+                movies: filteredMovies,
+            }, ()=>{
+                    if (this.state.movies.length === 0) {
+                        alert('No available titles');
+                    }
             });
         })
+      
     }
     render() {
         return (
@@ -59,13 +67,16 @@ console.log(response)
                         {
                             this.state.movies.map((movie) => {
                                 return (
-                                    <Link key={movie.id} to={`/movies/${movie.id}`}>
-                                        <li key={movie.id} className="listMenu">
-                                            <AddToLists movieId={movie.id}/> 
-                                            { movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-                                            }   
-                                        </li>
-                                    </Link>
+                            
+                                        <Link key={movie.id} to={`/movies/${movie.id}`}>
+                                            <li key={movie.id} className="listMenu">
+                                                <AddToLists movieId={movie.id} />
+                                                {movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                                }
+                                            </li>
+                                        </Link>
+                                   
+                             
                                 )
                             })
                         }

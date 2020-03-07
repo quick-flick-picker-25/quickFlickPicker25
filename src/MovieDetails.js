@@ -10,7 +10,6 @@ import {
 class MovieDetails extends Component {
     constructor (){
         super();
-
         this.state = {
             movie: {},
             movieGenre: [],
@@ -22,9 +21,15 @@ class MovieDetails extends Component {
     }
 
     componentDidMount = () => {
-        // get movie details
+        let movieId;
+        if (typeof this.props.movieId =='undefined'){
+            movieId = this.props.match.params.movieID;
+        }
+        else {
+            movieId = this.props.movieId;
+        }
         axios ({
-            url: `https://api.themoviedb.org/3/movie/${this.props.match.params.movieID}`,
+            url: `https://api.themoviedb.org/3/movie/${movieId}`,
             params: {
                 api_key: '8341ba99fae06408554c7e8411e4a4f9',
             }
@@ -39,7 +44,7 @@ class MovieDetails extends Component {
 
         // get cast and crew
         axios({
-            url: `https://api.themoviedb.org/3/movie/${this.props.match.params.movieID}/credits`,
+            url: `https://api.themoviedb.org/3/movie/${movieId}/credits`,
             params: {
                 api_key: '8341ba99fae06408554c7e8411e4a4f9',
             }
@@ -72,7 +77,7 @@ class MovieDetails extends Component {
 
         // get video link
         axios ({
-            url: `https://api.themoviedb.org/3/movie/${this.props.match.params.movieID}/videos`,
+            url: `https://api.themoviedb.org/3/movie/${movieId}/videos`,
             params: {
                 api_key: '8341ba99fae06408554c7e8411e4a4f9',
             }

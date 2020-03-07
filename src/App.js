@@ -11,6 +11,7 @@ import {
   Route, Link
 } from 'react-router-dom';
 import MovieDetails from './MovieDetails';
+import WatchMovie from './WatchMovie';
 
 class App extends Component {
 
@@ -37,7 +38,8 @@ class App extends Component {
       <div className="App">
         <Lists updateParentListFunc = {this.handleGetLists}/>
         <Route path="/" component={MovieSearch} />
-        <Route path="/movies/:movieID" component={MovieDetails} />
+          <Route path="/movies/:movieID" component={MovieDetails} />
+        <WatchMovie />
       </div>
     </Router>  
     );
