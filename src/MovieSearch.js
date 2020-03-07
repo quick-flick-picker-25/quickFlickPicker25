@@ -3,6 +3,13 @@ import axios from 'axios';
 import AddToLists from './AddToLists';
 import './addToLists.css'
 // import firebase from './firebase';
+import {
+    BrowserRouter as Router,
+    Route, Link
+} from 'react-router-dom';
+import brokenImage from "./brokenLink-01.png";
+
+
 
 class MovieSearch extends Component {
     constructor() {
@@ -52,15 +59,19 @@ console.log(response)
                         {
                             this.state.movies.map((movie) => {
                                 return (
-                                    <li key={movie.id} className="listMenu">
-                                        <AddToLists movieId={movie.id}/>
-                                        <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-                                    </li>
-                                );
+                                    <Link key={movie.id} to={`/movies/${movie.id}`}>
+                                        <li key={movie.id} className="listMenu">
+                                            <AddToLists movieId={movie.id}/> 
+                                            { movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                            }   
+                                        </li>
+                                    </Link>
+                                )
                             })
                         }
                     </ul>
                 }
+
             </div>
         );
     }

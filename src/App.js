@@ -4,9 +4,13 @@ import axios from 'axios';
 import firebase from './firebase'
 import './App.css';
 import Lists from './Lists';
-import AddToLists from './AddToLists'
-import MovieSearch from './MovieSearch'
 
+import MovieSearch from './MovieSearch';
+import {
+  BrowserRouter as Router,
+  Route, Link
+} from 'react-router-dom';
+import MovieDetails from './MovieDetails';
 
 class App extends Component {
 
@@ -29,11 +33,13 @@ class App extends Component {
 
   render() {
     return (
+    <Router>
       <div className="App">
         <Lists updateParentListFunc = {this.handleGetLists}/>
-        {/* <AddToLists /> */}
-        <MovieSearch />
+        <Route path="/" component={MovieSearch} />
+        <Route path="/movies/:movieID" component={MovieDetails} />
       </div>
+    </Router>  
     );
   }
 }
