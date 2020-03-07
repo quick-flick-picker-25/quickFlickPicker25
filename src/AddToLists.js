@@ -10,7 +10,6 @@ class AddToLists extends Component{
         this.state = {
             userLists: [],
             movieDetails: null,
-            testState: false,
         }
     }
 
