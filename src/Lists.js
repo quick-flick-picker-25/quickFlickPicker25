@@ -8,6 +8,7 @@ class Lists extends Component {
             dbRef: firebase.database().ref(),
             usersList: [],
             userListName: '',
+            userMovies: [],
         }
     }
 
@@ -59,6 +60,7 @@ class Lists extends Component {
         this.setState({
             userListName: '',
         })
+
     }
 
     // make a function that deletes the specific list
@@ -66,6 +68,22 @@ class Lists extends Component {
         // deletes the list
         this.state.dbRef.child(listToDelete).remove();
     }
+
+    handleReload = (e) => {
+        e.preventDefault()
+    }
+
+    handleMovieName = (object) => {
+        const stateToSet = [];
+        for(let movie in object.info) {
+            if (object.info[movie] === object.key) {
+                continue;
+            }
+            stateToSet.push(object.info[movie].title);
+        }
+        return stateToSet;
+    }
+
 
     render() {
         
@@ -83,7 +101,17 @@ class Lists extends Component {
                             return(
                                 <li key={list.key}>
                                     <h3>{list.key}</h3>
-                                    <button>see list.</button>
+                                    <a href="" onClick={this.handleReload}>see list.</a>
+                                    <ul>
+                                        {this.handleMovieName(list).map((movie, index) => {
+                                            return(
+                                                <li key={index}>
+                                                    <p>{movie}</p>
+                                                    <button>Delete</button>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
                                     <button onClick={()=>{this.handleDeleteList(list.key)}}>delete list.</button>
                                 </li>
                             )
@@ -96,3 +124,4 @@ class Lists extends Component {
 }
 
 export default Lists; 
+
