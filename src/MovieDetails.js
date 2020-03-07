@@ -4,6 +4,8 @@ import {
     BrowserRouter as Router,
     Route, Link
 } from 'react-router-dom';
+import AddToLists from './AddToLists';
+import GetMovieDetails from './GetMovieDetails';
 
 
 
@@ -12,31 +14,21 @@ class MovieDetails extends Component {
         super();
 
         this.state = {
-            movie: {},
+            movieDetails: {},
             movieGenre: [],
             credits: {},
             directors: [],
             cast: [],
             videoLink:'',
+            movieDetails: {},
+            isMounted: false,
         }
     }
 
     componentDidMount = () => {
-        // get movie details
-        axios ({
-            url: `https://api.themoviedb.org/3/movie/${this.props.match.params.movieID}`,
-            params: {
-                api_key: '8341ba99fae06408554c7e8411e4a4f9',
-            }
-        }).then(response => {
-            const movie = response.data;
-
-            this.setState({
-                movie: movie,
-                movieGenre: movie.genres,
-            })
+        this.setState({
+            isMounted: true,
         })
-
         // get cast and crew
         axios({
             url: `https://api.themoviedb.org/3/movie/${this.props.match.params.movieID}/credits`,
@@ -83,20 +75,35 @@ class MovieDetails extends Component {
 
     }
 
-    render(){
-    
+    getMovieDetails = (movieDetails) => {
+        this.setState({
+            movieDetails: movieDetails,
+            movieGenre: movieDetails.genres,
+        })
+    }
+
+
+    componentWillUnmount = () => {
+        this.setState({
+            isMounted: false,
+        })
+    }
+
+    render(){    
         // console.log(this.state.movie.genres);
         // const genres = this.state.movie.genres;
-
         return (
             <section className="movieDetails">
+                <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.props.match.params.movieID} />
+                {this.state.isMounted ? <AddToLists movieId={this.state.movieDetails.id} /> : null} 
+                {/* <AddToLists movieId={this.state.movieDetails.id}/> */}
                 <Link to="/">Back to results</Link>
                 <div>
-                    <img src={`http://image.tmdb.org/t/p/w500/${this.state.movie.poster_path}`} alt=""/>
+                    <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
                 </div>
 
                 <div>
-                    <h1>{this.state.movie.title}</h1>
+                    <h1>{this.state.movieDetails.title}</h1>
                     <div className="genres">
                         <h2>Genres</h2>
                         {
@@ -130,7 +137,7 @@ class MovieDetails extends Component {
                 </div>
                 <div className="description">
                     <h2>Description</h2>
-                    <p>{this.state.movie.overview}</p>
+                    <p>{this.state.movieDetails.overview}</p>
                 </div>
                 <a className="watchVideo" href={this.state.videoLink}>Watch Trailer</a>
             </section>
