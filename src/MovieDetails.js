@@ -65,9 +65,6 @@ class MovieDetails extends Component {
                 directors: director,
                 cast: cast,
             })
-
-            // console.log();
-            // console.log(this.state.movie);
         })
 
         // get video link
