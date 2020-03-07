@@ -32,6 +32,7 @@ class Lists extends Component {
                 usersList: stateToSet,
             }, ()=>{
                 this.props.updateParentListFunc(this.state.usersList);
+                console.log(this.state.usersList);
             })
         })
     }
@@ -67,6 +68,7 @@ class Lists extends Component {
     }
 
     render() {
+        
         return (
             <div>
                 <h2>Your Lists</h2>
