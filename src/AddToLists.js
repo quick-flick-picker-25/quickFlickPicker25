@@ -98,7 +98,7 @@ class AddToLists extends Component{
                             )
                         })}
                     </ul>
-                </div>
+                </div> 
             </div>
         )}
 }

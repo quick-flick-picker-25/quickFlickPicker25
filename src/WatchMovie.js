@@ -55,16 +55,28 @@ getGenres=()=>{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const movies=this.state.ListMovies;
-        const time = parseInt(this.state.selectedTime);
+        
         const genre=this.state.selectedGenre;
-        const  qualifyingMovies=movies.filter((movie)=>{
+        if (this.state.selectedTime !==''  && genre !== ''){
+            const movies=this.state.ListMovies;
+            const time = parseInt(this.state.selectedTime);
+            const  qualifyingMovies=movies.filter((movie)=>{
             return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre)>=0) 
         });
-        const selectedIndex=Math.floor(Math.random()*qualifyingMovies.length);
+        if (qualifyingMovies.length === 0){
+            alert("No matches in this list.")
+        }else{
+            const selectedIndex=Math.floor(Math.random()*qualifyingMovies.length);
+        
        this.setState({
            movieToWatch: qualifyingMovies[selectedIndex].name.id,
        })
+        }
+    }
+       else{
+           alert("Please select genre and time.")
+       }
+
     }
     handleChange= (event) => {
         const id=event.target.id;

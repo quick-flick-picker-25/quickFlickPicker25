@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import axios from 'axios';
-import firebase from './firebase'
 import './App.css';
 import Lists from './Lists';
 

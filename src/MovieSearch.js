@@ -18,6 +18,7 @@ class MovieSearch extends Component {
         this.state = {
             keyword: '',
             movies: [],
+            tempMovies:[],
         }
     }
     componentDidMount() {
@@ -29,6 +30,7 @@ class MovieSearch extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
+        let moviesWithDetails = [];
         axios({
             url: 'https://api.themoviedb.org/3/search/movie',
             params: {
@@ -36,18 +38,48 @@ class MovieSearch extends Component {
                 query: this.state.keyword,
             }
         }).then((response) => {
+
             const movies = response.data.results;
-            const filteredMovies=movies.filter((movie)=>{
-                return (movie.poster_path !== null && movie.genre_ids.length>0)
-            })
+            
+            
+        //     movies.forEach((movie) => {
+            
+        //        return axios ({
+        //         url: `https://api.themoviedb.org/3/movie/${movie.id}`,
+        //         params: {
+        //             api_key: '8341ba99fae06408554c7e8411e4a4f9',
+        //         }
+        //     }).then(response => {
+        //         const movieDetails = response.data;
+        //         // console.log(movieDetails);
+        //        moviesWithDetails.push(movieDetails);
+        //     }).then(()=>{
+        //            this.setState({
+        //                tempMovies:moviesWithDetails,
+        //            }, ()=>{
+        //             this.state.tempMovies.forEach((movieInfo)=>{
+        //                 console.log(movieInfo);
+        //                 // return (movieInfo.poster_path != '' )
+        //         // && movie.genres.length>0 && movie.runtime !==null)
+        //             }) // End of Filter.
+                       
+        //            }) 
+        //     })
+           
+        // //    
+        //     }); //end of forEach
+      
+           
+        // console.log(filteredMovies)
             this.setState({
-                movies: filteredMovies,
+                movies: movies,
             }, ()=>{
+                alert('No available titles');
                     if (this.state.movies.length === 0) {
-                        alert('No available titles');
                     }
-            });
-        })
+            
+        })//end of setState
+    }) // end of axios call
     }
     render() {
         return (
@@ -66,7 +98,7 @@ class MovieSearch extends Component {
                         {
                             this.state.movies.map((movie) => {
                                 return (
-                                    <li key={movie.id} className="listMenu">
+                                    <li key={movie.id} className="moviePoster">
                                     <AddToLists movieId={movie.id}/> 
                                         <Link key={movie.id} to={`/movies/${movie.id}`}>
                                             { movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
@@ -78,7 +110,6 @@ class MovieSearch extends Component {
                         }
                     </ul>
                 }
-
             </div>
         );
     }
