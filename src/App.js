@@ -37,8 +37,8 @@ class App extends Component {
       <div className="App">
         <Lists updateParentListFunc = {this.handleGetLists}/>
         <Route path="/" exact component={MovieSearch} />
-          <Route path="/movies/:movieID" component={MovieDetails} />
-        <Route path="/watch-movie" component={WatchMovie} />
+        <Route path="/movies/:movieID" component={MovieDetails} />
+        <Route path="/watch-movie/" component={WatchMovie} />
       </div>
     </Router>  
     );

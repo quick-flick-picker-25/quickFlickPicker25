@@ -116,7 +116,8 @@ class Lists extends Component {
                                             })}
                                         </ul>
                                     </div>
-                                    <Link to="/watch-movie">Watch Movie</Link>
+                                    {/* <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> */}
+                                    <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link>
                                     <button onClick={()=>{this.handleDeleteList(list.key)}}>delete list.</button>
                                 </li>
                             )

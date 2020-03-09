@@ -27,12 +27,15 @@ getGenres=()=>{
     })  
 }
     componentDidMount() {
-        const dbRef = firebase.database().ref('list 3');
+        // const {specificList} = this.props.location.state;
+        console.log(this.props.location.state.specificList);
+        const dbRef = firebase.database().ref(this.props.location.state.specificList);
+        // console.log(this.props.match.params.listName);
         const stateToBeSet = [];
         dbRef.on('value', (response) => {
             const dataFromDb = response.val();
             for (let key in dataFromDb) {
-                if(dataFromDb[key]==='list 3')
+                if (dataFromDb[key] === this.props.location.state.specificList)
                 {
                     continue;
                 }
@@ -76,6 +79,7 @@ getGenres=()=>{
 
 
     render() {
+        // console.log(this.props.location.state.specificList);
         return (
           this.state.movieToWatch==='' ?
               <section>
