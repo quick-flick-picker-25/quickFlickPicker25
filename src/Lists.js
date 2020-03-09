@@ -103,17 +103,19 @@ class Lists extends Component {
                             return(
                                 <li key={list.key}>
                                     <h3>{list.key}</h3>
-                                    <a href="" onClick={this.handleReload}>see list.</a>
-                                    <ul>
-                                        {this.handleMovieName(list).map((movie, index) => {
-                                            return(
-                                                <li key={index}>
-                                                    <p>{movie}</p>
-                                                    <button>Delete</button>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
+                                    <div className="movies">
+                                        <a className="showMovies" href="" onClick={this.handleReload}>see list.</a>
+                                        <ul className="moviesDisplayed">
+                                            {this.handleMovieName(list).map((movie, index) => {
+                                                return(
+                                                    <li key={index}>
+                                                        <p>{movie}</p>
+                                                        <button>Delete</button>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </div>
                                     <Link to="/watch-movie">Watch Movie</Link>
                                     <button onClick={()=>{this.handleDeleteList(list.key)}}>delete list.</button>
                                 </li>
