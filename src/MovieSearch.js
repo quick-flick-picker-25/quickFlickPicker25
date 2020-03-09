@@ -8,6 +8,7 @@ import {
     Route, Link
 } from 'react-router-dom';
 import brokenImage from "./brokenLink-01.png";
+import MovieDetails from './MovieDetails';
 
 
 
@@ -35,7 +36,7 @@ class MovieSearch extends Component {
                 query: this.state.keyword,
             }
         }).then((response) => {
-console.log(response)
+// console.log(response)
             const movies = response.data.results;
             this.setState({
                 movies,

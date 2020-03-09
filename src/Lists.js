@@ -70,19 +70,23 @@ class Lists extends Component {
         this.state.dbRef.child(listToDelete).remove();
     }
 
+    // prevents click of button
     handleReload = (e) => {
         e.preventDefault()
     }
 
+    // takes in the reference and maps through the list to display the names of the movies
     handleMovieName = (object) => {
         const stateToSet = [];
         for(let movie in object.info) {
+            // ignore the item in the object that holds the key
             if (object.info[movie] === object.key) {
                 continue;
             }
             stateToSet.push(object.info[movie]);
             // console.log(movie)
         }
+        //  return the array to map accross later
         return stateToSet;
     }
 
