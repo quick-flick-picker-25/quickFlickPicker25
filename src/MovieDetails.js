@@ -101,7 +101,7 @@ class MovieDetails extends Component {
     render(){    
         return (
             <section className="movieDetails">
-                <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.props.match.params.movieID} />
+                <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.props.match.params.movieID}/>
                 {/* if the state is mounted, include add to lists, if not make it null; this is to fix and error we were having */}
                 {this.state.isMounted ? <AddToLists movieId={this.state.movieDetails.id} /> : null} 
                 <Link to="/">Back to results</Link>

@@ -129,7 +129,7 @@ class Lists extends Component {
                                 <li key={list.key} className="list">
                                     <h3>{list.key}</h3>
                                     <div className="movies">
-                                        <a className="showMovies" href="" onClick={this.handleReload}>see list.</a>
+                                        <a className="showMovies" href="/" onClick={this.handleReload}>see list.</a>
                                         <ul className="moviesDisplayed">
                                             {this.handleMovieName(list).map((movie, index) => {
                                                 return(

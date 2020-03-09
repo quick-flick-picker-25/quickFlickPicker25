@@ -60,13 +60,13 @@ class MovieSearch extends Component {
                         {
                             this.state.movies.map((movie) => {
                                 return (
-                                    <Link key={movie.id} to={`/movies/${movie.id}`}>
-                                        <li key={movie.id} className="listMenu">
-                                            <AddToLists movieId={movie.id}/> 
+                                    <li key={movie.id} className="listMenu">
+                                    <AddToLists movieId={movie.id}/> 
+                                        <Link key={movie.id} to={`/movies/${movie.id}`}>
                                             { movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
                                             }   
-                                        </li>
-                                    </Link>
+                                        </Link>
+                                    </li>
                                 )
                             })
                         }
