@@ -84,16 +84,16 @@ class AddToLists extends Component{
         return(
             <div className="addToLists">
                 <div className="listMenu">   
-                    <a href="" onClick={this.handleReload}>
+                    <a href="/" onClick={this.handleReload}>
                         <span aria-hidden="true">&#43;</span>
                     </a>
                     <ul className="listSubMenu">
-                        {userLists.map((list) => {
+                        {userLists.map((list, index) => {
                             return (
-                                <li>
+                                <li key={index}>
                                     <GetMovieDetails movieID={this.props.movieId} 
                                     movieDetails={this.getMovieDetails} />
-                                    <a href="" onClick={this.clickHandler}>{list.key}</a>
+                                    <a href="/" onClick={this.clickHandler}>{list.key}</a>
                                 </li>
                             )
                         })}

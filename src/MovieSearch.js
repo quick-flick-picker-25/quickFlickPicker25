@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import AddToLists from './AddToLists';
 import './addToLists.css';
-import MovieDetails from './MovieDetails';
 // import firebase from './firebase';
 import {
     BrowserRouter as Router,
     Route, Link
 } from 'react-router-dom';
 import brokenImage from "./brokenLink-01.png";
+import MovieDetails from './MovieDetails';
 
 
 
@@ -48,7 +48,6 @@ class MovieSearch extends Component {
                     }
             });
         })
-      
     }
     render() {
         return (
@@ -67,16 +66,13 @@ class MovieSearch extends Component {
                         {
                             this.state.movies.map((movie) => {
                                 return (
-                            
+                                    <li key={movie.id} className="listMenu">
+                                    <AddToLists movieId={movie.id}/> 
                                         <Link key={movie.id} to={`/movies/${movie.id}`}>
-                                            <li key={movie.id} className="listMenu">
-                                                <AddToLists movieId={movie.id} />
-                                                {movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-                                                }
-                                            </li>
+                                            { movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                            }   
                                         </Link>
-                                   
-                             
+                                    </li>
                                 )
                             })
                         }

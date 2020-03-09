@@ -1,0 +1,16 @@
+
+.movies{
+    position: relative;
+}
+
+.moviesDisplayed{
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.movies:active .moviesDisplayed,
+.movies:focus-within .moviesDisplayed{
+    display: block;
+}

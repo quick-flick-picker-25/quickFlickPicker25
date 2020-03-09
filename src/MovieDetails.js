@@ -4,20 +4,26 @@ import {
     BrowserRouter as Router,
     Route, Link
 } from 'react-router-dom';
+import AddToLists from './AddToLists';
+import GetMovieDetails from './GetMovieDetails';
 
 
 
 class MovieDetails extends Component {
-    constructor (){
+    constructor (props){
         super();
         this.state = {
-            movie: {},
+            movieDetails: {},
             movieGenre: [],
             credits: {},
             directors: [],
             cast: [],
             videoLink:'',
+            movieDetails: {},
+            isMounted: false,
         }
+
+        
     }
 
     componentDidMount = () => {
@@ -28,18 +34,12 @@ class MovieDetails extends Component {
         else {
             movieId = this.props.movieId;
         }
-        axios ({
-            url: `https://api.themoviedb.org/3/movie/${movieId}`,
-            params: {
-                api_key: '8341ba99fae06408554c7e8411e4a4f9',
-            }
-        }).then(response => {
-            const movie = response.data;
 
-            this.setState({
-                movie: movie,
-                movieGenre: movie.genres,
-            })
+
+        // on component did mount, set mounted to true
+        this.setState({
+            isMounted: true,
+            
         })
 
         // get cast and crew
@@ -58,7 +58,7 @@ class MovieDetails extends Component {
                 }
             })
 
-            // take only first couple cast members
+            // take only first 5 cast members
             const cast = credits.cast.filter((castMember, index) => {
                 if(index <= 4){
                     return castMember;
@@ -70,9 +70,6 @@ class MovieDetails extends Component {
                 directors: director,
                 cast: cast,
             })
-
-            // console.log();
-            // console.log(this.state.movie);
         })
 
         // get video link
@@ -84,6 +81,7 @@ class MovieDetails extends Component {
         }).then(response => {
             const videos = response.data;
 
+            // set state
             this.setState({
                 videoLink: `https://www.youtube.com/embed/${videos.results[0].key}`
             })
@@ -91,22 +89,37 @@ class MovieDetails extends Component {
 
     }
 
-    render(){
-    
-        // console.log(this.state.movie.genres);
-        // const genres = this.state.movie.genres;
+    // call function to get movie details from other component
+    getMovieDetails = (movieDetails) => {
+        this.setState({
+            movieDetails: movieDetails,
+            movieGenre: movieDetails.genres,
+        })
+    }
 
+    // on component did unmount set the state to false
+    componentWillUnmount = () => {
+        this.setState({
+            isMounted: false,
+        })
+    }
+
+    render(){    
         return (
             <section className="movieDetails">
+                <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.props.match.params.movieID}/>
+                {/* if the state is mounted, include add to lists, if not make it null; this is to fix and error we were having */}
+                {this.state.isMounted ? <AddToLists movieId={this.state.movieDetails.id} /> : null} 
                 <Link to="/">Back to results</Link>
                 <div>
-                    <img src={`http://image.tmdb.org/t/p/w500/${this.state.movie.poster_path}`} alt=""/>
+                    <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
                 </div>
 
                 <div>
-                    <h1>{this.state.movie.title}</h1>
+                    <h1>{this.state.movieDetails.title}</h1>
                     <div className="genres">
                         <h2>Genres</h2>
+                        {/* map through the genres, and display them */}
                         {
                             this.state.movieGenre.map((genre, index) => {
                                 return (
@@ -117,6 +130,7 @@ class MovieDetails extends Component {
                     </div>
                     <div className="director">
                         <h2>Director</h2>
+                        {/* map through the directors and display them */}
                         {
                             this.state.directors.map((director)=>{
                                 return(
@@ -127,6 +141,7 @@ class MovieDetails extends Component {
                     </div>
                     <div className="cast">
                         <h2>Cast</h2>
+                        {/* map through the cast members and display */}
                         {
                             this.state.cast.map((actor)=>{
                                 return(
@@ -138,7 +153,7 @@ class MovieDetails extends Component {
                 </div>
                 <div className="description">
                     <h2>Description</h2>
-                    <p>{this.state.movie.overview}</p>
+                    <p>{this.state.movieDetails.overview}</p>
                 </div>
                 <a className="watchVideo" href={this.state.videoLink}>Watch Trailer</a>
             </section>
