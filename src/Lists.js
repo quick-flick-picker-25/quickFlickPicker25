@@ -113,19 +113,21 @@ class Lists extends Component {
                                             <ul className="moviesDisplayed">
                                                 {this.handleMovieName(list).map((movie, index) => {
                                                     return(
-                                                        <li key={index}>
-                                                            <p>{movie}</p>
-                                                            <button>
-                                                                <i class="fas fa-trash-alt"></i>
-                                                            </button>
+                                                        <li className="listItem" key={index}>
+                                                            
+                                                                <p>{movie}</p>
+                                                                <button>
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            
                                                         </li>
                                                     )
                                                 })}
                                             </ul>
                                         </div>
                                         {/* <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> */}
-                                        <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link>
-                                        <button onClick={() => { this.handleDeleteList(list.key) }}><i class="fas fa-trash-alt"></i></button>
+                                        {/* <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link>
+                                        <button onClick={() => { this.handleDeleteList(list.key) }}><i class="fas fa-trash-alt"></i></button> */}
                                     </li>
                                 )
                             })

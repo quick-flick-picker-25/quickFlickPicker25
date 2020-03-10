@@ -186,21 +186,6 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 /* ----------------------------------------- */
 
-.movies {
-    position: relative;
-}
-
-.moviesDisplayed {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.movies:active .moviesDisplayed, .movies:focus-within .moviesDisplayed {
-    display: block;
-}
-
 /* VARIABLES */
 
 :root {
@@ -252,6 +237,7 @@ img {
 .yourLists {
     background-color: var(--mainColor);
     width: 25%;
+    height: 100vh;
     text-align: left;
 }
 
@@ -282,6 +268,7 @@ img {
     max-width: 100%;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 40px;
 }
 
 .listInput input {
@@ -306,9 +293,14 @@ img {
 }
 
 .dropDownList {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 191px;
+    background-color: var(--accentColor);
+    margin-bottom: 35px;
+    padding: 0 10px;
 }
 
 h3 {
@@ -317,18 +309,65 @@ h3 {
     font-weight: 100;
     font-size: 2rem;
     font-size: 1.75rem;
+    margin: 10px 0;
 }
 
 .fa-chevron-down {
     color: var(--backgroundColor);
+    font-size: 1.5rem;
 }
 
-.dropDownList button:first-of-type {
-    color: var(--backgroundColor);
-    background: none;
-    border: none;
+/* Movies displayed list */
+
+.movies {
+    position: relative;
 }
 
 .moviesDisplayed {
-    background-color: var(--backgroundColor);
+    display: none;
+    position: absolute;
+    top: 31px;
+    right: -10px;
+    text-align: left;
+    margin-bottom: 30px;
 }
+
+.moviesDisplayed li {
+    display: flex;
+    width: 191px;
+    font-size: 2rem;
+    /* padding-left: 0; */
+    background: white;
+    font-size: 1.75rem;
+}
+
+.listItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* margin: 0 10px; */
+    padding: 0 10px;
+}
+
+.listItem:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+
+.listItem p {
+    margin: 15px 0;
+    font-weight: 100;
+}
+
+.moviesDisplayed button {
+    font-size: 1.3rem;
+    color: var(--mainColor);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.movies:active .moviesDisplayed, .movies:focus-within .moviesDisplayed {
+    display: block;
+}
+
+/* -------------- */
