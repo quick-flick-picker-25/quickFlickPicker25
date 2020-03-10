@@ -54,11 +54,22 @@ class Lists extends Component {
         // prevent default action
         e.preventDefault();
 
-        // create new reference point in database
-        const newList = firebase.database().ref(this.state.userListName);
-
-        // push the name on submit to create node in firebase
-        newList.push(this.state.userListName);
+        // checks if already have list with name
+        const checkForSameName = this.state.usersList.find((list)=>{
+            return list.key === this.state.userListName;
+        })
+        
+        // check if the list is empty string
+        if(this.state.userListName === ""){
+            alert("please enter a name for your list!")
+        } else if (checkForSameName){
+            alert("You already have a list with that name!");
+        } else {
+            // create new reference point in database
+            const newList = firebase.database().ref(this.state.userListName);
+            // push the name on submit to create node in firebase
+            newList.push(this.state.userListName);
+        }
 
         // set to empty string 
         this.setState({
@@ -88,6 +99,8 @@ class Lists extends Component {
         return stateToSet;
     }
 
+
+
     render() {
         return (
             <div>
@@ -116,8 +129,9 @@ class Lists extends Component {
                                             })}
                                         </ul>
                                     </div>
+                                    <Link to={`/watch-movie/`} onClick={()=>{this.props.updateSpecificListFunc(list)}}>Watch Movie</Link> 
                                     {/* <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> */}
-                                    <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link>
+                                    {/* <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link> */}
                                     <button onClick={()=>{this.handleDeleteList(list.key)}}>delete list.</button>
                                 </li>
                             )

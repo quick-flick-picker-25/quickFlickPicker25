@@ -81,10 +81,19 @@ class MovieDetails extends Component {
         }).then(response => {
             const videos = response.data;
 
-            // set state
-            this.setState({
-                videoLink: `https://www.youtube.com/embed/${videos.results[0].key}`
-            })
+            // check if video results is undefined
+            if(videos.results[0] != undefined){
+                // set state
+                this.setState({
+                    videoLink: `https://www.youtube.com/embed/${videos.results[0].key}`
+                })
+
+                // if it is undefined, set state to null
+            } else {
+                this.setState({
+                    videoLink: null,
+                })
+            }
         })
 
     }
@@ -96,6 +105,8 @@ class MovieDetails extends Component {
             movieGenre: movieDetails.genres,
         })
     }
+
+
 
     // on component did unmount set the state to false
     componentWillUnmount = () => {
@@ -155,7 +166,9 @@ class MovieDetails extends Component {
                     <h2>Description</h2>
                     <p>{this.state.movieDetails.overview}</p>
                 </div>
-                <a className="watchVideo" href={this.state.videoLink}>Watch Trailer</a>
+                {this.state.videoLink === null ? null : 
+                    <a className="watchVideo" href={this.state.videoLink}>Watch Trailer</a>
+                }
             </section>
         )
     }

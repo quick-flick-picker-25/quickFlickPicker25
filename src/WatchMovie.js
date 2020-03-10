@@ -28,14 +28,15 @@ getGenres=()=>{
 }
     componentDidMount() {
         // const {specificList} = this.props.location.state;
-        console.log(this.props.location.state.specificList);
-        const dbRef = firebase.database().ref(this.props.location.state.specificList);
+        
+        const dbRef = firebase.database().ref(this.props.specificList);
         // console.log(this.props.match.params.listName);
+        console.log(this.props.specificList);
         const stateToBeSet = [];
         dbRef.on('value', (response) => {
             const dataFromDb = response.val();
             for (let key in dataFromDb) {
-                if (dataFromDb[key] === this.props.location.state.specificList)
+                if (dataFromDb[key] === this.props.specificList)
                 {
                     continue;
                 }
@@ -60,14 +61,18 @@ getGenres=()=>{
         event.preventDefault();
         const movies=this.state.ListMovies;
         const time = parseInt(this.state.selectedTime);
-        const genre=this.state.selectedGenre;
+        const genre = this.state.selectedGenre;
         const  qualifyingMovies=movies.filter((movie)=>{
             return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre)>=0) 
         });
-        const selectedIndex=Math.floor(Math.random()*qualifyingMovies.length);
-       this.setState({
-           movieToWatch: qualifyingMovies[selectedIndex].name.id,
-       })
+        // const selectedIndex=Math.floor(Math.random()*qualifyingMovies.length);
+        if(qualifyingMovies.length === 0){
+            alert("no movies qualify");
+        } else {
+            this.setState({
+                movieToWatch: qualifyingMovies[Math.floor(Math.random()*qualifyingMovies.length)].name.id,
+            })
+        }
     }
     handleChange= (event) => {
         const id=event.target.id;
@@ -80,6 +85,7 @@ getGenres=()=>{
 
     render() {
         // console.log(this.props.location.state.specificList);
+        console.log(this.props.specificList);
         return (
           this.state.movieToWatch==='' ?
               <section>

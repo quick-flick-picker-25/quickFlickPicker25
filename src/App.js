@@ -20,6 +20,7 @@ class App extends Component {
 
     this.state = {
       userLists: [],
+      specificList: '',
     }
   }
 
@@ -31,14 +32,25 @@ class App extends Component {
     })
   }
 
+  // make a function to update the list that will be filtered through
+  handleGetSpecificList = (listName) => {
+    console.log(listName.key);
+    this.setState({
+      specificList: listName.key,
+    })
+  }
+
   render() {
     return (
     <Router>
       <div className="App">
-        <Lists updateParentListFunc = {this.handleGetLists}/>
+        <Lists updateParentListFunc = {this.handleGetLists} updateSpecificListFunc={this.handleGetSpecificList}/>
         <Route path="/" exact component={MovieSearch} />
         <Route path="/movies/:movieID" component={MovieDetails} />
-        <Route path="/watch-movie/" component={WatchMovie} />
+        <Route path="/watch-movie/" exact>
+          <WatchMovie specificList ={this.state.specificList}/>
+        </Route>
+        {/* <Route path="/watch-movie/" render={()=><WatchMovie listName={this.state.specificList}/>} /> */}
       </div>
     </Router>  
     );
