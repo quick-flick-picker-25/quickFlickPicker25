@@ -27,12 +27,12 @@ getGenres=()=>{
     })  
 }
     componentDidMount() {
-        const dbRef = firebase.database().ref('List 3');
+        const dbRef = firebase.database().ref('list');
         const stateToBeSet = [];
         dbRef.on('value', (response) => {
             const dataFromDb = response.val();
             for (let key in dataFromDb) {
-                if(dataFromDb[key]==='List 3')
+                if(dataFromDb[key]==='list')
                 {
                     continue;
                 }
@@ -73,8 +73,11 @@ getGenres=()=>{
        })
         }
     }
-       else{
-           alert("Please select genre and time.")
+       else if(genre === '') {
+           alert("Please select a genre!");
+       }
+       else {
+            alert("Please select a time!");
        }
 
     }

@@ -67,12 +67,16 @@ class Lists extends Component {
     // make a function that deletes the specific list
     handleDeleteList = (listToDelete) => {
         // deletes the list
-        this.state.dbRef.child(listToDelete).remove();
+        const response = window.confirm(`Are you sure you want to delete list:${listToDelete}?`);
+        if (response === true) {
+            this.state.dbRef.child(listToDelete).remove();
+        } 
     }
 
     // prevents click of button
     handleReload = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+    
     }
 
     // takes in the reference and maps through the list to display the names of the movies
@@ -119,7 +123,7 @@ class Lists extends Component {
                 <h2>Your Lists</h2>
                 <form action="" onSubmit={this.handleUserListName}>
                     <label htmlFor="listName">Please enter a list name</label>
-                    <input onChange={this.handleUserInput} type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
+                    <input onChange={this.handleUserInput} required type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
                     <button type="submit">Submit</button>
                 </form>
                 <ul>
@@ -131,14 +135,18 @@ class Lists extends Component {
                                     <div className="movies">
                                         <a className="showMovies" href="/" onClick={this.handleReload}>see list.</a>
                                         <ul className="moviesDisplayed">
-                                            {this.handleMovieName(list).map((movie, index) => {
-                                                return(
+                                            {
+                                            this.handleMovieName(list).length===0 ? 
+                                            <li> No movies in this list</li>:
+                                            this.handleMovieName(list).map((movie, index) => {
+                                                return (
                                                     <li key={index}>
                                                         <p>{movie.title}</p>
-                                                        <button onClick={()=>{this.handleDeleteMovie(list, movie)}}>Delete</button>
+                                                        <button onClick={() => { this.handleDeleteMovie(list, movie) }}>Delete</button>
                                                     </li>
                                                 )
-                                            })}
+                                            })
+                                        }
                                         </ul>
                                     </div>
                                     <button onClick={()=>{this.handleDeleteList(list.key)}}>delete list.</button>

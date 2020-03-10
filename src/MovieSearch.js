@@ -3,7 +3,6 @@ import axios from 'axios';
 import AddToLists from './AddToLists';
 import './addToLists.css';
 import {Link} from 'react-router-dom';
-import brokenImage from "./brokenLink-01.png";
 
 class MovieSearch extends Component {
     constructor() {
@@ -72,7 +71,7 @@ class MovieSearch extends Component {
                         <h1>quick flick picker</h1>
                         <form action="" onSubmit={this.handleSubmit}>
                             <label htmlFor="keywordInput" className="visuallyHidden">enter a keyword to search for a movie</label>
-                            <input type="text" id="keywordInput" onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
+                            <input type="text" id="keywordInput" required onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
                             <button type="submit">find movie</button>
                         </form>
                     </div>
@@ -85,7 +84,7 @@ class MovieSearch extends Component {
                                     <AddToLists movieId={movie.id}/> 
                                         <Link key={movie.id} to={`/movies/${movie.id}`}>
                                             {/* no need for this because we are showing only the movies that have posters */}
-                                            { movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                         <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
                                             }   
                                         </Link>
                                     </li>

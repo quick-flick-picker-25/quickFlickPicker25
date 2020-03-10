@@ -47,16 +47,13 @@ class MovieDetails extends Component {
 
             // if the job is directing, return to the new array
             const director = credits.crew.filter((crew) => {
-                if(crew.job === 'Director'){ //small change
-                    return crew;
-                }
+              
+                    return(crew.job === 'Director');
             })
 
             // take only first 5 cast members
             const cast = credits.cast.filter((castMember, index) => {
-                if(index <= 4){
-                    return castMember; // small change
-                }
+                    return index <= 4; // small change
             })
             
             // set state

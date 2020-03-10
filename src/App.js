@@ -4,7 +4,7 @@ import Lists from './Lists';
 import MovieSearch from './MovieSearch';
 import {
   BrowserRouter as Router,
-  Route, Link
+  Route
 } from 'react-router-dom';
 import MovieDetails from './MovieDetails';
 import WatchMovie from './WatchMovie';
