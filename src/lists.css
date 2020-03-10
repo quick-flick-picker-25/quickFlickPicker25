@@ -358,7 +358,7 @@ h3 {
     font-weight: 100;
 }
 
-.moviesDisplayed button {
+.deleteButton {
     font-size: 1.3rem;
     color: var(--mainColor);
     background: none;
