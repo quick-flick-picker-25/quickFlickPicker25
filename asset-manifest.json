@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/quick-flick-picker-25/quickFlickPicker25/static/css/main.a6bd8612.chunk.css",
-    "main.js": "/quick-flick-picker-25/quickFlickPicker25/static/js/main.17cbb602.chunk.js",
-    "main.js.map": "/quick-flick-picker-25/quickFlickPicker25/static/js/main.17cbb602.chunk.js.map",
-    "runtime-main.js": "/quick-flick-picker-25/quickFlickPicker25/static/js/runtime-main.611c1adf.js",
-    "runtime-main.js.map": "/quick-flick-picker-25/quickFlickPicker25/static/js/runtime-main.611c1adf.js.map",
-    "static/js/2.8dee2a1d.chunk.js": "/quick-flick-picker-25/quickFlickPicker25/static/js/2.8dee2a1d.chunk.js",
-    "static/js/2.8dee2a1d.chunk.js.map": "/quick-flick-picker-25/quickFlickPicker25/static/js/2.8dee2a1d.chunk.js.map",
-    "index.html": "/quick-flick-picker-25/quickFlickPicker25/index.html",
-    "precache-manifest.00b7cb778d5a6327d2d24753e7b6e23b.js": "/quick-flick-picker-25/quickFlickPicker25/precache-manifest.00b7cb778d5a6327d2d24753e7b6e23b.js",
-    "service-worker.js": "/quick-flick-picker-25/quickFlickPicker25/service-worker.js",
-    "static/css/main.a6bd8612.chunk.css.map": "/quick-flick-picker-25/quickFlickPicker25/static/css/main.a6bd8612.chunk.css.map",
-    "static/js/2.8dee2a1d.chunk.js.LICENSE.txt": "/quick-flick-picker-25/quickFlickPicker25/static/js/2.8dee2a1d.chunk.js.LICENSE.txt"
+    "main.css": "/quickFlickPicker25/static/css/main.a6bd8612.chunk.css",
+    "main.js": "/quickFlickPicker25/static/js/main.f19a8447.chunk.js",
+    "main.js.map": "/quickFlickPicker25/static/js/main.f19a8447.chunk.js.map",
+    "runtime-main.js": "/quickFlickPicker25/static/js/runtime-main.8cbaaf37.js",
+    "runtime-main.js.map": "/quickFlickPicker25/static/js/runtime-main.8cbaaf37.js.map",
+    "static/js/2.22868b86.chunk.js": "/quickFlickPicker25/static/js/2.22868b86.chunk.js",
+    "static/js/2.22868b86.chunk.js.map": "/quickFlickPicker25/static/js/2.22868b86.chunk.js.map",
+    "index.html": "/quickFlickPicker25/index.html",
+    "precache-manifest.3efba94309a7f17502c1c8c5b2c133ff.js": "/quickFlickPicker25/precache-manifest.3efba94309a7f17502c1c8c5b2c133ff.js",
+    "service-worker.js": "/quickFlickPicker25/service-worker.js",
+    "static/css/main.a6bd8612.chunk.css.map": "/quickFlickPicker25/static/css/main.a6bd8612.chunk.css.map",
+    "static/js/2.22868b86.chunk.js.LICENSE.txt": "/quickFlickPicker25/static/js/2.22868b86.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.611c1adf.js",
-    "static/js/2.8dee2a1d.chunk.js",
+    "static/js/runtime-main.8cbaaf37.js",
+    "static/js/2.22868b86.chunk.js",
     "static/css/main.a6bd8612.chunk.css",
-    "static/js/main.17cbb602.chunk.js"
+    "static/js/main.f19a8447.chunk.js"
   ]
 }
