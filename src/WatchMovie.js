@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from './firebase.js';
 import MovieDetails from './MovieDetails';
 
 class WatchMovie extends Component {
@@ -27,12 +27,12 @@ getGenres=()=>{
     })  
 }
     componentDidMount() {
-        const dbRef = firebase.database().ref('list 3');
+        const dbRef = firebase.database().ref('List 3');
         const stateToBeSet = [];
         dbRef.on('value', (response) => {
             const dataFromDb = response.val();
             for (let key in dataFromDb) {
-                if(dataFromDb[key]==='list 3')
+                if(dataFromDb[key]==='List 3')
                 {
                     continue;
                 }

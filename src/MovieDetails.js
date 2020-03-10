@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {
-    BrowserRouter as Router,
-    Route, Link
-} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import AddToLists from './AddToLists';
 import GetMovieDetails from './GetMovieDetails';
-
-
 
 class MovieDetails extends Component {
     constructor (props){
@@ -19,7 +14,6 @@ class MovieDetails extends Component {
             directors: [],
             cast: [],
             videoLink:'',
-            movieDetails: {},
             isMounted: false,
         }
 
@@ -53,7 +47,7 @@ class MovieDetails extends Component {
 
             // if the job is directing, return to the new array
             const director = credits.crew.filter((crew) => {
-                if(crew.job === 'Director'){
+                if(crew.job === 'Director'){ //small change
                     return crew;
                 }
             })
@@ -61,7 +55,7 @@ class MovieDetails extends Component {
             // take only first 5 cast members
             const cast = credits.cast.filter((castMember, index) => {
                 if(index <= 4){
-                    return castMember;
+                    return castMember; // small change
                 }
             })
             

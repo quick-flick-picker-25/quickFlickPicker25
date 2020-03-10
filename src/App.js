@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Lists from './Lists';
-
 import MovieSearch from './MovieSearch';
 import {
   BrowserRouter as Router,
