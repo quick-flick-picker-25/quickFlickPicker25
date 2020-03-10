@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js';
+import firebase from './firebase';
+import {
+    BrowserRouter as Router,
+    Route, Link
+} from 'react-router-dom';
 import './lists.css';
 
 class Lists extends Component {
@@ -34,7 +38,6 @@ class Lists extends Component {
                 usersList: stateToSet,
             }, ()=>{
                 this.props.updateParentListFunc(this.state.usersList);
-                // console.log(this.state.usersList);
             })
         })
     }
@@ -70,83 +73,67 @@ class Lists extends Component {
         this.state.dbRef.child(listToDelete).remove();
     }
 
-    // prevents click of button
     handleReload = (e) => {
         e.preventDefault()
     }
 
-    // takes in the reference and maps through the list to display the names of the movies
     handleMovieName = (object) => {
         const stateToSet = [];
         for(let movie in object.info) {
-            // ignore the item in the object that holds the key
             if (object.info[movie] === object.key) {
                 continue;
             }
-            stateToSet.push(object.info[movie]);
-            // console.log(movie)
+            stateToSet.push(object.info[movie].title);
         }
-        //  return the array to map accross later
         return stateToSet;
     }
 
-    // make function to delete the specific movie
-    handleDeleteMovie = (listName, movieObject) => {
-        // make empty variable to store the reference key in DB 
-        let refKey;
-
-        // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
-        for (let movie in listName.info){
-            if (listName.info[movie] === listName.key) {
-                continue;
-            } else if(listName.info[movie].id === movieObject.id){
-                refKey = movie;
-            }
-        }
-
-        // make variable to get the reference point in the database
-        const reference = firebase.database().ref(listName.key);
-
-        // delete the movie with the speicifc key
-        reference.child(refKey).remove();
-    }
-
-
     render() {
-        
         return (
-            <div>
-                <h2>Your Lists</h2>
-                <form action="" onSubmit={this.handleUserListName}>
-                    <label htmlFor="listName">Please enter a list name</label>
-                    <input onChange={this.handleUserInput} type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
-                    <button type="submit">Submit</button>
-                </form>
-                <ul>
-                    {
-                        this.state.usersList.map((list)=>{
-                            return(
-                                <li key={list.key} className="list">
-                                    <h3>{list.key}</h3>
-                                    <div className="movies">
-                                        <a className="showMovies" href="/" onClick={this.handleReload}>see list.</a>
-                                        <ul className="moviesDisplayed">
-                                            {this.handleMovieName(list).map((movie, index) => {
-                                                return(
-                                                    <li key={index}>
-                                                        <p>{movie.title}</p>
-                                                        <button onClick={()=>{this.handleDeleteMovie(list, movie)}}>Delete</button>
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </div>
-                                    <button onClick={()=>{this.handleDeleteList(list.key)}}>delete list.</button>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+            <div className="yourLists">
+                <div className="wrapper">
+                    <h2>Your Lists:</h2>
+                    <form className="listInput" action="" onSubmit={this.handleUserListName}>
+                        <label className="labelHidden" htmlFor="listName">Please enter a list name</label>
+                        <input onChange={this.handleUserInput} type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
+                        <button className="roundButton" type="submit">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </form>
+                    <ul>
+                        {
+                            this.state.usersList.map((list)=>{
+                                return(
+                                    <li className="dropDownList" key={list.key}>
+                                        <h3>{list.key}</h3>
+                                        <div className="movies">
+                                            <a className="showMovies" href="" onClick={this.handleReload}>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </a>
+                                            <ul className="moviesDisplayed">
+                                                {this.handleMovieName(list).map((movie, index) => {
+                                                    return(
+                                                        <li className="listItem" key={index}>
+                                                            
+                                                                <p>{movie}</p>
+                                                                <button>
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </div>
+                                        {/* <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> */}
+                                        {/* <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link>
+                                        <button onClick={() => { this.handleDeleteList(list.key) }}><i class="fas fa-trash-alt"></i></button> */}
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
             </div>
         )
     }
