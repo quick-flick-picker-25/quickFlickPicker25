@@ -1,4 +1,6 @@
 .App {
+  display: flex;
+  width: 100%;
   text-align: center;
 }
 
@@ -36,3 +38,5 @@
     transform: rotate(360deg);
   }
 }
+
+
