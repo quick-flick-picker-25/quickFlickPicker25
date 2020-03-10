@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import Lists from './Lists';
-import MovieSearch from './MovieSearch';
+import Lists from './Lists.js';
+import MovieSearch from './MovieSearch.js';
 import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-import MovieDetails from './MovieDetails';
-import WatchMovie from './WatchMovie';
+import MovieDetails from './MovieDetails.js';
+import WatchMovie from './WatchMovie.js';
 
 class App extends Component {
 
@@ -16,6 +16,7 @@ class App extends Component {
 
     this.state = {
       userLists: [],
+      specificList: '',
     }
   }
 
@@ -27,14 +28,27 @@ class App extends Component {
     })
   }
 
+  // make a function to update the list that will be filtered through
+  handleGetSpecificList = (listName) => {
+    console.log(listName.key);
+    this.setState({
+      specificList: listName.key,
+    })
+  }
+
   render() {
     return (
     <Router>
       <div className="App">
-        <Lists updateParentListFunc = {this.handleGetLists}/>
-        <Route path="/" component={MovieSearch} />
-          <Route path="/movies/:movieID" component={MovieDetails} />
-        <WatchMovie />
+        <Lists updateParentListFunc = {this.handleGetLists} 
+        // updateSpecificListFunc={this.handleGetSpecificList}
+        />
+        <Route path="/" exact component={MovieSearch} />
+        <Route path="/movies/:movieID" exact component={MovieDetails} />
+        <Route path="/watch-movie/:listName" exact component={WatchMovie}>
+          {/* <Route paWatchMovie specificList ={this.state.specificList}/> */}
+        </Route>
+        {/* <Route path="/watch-movie/" render={()=><WatchMovie listName={this.state.specificList}/>} /> */}
       </div>
     </Router>  
     );

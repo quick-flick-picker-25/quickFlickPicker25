@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import AddToLists from './AddToLists';
-import GetMovieDetails from './GetMovieDetails';
+import AddToLists from './AddToLists.js';
+import GetMovieDetails from './GetMovieDetails.js';
 
 class MovieDetails extends Component {
-    constructor (props){
+    constructor (){
         super();
         this.state = {
             movieDetails: {},
@@ -14,7 +14,7 @@ class MovieDetails extends Component {
             directors: [],
             cast: [],
             videoLink:'',
-            isMounted: false,
+            movieId:'',
         }
 
         
@@ -32,7 +32,7 @@ class MovieDetails extends Component {
 
         // on component did mount, set mounted to true
         this.setState({
-            isMounted: true,
+            movieId:movieId,
             
         })
 
@@ -72,10 +72,19 @@ class MovieDetails extends Component {
         }).then(response => {
             const videos = response.data;
 
-            // set state
-            this.setState({
-                videoLink: `https://www.youtube.com/embed/${videos.results[0].key}`
-            })
+            // check if video results is undefined
+            if(videos.results[0] !== undefined){
+                // set state
+                this.setState({
+                    videoLink: `https://www.youtube.com/embed/${videos.results[0].key}`
+                })
+
+                // if it is undefined, set state to null
+            } else {
+                this.setState({
+                    videoLink: null,
+                })
+            }
         })
 
     }
@@ -88,6 +97,8 @@ class MovieDetails extends Component {
         })
     }
 
+
+
     // on component did unmount set the state to false
     componentWillUnmount = () => {
         this.setState({
@@ -98,9 +109,13 @@ class MovieDetails extends Component {
     render(){    
         return (
             <section className="movieDetails">
-                <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.props.match.params.movieID}/>
                 {/* if the state is mounted, include add to lists, if not make it null; this is to fix and error we were having */}
-                {this.state.isMounted ? <AddToLists movieId={this.state.movieDetails.id} /> : null} 
+                {this.state.movieId !=='' ? 
+                <div>
+                        <AddToLists movieId={this.state.movieId} /> 
+                 <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
+                    </div>
+                : null} 
                 <Link to="/">Back to results</Link>
                 <div>
                     <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
@@ -146,7 +161,9 @@ class MovieDetails extends Component {
                     <h2>Description</h2>
                     <p>{this.state.movieDetails.overview}</p>
                 </div>
-                <a className="watchVideo" href={this.state.videoLink}>Watch Trailer</a>
+                {this.state.videoLink === null ? null : 
+                    <a className="watchVideo" target="_blank" rel="noopener noreferrer"  href={this.state.videoLink}>Watch Trailer</a>
+                }
             </section>
         )
     }

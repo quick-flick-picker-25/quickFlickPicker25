@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './addToLists.css';
-import GetMovieDetails from './GetMovieDetails';
+import GetMovieDetails from './GetMovieDetails.js';
 
 class AddToLists extends Component{
     constructor(){

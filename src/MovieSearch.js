@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AddToLists from './AddToLists';
+import AddToLists from './AddToLists.js';
 import './addToLists.css';
 import {Link} from 'react-router-dom';
 
@@ -84,8 +84,7 @@ class MovieSearch extends Component {
                                     <AddToLists movieId={movie.id}/> 
                                         <Link key={movie.id} to={`/movies/${movie.id}`}>
                                             {/* no need for this because we are showing only the movies that have posters */}
-                                         <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-                                            }   
+                                         <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />   
                                         </Link>
                                     </li>
                                 )

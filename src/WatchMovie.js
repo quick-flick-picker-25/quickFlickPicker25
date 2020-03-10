@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
-import MovieDetails from './MovieDetails';
+import MovieDetails from './MovieDetails.js';
 
 class WatchMovie extends Component {
     constructor() {
@@ -11,6 +11,7 @@ class WatchMovie extends Component {
             selectedGenre:'',
             selectedTime:'',
             movieToWatch:'',
+            listName:'',
         };
         
     }
@@ -26,30 +27,40 @@ getGenres=()=>{
         listGenres: uniqueGenres,
     })  
 }
-    componentDidMount() {
-        const dbRef = firebase.database().ref('list');
-        const stateToBeSet = [];
-        dbRef.on('value', (response) => {
-            const dataFromDb = response.val();
-            for (let key in dataFromDb) {
-                if(dataFromDb[key]==='list')
-                {
-                    continue;
-                }
-                const listInfo = {
-                    key: key,
-                    name: dataFromDb[key]
 
-                }
-                stateToBeSet.push(listInfo)
+getInfo=()=>{
+    const dbRef = firebase.database().ref(this.props.match.params.listName);
+    const stateToBeSet = [];
+    dbRef.on('value', (response) => {
+        const dataFromDb = response.val();
+        for (let key in dataFromDb) {
+            if (dataFromDb[key] === this.props.match.params.listName) {
+                continue;
             }
-            this.setState({
-                ListMovies: stateToBeSet
-            }, ()=> {
-                this.getGenres();
-    
-            });
+            const listInfo = {
+                key: key,
+                name: dataFromDb[key]
+
+            }
+            stateToBeSet.push(listInfo)
+        }
+        this.setState({
+            ListMovies: stateToBeSet
+        }, () => {
+            this.getGenres();
+
         });
+    });
+}
+    componentWillReceiveProps(){
+      this.getInfo();
+    }
+    componentDidMount() {
+        this.getInfo();
+        // const {specificList} = this.props.location.state;
+        
+        // const dbRef = firebase.database().ref(this.props.specificList);
+     
     }
 
 
@@ -91,6 +102,8 @@ getGenres=()=>{
 
 
     render() {
+        // console.log(this.props.location.state.specificList);
+        console.log(this.props.specificList);
         return (
           this.state.movieToWatch==='' ?
               <section>

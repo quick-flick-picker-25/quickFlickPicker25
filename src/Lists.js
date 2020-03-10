@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js';
+import firebase from './firebase';
+import { Link} from 'react-router-dom';
 import './lists.css';
 
 class Lists extends Component {
@@ -32,10 +33,11 @@ class Lists extends Component {
             //set state to our array
             this.setState({
                 usersList: stateToSet,
-            }, ()=>{
-                this.props.updateParentListFunc(this.state.usersList);
-                // console.log(this.state.usersList);
-            })
+            }, 
+            // ()=>{
+            //     this.props.updateParentListFunc(this.state.usersList);
+            // }
+            )
         })
     }
 
@@ -51,11 +53,22 @@ class Lists extends Component {
         // prevent default action
         e.preventDefault();
 
-        // create new reference point in database
-        const newList = firebase.database().ref(this.state.userListName);
-
-        // push the name on submit to create node in firebase
-        newList.push(this.state.userListName);
+        // checks if already have list with name
+        const checkForSameName = this.state.usersList.find((list)=>{
+            return list.key === this.state.userListName;
+        })
+        
+        // check if the list is empty string
+        if(this.state.userListName === ""){
+            alert("please enter a name for your list!")
+        } else if (checkForSameName){
+            alert("You already have a list with that name!");
+        } else {
+            // create new reference point in database
+            const newList = firebase.database().ref(this.state.userListName);
+            // push the name on submit to create node in firebase
+            newList.push(this.state.userListName);
+        }
 
         // set to empty string 
         this.setState({
@@ -73,51 +86,43 @@ class Lists extends Component {
         } 
     }
 
-    // prevents click of button
     handleReload = (e) => {
         e.preventDefault();
     
     }
 
-    // takes in the reference and maps through the list to display the names of the movies
     handleMovieName = (object) => {
         const stateToSet = [];
         for(let movie in object.info) {
-            // ignore the item in the object that holds the key
             if (object.info[movie] === object.key) {
                 continue;
             }
             stateToSet.push(object.info[movie]);
-            // console.log(movie)
         }
-        //  return the array to map accross later
         return stateToSet;
     }
 
-    // make function to delete the specific movie
     handleDeleteMovie = (listName, movieObject) => {
         // make empty variable to store the reference key in DB 
         let refKey;
-
         // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
-        for (let movie in listName.info){
+        for (let movie in listName.info) {
+
             if (listName.info[movie] === listName.key) {
                 continue;
-            } else if(listName.info[movie].id === movieObject.id){
+            }else if (listName.info[movie].id === movieObject.id) {
                 refKey = movie;
             }
         }
-
+        // console.log(refKey);
         // make variable to get the reference point in the database
         const reference = firebase.database().ref(listName.key);
-
         // delete the movie with the speicifc key
         reference.child(refKey).remove();
     }
 
 
     render() {
-        
         return (
             <div>
                 <h2>Your Lists</h2>
@@ -130,7 +135,7 @@ class Lists extends Component {
                     {
                         this.state.usersList.map((list)=>{
                             return(
-                                <li key={list.key} className="list">
+                                <li key={list.key}>
                                     <h3>{list.key}</h3>
                                     <div className="movies">
                                         <a className="showMovies" href="/" onClick={this.handleReload}>see list.</a>
@@ -149,6 +154,11 @@ class Lists extends Component {
                                         }
                                         </ul>
                                     </div>
+                                    <Link to={`/watch-movie/${list.key}`} 
+                                    // onClick={()=>{this.props.updateSpecificListFunc(list)}}
+                                    >Watch Movie</Link> 
+                                    {/* <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> */}
+                                    {/* <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link> */}
                                     <button onClick={()=>{this.handleDeleteList(list.key)}}>delete list.</button>
                                 </li>
                             )
