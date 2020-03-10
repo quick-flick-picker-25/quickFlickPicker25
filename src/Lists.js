@@ -129,11 +129,11 @@ class Lists extends Component {
         return (
             <div className="yourLists">
                 <div className="wrapper">
-                    <h2>Your Lists</h2>
+                    <h2>Your Lists:</h2>
                     <form className="listInput" action="" onSubmit={this.handleUserListName}>
                         <label className="labelHidden" htmlFor="listName">Please enter a list name</label>
                         <input onChange={this.handleUserInput} required type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
-                        <button className="roundButton" type="submit">Submit</button>
+                        <button className="roundButton" type="submit"><i class="fas fa-plus"></i></button>
                     </form>
                     <ul>
                         {
@@ -151,7 +151,7 @@ class Lists extends Component {
                                                     return (
                                                         <li className="listItem" key={index}>
                                                             <p>{movie.title}</p>
-                                                            <button onClick={() => { this.handleDeleteMovie(list, movie) }}>Delete</button>
+                                                            <button className="deleteButton" onClick={() => { this.handleDeleteMovie(list, movie) }}>Delete</button>
                                                         </li>
                                                     )
                                                 })
