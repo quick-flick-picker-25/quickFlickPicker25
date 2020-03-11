@@ -28,3 +28,45 @@
     background-color:#b3d5df;
     cursor: pointer;
   }
+
+
+  /* HAM NAV STYLES */
+  .showLists,
+  .hideLists{
+      background-color: transparent;
+      border: none;
+      transition: all 0.5s ease;
+      cursor: pointer;
+      padding: 5px;
+  }
+
+  .showLists{
+    font-size: 4rem;
+    color: #ABBEBA;
+    position: fixed;
+    top: 30px;
+    left: 30px;
+  }
+
+  .showLists:hover,
+  .showLists:focus,
+  .hideLists:hover,
+  .hideLists:focus{
+      color: #B3D5DF;
+  }
+  
+  .yourLists{
+      position: fixed;
+  }
+  .yourLists .wrapper{
+      position: relative;
+  }
+
+  .hideLists{
+    position: absolute;
+    font-size: 3.5rem;
+    right: -5px;
+    top: 10px;
+    color: white;
+  }
+

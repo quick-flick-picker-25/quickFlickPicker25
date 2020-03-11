@@ -161,11 +161,17 @@ class Lists extends Component {
         open.classList.toggle("changeClose");
     }
 
+    // function to hide the lists
+    hideLists = () => {
+        this.props.hideListsFunc(false);
+    }
+
 
     render() {
         return (
             <div className="yourLists">
                 <div className="wrapper">
+                    <button className="hideLists" onClick={this.hideLists}><i className="fas fa-times"></i></button>
                     <div className="asideContainer">
                         <h2>Your Lists:</h2>
                         <form className="listInput" action="" onSubmit={this.handleUserListName}>
