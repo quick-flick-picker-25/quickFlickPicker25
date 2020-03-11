@@ -60,7 +60,7 @@ class MovieSearch extends Component {
                 {this.state.movies.length === 0 ?
                     <div className="movieHead"> 
                         <h1>quick flick picker</h1>
-                        <form action="" onSubmit={this.handleSubmit}>
+                        <form className="movieSearchForm" action="" onSubmit={this.handleSubmit}>
                             <label htmlFor="keywordInput" className="visuallyHidden">enter a keyword to search for a movie</label>
                             <input className="movieSearchBar" type="text" id="keywordInput" required onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
                             <button className="movieSearchButton" type="submit">find movie</button>

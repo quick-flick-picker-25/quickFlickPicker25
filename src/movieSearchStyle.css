@@ -14,7 +14,7 @@ h1{
     color:var(--mainColor);
     text-transform: uppercase;
     font-size: 7rem;
-    font-weight:bold
+    font-weight:bold;
 }
 
 .movieSearchArea{
@@ -29,42 +29,44 @@ h1{
 .movieHead{
     height:fit-content;
     position:relative;
-    bottom: 8rem
+    bottom: 8rem;
+}
+
+.movieSearchForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
 
 .movieSearchBar{
-    width:80%;
+    width:100%;
     font-size:2rem;
     height:4rem;
-    margin-bottom:5rem
+    margin-bottom:5rem;
+    background: #e2ecea;
+    padding:2rem;
+    border:none;
+
 }
 
 .movieSearchButton{
-    display:block;
-    padding:1rem 3rem;
+    /* display:block; */
+    padding:1rem 2rem;
     margin:auto;
     text-transform:uppercase;
-    border-radius:1.5rem
+    border-radius:2rem;
+    background:var(--accentColor);
+    border:none;
+    transition: 0.3;
 }
 
-.moviePosterContainer{
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    height:100vh;
-    width:100%;
-    margin:20rem 10rem 0 ;
-    align-items:center
+.movieSearchButton:hover{
+    background:var(--hoverColor)
 }
 
-.moviePoster{
-    width:20rem;
-    margin:1rem 0 0 1rem
-}
-
-@media(max-width:1008px){
-    .moviePoster{
-        width:30rem
-    }
+.movieSearchButton:active{
+    background:var(--accentColor)
+    
 }
 
