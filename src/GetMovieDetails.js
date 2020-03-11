@@ -1,5 +1,7 @@
 import { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import swal from 'sweetalert';
+import './sweetAlerts.css';
 
 class GetMovieDetails extends Component {
     componentDidMount(){
@@ -13,7 +15,10 @@ class GetMovieDetails extends Component {
                     const movie = response.data;
                     this.props.movieDetails(movie);
                 }).catch(() => {
-                    alert('Something went wrong!! Please try again later!!');
+                    swal({
+                        title: 'Something went wrong!! Please try again later!!',
+                        button: 'OK',
+                    }) 
                 });
         } 
     }
