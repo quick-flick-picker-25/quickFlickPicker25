@@ -21,13 +21,13 @@ class MovieDetails extends Component {
     }
 
     componentDidMount = () => {
-        let movieId;
-        if (typeof this.props.movieId =='undefined'){
-            movieId = this.props.match.params.movieID;
-        }
-        else {
-            movieId = this.props.movieId;
-        }
+        // let movieId;
+        // if (typeof this.props.movieId =='undefined'){
+           const movieId = this.props.match.params.movieID;
+        // }
+        // else {
+        //     movieId = this.props.movieId;
+        // }
 
 
         // on component did mount, set mounted to true
@@ -61,7 +61,9 @@ class MovieDetails extends Component {
                 directors: director,
                 cast: cast,
             })
-        })
+        }).catch(()=>{
+            alert('Something went wrong!! Please try again later!!');
+        });
 
         // get video link
         axios ({
@@ -76,7 +78,7 @@ class MovieDetails extends Component {
             if(videos.results[0] !== undefined){
                 // set state
                 this.setState({
-                    videoLink: `https://www.youtube.com/embed/${videos.results[0].key}`
+                    videoLink: `https://www.youtube.com/embed/${videos.results[0].key}`,
                 })
 
                 // if it is undefined, set state to null
@@ -85,7 +87,9 @@ class MovieDetails extends Component {
                     videoLink: null,
                 })
             }
-        })
+        }).catch(() => {
+            alert('Something went wrong!! Please try again later!!');
+        });
 
     }
 
@@ -116,7 +120,7 @@ class MovieDetails extends Component {
                  <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
                     </div>
                 : null} 
-                <Link to="/">Back to results</Link>
+                <Link to="/quickFlickPicker25">Back to results</Link>
                 <div>
                     <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
                 </div>

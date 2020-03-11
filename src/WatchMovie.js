@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
-import MovieDetails from './MovieDetails.js';
 
 class WatchMovie extends Component {
     constructor() {
@@ -11,7 +10,6 @@ class WatchMovie extends Component {
             selectedGenre:'',
             selectedTime:'',
             movieToWatch:'',
-            listName:'',
         };
         
     }
@@ -28,39 +26,33 @@ getGenres=()=>{
     })  
 }
 
-getInfo=()=>{
-    const dbRef = firebase.database().ref(this.props.match.params.listName);
-    const stateToBeSet = [];
-    dbRef.on('value', (response) => {
-        const dataFromDb = response.val();
-        for (let key in dataFromDb) {
-            if (dataFromDb[key] === this.props.match.params.listName) {
-                continue;
-            }
-            const listInfo = {
-                key: key,
-                name: dataFromDb[key]
 
-            }
-            stateToBeSet.push(listInfo)
-        }
-        this.setState({
-            ListMovies: stateToBeSet
-        }, () => {
-            this.getGenres();
-
-        });
-    });
-}
-    componentWillReceiveProps(){
-      this.getInfo();
-    }
+   
     componentDidMount() {
-        this.getInfo();
-        // const {specificList} = this.props.location.state;
-        
-        // const dbRef = firebase.database().ref(this.props.specificList);
-     
+        const dbRef = firebase.database().ref(this.props.listName);
+        const stateToBeSet = [];
+        dbRef.on('value', (response) => {
+            const dataFromDb = response.val();
+            for (let key in dataFromDb) {
+                if (dataFromDb[key] === this.props.listName) {
+                    continue;
+                }
+                const listInfo = {
+                    key: key,
+                    name: dataFromDb[key]
+
+                }
+                stateToBeSet.push(listInfo);
+            }
+            if (stateToBeSet.length !== 0) {
+                this.setState({
+                    ListMovies: stateToBeSet,
+                }, () => {
+                    this.getGenres();
+
+                });
+            }
+        });
     }
 
 
@@ -81,7 +73,11 @@ getInfo=()=>{
         
        this.setState({
            movieToWatch: qualifyingMovies[selectedIndex].name.id,
-       })
+       },()=>{
+               this.props.history.push(`/movies/${this.state.movieToWatch}`);
+       }
+       );
+            
         }
     }
        else if(genre === '') {
@@ -102,10 +98,8 @@ getInfo=()=>{
 
 
     render() {
-        // console.log(this.props.location.state.specificList);
-        console.log(this.props.specificList);
         return (
-          this.state.movieToWatch==='' ?
+        //   this.state.movieToWatch==='' ?
               <section>
                   <h1>
                       watch a movie
@@ -134,8 +128,9 @@ getInfo=()=>{
 
                   </form>
               </section>
-            :
-            <MovieDetails movieId={this.state.movieToWatch} />  
+            // :
+                
+            // <MovieDetails movieId={this.state.movieToWatch} />  
         )
     }
 }

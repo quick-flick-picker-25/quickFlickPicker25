@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
-import {
-    BrowserRouter as Router,
-    Route, Link
-} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './lists.css';
 
 class Lists extends Component {
@@ -13,7 +10,6 @@ class Lists extends Component {
             dbRef: firebase.database().ref(),
             usersList: [],
             userListName: '',
-            userMovies: [],
         }
     }
 
@@ -48,7 +44,7 @@ class Lists extends Component {
     handleUserInput = (e)=>{
         this.setState({
             userListName: e.target.value,
-        })
+        });
     }
 
     // make a function that records the value of the user input
@@ -62,9 +58,10 @@ class Lists extends Component {
         })
         
         // check if the list is empty string
-        if(this.state.userListName === ""){
-            alert("please enter a name for your list!")
-        } else if (checkForSameName){
+        // if(this.state.userListName === ""){
+        //     alert("please enter a name for your list!")
+        // } else //already done
+         if (checkForSameName){
             alert("You already have a list with that name!");
         } else {
             // create new reference point in database
@@ -106,22 +103,25 @@ class Lists extends Component {
     }
 
     handleDeleteMovie = (listName, movieObject) => {
-        // make empty variable to store the reference key in DB 
-        let refKey;
-        // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
-        for (let movie in listName.info) {
-
-            if (listName.info[movie] === listName.key) {
-                continue;
-            }else if (listName.info[movie].id === movieObject.id) {
-                refKey = movie;
+        const response = window.confirm(`Are you sure you want to delete the movie ${movieObject.title} from the list :${listName.key}?`);
+        if (response === true) {
+            // make empty variable to store the reference key in DB 
+            let refKey;
+            // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
+            for (let movie in listName.info) {
+                
+                if (listName.info[movie] === listName.key) {
+                    continue;
+                }else if (listName.info[movie].id === movieObject.id) {
+                    refKey = movie;
+                }
             }
-        }
-        // console.log(refKey);
-        // make variable to get the reference point in the database
-        const reference = firebase.database().ref(listName.key);
-        // delete the movie with the speicifc key
-        reference.child(refKey).remove();
+            // console.log(refKey);
+            // make variable to get the reference point in the database
+            const reference = firebase.database().ref(listName.key);
+            // delete the movie with the speicifc key
+            reference.child(refKey).remove();
+        } 
     }
 
 
@@ -158,11 +158,9 @@ class Lists extends Component {
                                             }
                                             </ul>
                                         </div>
-                                        <Link to={`/watch-movie/${list.key}`} 
-                                        // onClick={()=>{this.props.updateSpecificListFunc(list)}}
-                                        >Watch Movie</Link> 
-                                        {/* <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> */}
-                                        {/* <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link> */}
+                                        {this.handleMovieName(list).length !== 0 ? <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> 
+                                     : null
+                                        }
                                         <button onClick={() => { this.handleDeleteList(list.key) }}><i class="fas fa-trash-alt"></i></button>
                                     </li>
                                 )
