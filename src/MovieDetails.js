@@ -15,25 +15,20 @@ class MovieDetails extends Component {
             cast: [],
             videoLink:'',
             movieId:'',
+            keyword:'',
         }
 
         
     }
 
     componentDidMount = () => {
-        // let movieId;
-        // if (typeof this.props.movieId =='undefined'){
            const movieId = this.props.match.params.movieID;
-        // }
-        // else {
-        //     movieId = this.props.movieId;
-        // }
-
-
+        const keyword = this.props.match.params.keyword;
+           console.log(movieId);
         // on component did mount, set mounted to true
         this.setState({
             movieId:movieId,
-            
+            keyword:keyword,
         })
 
         // get cast and crew
@@ -120,7 +115,9 @@ class MovieDetails extends Component {
                  <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
                     </div>
                 : null} 
-                <Link to="/quickFlickPicker25">Back to results</Link>
+                {this.state.keyword===''?
+                <Link to={`/quickFlickPicker25/${this.state.keyword}`}>Back to results</Link>
+            : null}
                 <div>
                     <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
                 </div>
