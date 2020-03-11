@@ -29,8 +29,6 @@ class MovieDetails extends Component {
             })
         }
            const movieId = this.props.match.params.movieID;
-        
-           console.log(movieId);
         // on component did mount, set mounted to true
         this.setState({
             movieId:movieId,
@@ -102,13 +100,12 @@ class MovieDetails extends Component {
     }
 
 
-
-    // on component did unmount set the state to false
-    componentWillUnmount = () => {
-        this.setState({
-            isMounted: false,
-        })
-    }
+    // // on component did unmount set the state to false
+    // componentWillUnmount = () => {
+    //     this.setState({
+    //         isMounted: false,
+    //     })
+    // }
 
     render(){    
         return (
