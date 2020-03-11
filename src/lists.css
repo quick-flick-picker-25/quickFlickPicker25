@@ -56,6 +56,7 @@
     color: var(--backgroundColor);
     background-color: var(--accentColor);
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .roundButton:hover {
@@ -188,6 +189,7 @@ h3 {
     border: none;
     padding: 0;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .deleteButton:hover, .deleteListButton:hover {
@@ -205,6 +207,7 @@ h3 {
     border: none;
     padding: 0;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .closeMovies {
