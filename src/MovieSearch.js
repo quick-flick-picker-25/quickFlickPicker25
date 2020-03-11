@@ -28,16 +28,15 @@ class MovieSearch extends Component {
             }
         }).then((response) => {
             const movies = response.data.results;
-            const promises= movies.map((movie) => {
-               return axios ({
-                url: `https://api.themoviedb.org/3/movie/${movie.id}`,
-                params: {
-                    api_key: '8341ba99fae06408554c7e8411e4a4f9',
-                }
-            }).then(response => {
+            const promises= movies.map(async (movie) => {
+               const response = await axios({
+                    url: `https://api.themoviedb.org/3/movie/${movie.id}`,
+                    params: {
+                        api_key: '8341ba99fae06408554c7e8411e4a4f9',
+                    }
+                });
                 const movieDetails = response.data;
-               moviesWithDetails.push(movieDetails);
-            });
+                moviesWithDetails.push(movieDetails);
         });
             Promise.all(promises).then(() => {
                 const filteredMovies= moviesWithDetails.filter((movie)=>{
@@ -49,8 +48,6 @@ class MovieSearch extends Component {
                     if (this.state.movies.length === 0) {
                         alert('No available titles');
                     }
-                }).catch(() => {
-                    alert('Something went wrong!! Please try again later!!');
                 });
             });       
         }).catch(() => {

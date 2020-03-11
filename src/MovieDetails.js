@@ -120,7 +120,7 @@ class MovieDetails extends Component {
                  <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
                     </div>
                 : null} 
-                <Link to="/">Back to results</Link>
+                <Link to="/quickFlickPicker25">Back to results</Link>
                 <div>
                     <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
                 </div>

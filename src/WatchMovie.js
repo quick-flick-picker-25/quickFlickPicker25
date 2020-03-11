@@ -42,11 +42,11 @@ getGenres=()=>{
                     name: dataFromDb[key]
 
                 }
-                stateToBeSet.push(listInfo)
+                stateToBeSet.push(listInfo);
             }
             if (stateToBeSet.length !== 0) {
                 this.setState({
-                    ListMovies: stateToBeSet
+                    ListMovies: stateToBeSet,
                 }, () => {
                     this.getGenres();
 
