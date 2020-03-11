@@ -3,15 +3,25 @@ ul {
   }
   a {
     text-decoration: none;
-    /* color: inherit; */
+    font: inherit;
+    color: inherit;
   }
+ 
   /* move to main */
   .addToLists {
 position: absolute;
 right: 0;
 }
-  .listMenu, .moviePoster {
+ a.roundButton{
+      display: flex;
+      font-size: 3rem;
+      justify-content: center;
+      align-items: center;
+  }
+  .listMenu {
     position: relative;
+    top: 20px;
+    right: 20px;
   }
 
   .listMenu:active ul.listSubMenu,
@@ -22,27 +32,14 @@ right: 0;
     display: none;
     position: absolute;
     right: 0;
+    width: 150px;
+
   }
 
-  li{
-      width:fit-content;
-      font-size: 2rem;
-  }
-  
-  /* .roundButton {
-    text-align: center;
-    font-size: 2rem;
-    border-radius: 50%;
-    width: 4rem;
-    height: 4rem;
-    border: none;
-    color: var(--backgroundColor);
-    background-color: var(--accentColor);
-    transition: 0.3s;
+.listMenu .listItem a{
+ margin: 15px auto;
 }
-.roundButton:hover {
-    background-color: var(--hoverColor);
+
+.listMenu .listItem {
+ cursor: pointer;
 }
-.roundButton:active {
-    color: var(--accentColor);
-} */

@@ -165,6 +165,7 @@ h3 {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .listItem:not(:last-child) {
@@ -175,7 +176,7 @@ h3 {
     padding: 10px 0;
 }
 
-.listItem p {
+.listItem p,.listItem a {
     font-family: var(--bodyFont);
     margin: 15px 0;
     font-weight: 100;

@@ -50,9 +50,9 @@ class AddToLists extends Component{
         return false;
 
     }
-    clickHandler = (event) => {
+    clickHandler = (event,listName) => {
         event.preventDefault();
-        const dbRef = firebase.database().ref(event.target.text);
+        const dbRef = firebase.database().ref(listName);
         const movieInfo = this.state.movieDetails;
         if(this.checkIfMovieExist(dbRef, movieInfo.id))
         {
@@ -68,7 +68,8 @@ class AddToLists extends Component{
                 runtime: movieInfo.runtime,
                 genre: genres
             }
-            dbRef.push(details)
+            dbRef.push(details);
+            alert('The movie has been added to the list successfully');
         }
     }
 
@@ -83,16 +84,16 @@ class AddToLists extends Component{
         return(
             <div className="addToLists">
                 <div className="listMenu">   
-                    <a href="/"  onClick={this.handleReload}>
-                        <span aria-hidden="true">&#43;</span>
+                    <a href="/" onClick={this.handleReload} className="roundButton" >
+                        <span aria-hidden="true" >&#43;</span>
                     </a>
-                    <ul className="listSubMenu">
+                    <ul className="listSubMenu moviesDisplayed">
                         {userLists.map((list, index) => {
                             return (
-                                <li key={index}>
+                                <li key={index} className="listItem" onClick={(event) => { this.clickHandler(event,list.key)}}>
                                     <GetMovieDetails movieID={this.props.movieId} 
                                     movieDetails={this.getMovieDetails} />
-                                    <a href="/" onClick={this.clickHandler}>{list.key}</a>
+                                    <a href="/" className="listLinks" >{list.key}</a>
                                 </li>
                             )
                         })}
