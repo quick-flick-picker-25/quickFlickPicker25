@@ -3,6 +3,9 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import AddToLists from './AddToLists.js';
 import GetMovieDetails from './GetMovieDetails.js';
+import swal from 'sweetalert';
+import './sweetAlerts.css';
+
 
 class MovieDetails extends Component {
     constructor (){
@@ -60,7 +63,10 @@ class MovieDetails extends Component {
                 cast: cast,
             })
         }).catch(()=>{
-            alert('Something went wrong!! Please try again later!!');
+            swal({
+                text: 'Something went wrong!! Please try again later!!',
+                button: 'OK',
+            })
         });
 
         // get video link
@@ -86,7 +92,10 @@ class MovieDetails extends Component {
                 })
             }
         }).catch(() => {
-            alert('Something went wrong!! Please try again later!!');
+            swal({
+                text: 'Something went wrong!! Please try again later!!',
+                button: 'OK',
+            })
         });
 
     }

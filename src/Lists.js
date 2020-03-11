@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import firebase from './firebase';
 import {Link} from 'react-router-dom';
 import './lists.css';
+import swal from 'sweetalert';
+import './sweetAlerts.css';
 
 class Lists extends Component {
     constructor () {
@@ -57,12 +59,13 @@ class Lists extends Component {
             return list.key === this.state.userListName;
         })
         
-        // check if the list is empty string
-        // if(this.state.userListName === ""){
-        //     alert("please enter a name for your list!")
-        // } else //already done
+        // check if the name is already existing
          if (checkForSameName){
-            alert("You already have a list with that name!");
+            swal({
+                title: 'You already have a list with that name!',
+                text: 'Please create a unique name for your list',
+                button: 'OK',
+            })
         } else {
             // create new reference point in database
             const newList = firebase.database().ref(this.state.userListName);
@@ -80,10 +83,19 @@ class Lists extends Component {
     // make a function that deletes the specific list
     handleDeleteList = (listToDelete) => {
         // deletes the list
-        const response = window.confirm(`Are you sure you want to delete the list: ${listToDelete}?`);
-        if (response === true) {
-            this.state.dbRef.child(listToDelete).remove();
-        } 
+        swal({
+            title: `Are you sure you want to delete the list: ${listToDelete}?`,
+            buttons: ["Cancel", "Yes please"],
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal({
+                    title: `Your list was deleted!`,
+                })
+              this.state.dbRef.child(listToDelete).remove();
+            }
+          });
     }
 
     handleReload = (e) => {
@@ -103,25 +115,30 @@ class Lists extends Component {
     }
 
     handleDeleteMovie = (listName, movieObject) => {
-        const response = window.confirm(`Are you sure you want to delete the movie ${movieObject.title} from the list: ${listName.key}?`);
-        if (response === true) {
+        swal({
+            title: `Are you sure you want to delete the movie: ${movieObject.title} from the list: ${listName.key}?`,
+            buttons: ["Cancel", "Yes please"],
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
             // make empty variable to store the reference key in DB 
             let refKey;
-        // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
-        for (let movie in listName.info) {
+            // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
+            for (let movie in listName.info) {
 
-            if (listName.info[movie] === listName.key) {
-                continue;
-            }else if (listName.info[movie].id === movieObject.id) {
-                refKey = movie;
+                if (listName.info[movie] === listName.key) {
+                    continue;
+                } else if (listName.info[movie].id === movieObject.id) {
+                    refKey = movie;
+                }
             }
-        }
-        // console.log(refKey);
-        // make variable to get the reference point in the database
-        const reference = firebase.database().ref(listName.key);
-        // delete the movie with the specifc key
-        reference.child(refKey).remove();
-        }
+            // make variable to get the reference point in the database
+            const reference = firebase.database().ref(listName.key);
+            // delete the movie with the specifc key
+            reference.child(refKey).remove();
+            }
+        }); 
     }
 
     handleMovieList = (e) => {

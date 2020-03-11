@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
+import swal from 'sweetalert';
+import './sweetAlerts.css';
 
 class WatchMovie extends Component {
     constructor() {
@@ -67,7 +69,10 @@ getGenres=()=>{
             return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre)>=0) 
         });
         if (qualifyingMovies.length === 0){
-            alert("No matches in this list.")
+            swal({
+                title: 'No matches in this list',
+                button: 'OK',
+            }) 
         }else{
             const selectedIndex=Math.floor(Math.random()*qualifyingMovies.length);
         
@@ -81,10 +86,16 @@ getGenres=()=>{
         }
     }
        else if(genre === '') {
-           alert("Please select a genre!");
+            swal({
+                title: 'Please select a genre!',
+                button: 'OK',
+            }) 
        }
        else {
-            alert("Please select a time!");
+            swal({
+                title: 'Please select a time!',
+                button: 'OK',
+            }) 
        }
 
     }
