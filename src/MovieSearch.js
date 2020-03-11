@@ -3,6 +3,8 @@ import axios from 'axios';
 import AddToLists from './AddToLists.js';
 import './addToLists.css';
 import {Link} from 'react-router-dom';
+import swal from 'sweetalert';
+import './sweetAlerts.css';
 
 class MovieSearch extends Component {
     constructor() {
@@ -63,12 +65,18 @@ class MovieSearch extends Component {
                     movies: filteredMovies,
                 }, () => {
                     if (this.state.movies.length === 0) {
-                        alert('No available titles');
+                        swal({
+                            title: 'No available titles',
+                            button: 'OK',
+                        }) 
                     }
                 });
             });
         }).catch(() => {
-            alert('Something went wrong!! Please try again later!!');
+            swal({
+                title: 'Something went wrong!! Please try again later!!',
+                button: 'OK',
+            }) 
         });
     }
     handleSubmit = (event) => {

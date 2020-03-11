@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,600|Lato:300,400&display=swap');
+
+.swal-title{
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.swal-text,
+.swal-button{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+.swal-footer{
+    text-align: center;
+}
+
+.swal-button {
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-color: #eadbc4;
+    color: black;
+    width: 120px;
+    border-radius: 25px;
+  }
+  
+  .swal-button:not([disabled]):hover,
+  .swal-button:not([disabled]):focus {
+    background-color:#b3d5df;
+    cursor: pointer;
+  }
+
+
+  /* HAM NAV STYLES */
+  .showLists,
+  .hideLists{
+      background-color: transparent;
+      border: none;
+      transition: all 0.5s ease;
+      cursor: pointer;
+      padding: 5px;
+  }
+
+  .showLists{
+    font-size: 4rem;
+    color: #ABBEBA;
+    position: fixed;
+    top: 30px;
+    left: 30px;
+  }
+
+  .showLists:hover,
+  .showLists:focus,
+  .hideLists:hover,
+  .hideLists:focus{
+      color: #B3D5DF;
+  }
+  
+  .yourLists{
+      position: fixed;
+  }
+  .yourLists .wrapper{
+      position: relative;
+  }
+
+  .hideLists{
+    position: absolute;
+    font-size: 3.5rem;
+    right: -5px;
+    top: 10px;
+    color: white;
+  }
+

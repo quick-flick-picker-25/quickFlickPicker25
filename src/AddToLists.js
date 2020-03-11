@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './addToLists.css';
 import GetMovieDetails from './GetMovieDetails.js';
+import swal from 'sweetalert';
+import './sweetAlerts.css';
 
 class AddToLists extends Component{
     constructor(){
@@ -56,7 +58,10 @@ class AddToLists extends Component{
         const movieInfo = this.state.movieDetails;
         if(this.checkIfMovieExist(dbRef, movieInfo.id))
         {
-            alert('The movie is already in the list');
+            swal({
+                title: 'The movie is already in the list!',
+                button: 'OK',
+            })
         }
         else {
             const genres = movieInfo.genres.map((genre) => {
@@ -69,7 +74,10 @@ class AddToLists extends Component{
                 genre: genres
             }
             dbRef.push(details);
-            alert('The movie has been added to the list successfully');
+            swal({
+                title: 'The movie has been added to the list successfully!',
+                button: 'OK',
+            })
         }
     }
 

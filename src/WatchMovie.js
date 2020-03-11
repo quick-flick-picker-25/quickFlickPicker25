@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './watchMovie.css';
+import swal from 'sweetalert';
+import './sweetAlerts.css';
 
 class WatchMovie extends Component {
     constructor() {
@@ -64,29 +66,38 @@ class WatchMovie extends Component {
         if (this.state.selectedTime !== '' && genre !== '') {
             const movies = this.state.ListMovies;
             const time = parseInt(this.state.selectedTime);
-            const qualifyingMovies = movies.filter((movie) => {
-                return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre) >= 0)
-            });
-            if (qualifyingMovies.length === 0) {
-                alert("No matches in this list.")
-            } else {
-                const selectedIndex = Math.floor(Math.random() * qualifyingMovies.length);
-
-                this.setState({
-                    movieToWatch: qualifyingMovies[selectedIndex].name.id,
-                }, () => {
-                    this.props.history.push(`/movies/${this.state.movieToWatch}`);
-                }
-                );
-
-            }
+            const  qualifyingMovies=movies.filter((movie)=>{
+            return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre)>=0) 
+        });
+        if (qualifyingMovies.length === 0){
+            swal({
+                title: 'No matches in this list',
+                button: 'OK',
+            }) 
+        }else{
+            const selectedIndex=Math.floor(Math.random()*qualifyingMovies.length);
+        
+       this.setState({
+           movieToWatch: qualifyingMovies[selectedIndex].name.id,
+       },()=>{
+               this.props.history.push(`/movies/${this.state.movieToWatch}`);
+       }
+       );
+            
         }
-        else if (genre === '') {
-            alert("Please select a genre!");
-        }
-        else {
-            alert("Please select a time!");
-        }
+    }
+       else if(genre === '') {
+            swal({
+                title: 'Please select a genre!',
+                button: 'OK',
+            }) 
+       }
+       else {
+            swal({
+                title: 'Please select a time!',
+                button: 'OK',
+            }) 
+       }
 
     }
     handleChange = (event) => {
