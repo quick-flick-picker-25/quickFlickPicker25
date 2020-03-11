@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bf1674a1e28548c44b3ea30f80322b1f",
+    "revision": "262867e86c29ecf608280d5be17b7159",
     "url": "/quickFlickPicker25/index.html"
   },
   {
-    "revision": "5a80440cedc0079d9b8c",
+    "revision": "3a97df6a5567af504f5f",
     "url": "/quickFlickPicker25/static/css/main.a6bd8612.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/quickFlickPicker25/static/js/2.22868b86.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5a80440cedc0079d9b8c",
-    "url": "/quickFlickPicker25/static/js/main.3cfb1396.chunk.js"
+    "revision": "3a97df6a5567af504f5f",
+    "url": "/quickFlickPicker25/static/js/main.cd8e4ee8.chunk.js"
   },
   {
     "revision": "2db411ed65f03820ceec",
