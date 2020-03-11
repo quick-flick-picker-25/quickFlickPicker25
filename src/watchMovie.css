@@ -85,7 +85,7 @@
     }
 }
 
-@media (max-width: 841px) {
+@media (max-width: 840px) {
     .watchMovie {
         width: 100%;
         display: flex;
