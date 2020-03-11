@@ -35,6 +35,7 @@ class App extends Component {
     return (
     <Router>
       <div className="App">
+        {/* <img src="./assets/qfpLogo.png" alt=""/> */}
         <Lists updateParentListFunc = {this.handleGetLists}/>
         <Route path="/" exact component={MovieSearch} />
         <Route path="/movies/:movieID" component={MovieDetails} />

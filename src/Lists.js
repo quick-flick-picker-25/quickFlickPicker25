@@ -14,6 +14,7 @@ class Lists extends Component {
             usersList: [],
             userListName: '',
             userMovies: [],
+            openList: false
         }
     }
 
@@ -36,9 +37,11 @@ class Lists extends Component {
             //set state to our array
             this.setState({
                 usersList: stateToSet,
-            }, ()=>{
-                this.props.updateParentListFunc(this.state.usersList);
-            })
+            }, 
+            // ()=>{
+            //     this.props.updateParentListFunc(this.state.usersList);
+            // }
+            )
         })
     }
 
@@ -54,11 +57,22 @@ class Lists extends Component {
         // prevent default action
         e.preventDefault();
 
-        // create new reference point in database
-        const newList = firebase.database().ref(this.state.userListName);
-
-        // push the name on submit to create node in firebase
-        newList.push(this.state.userListName);
+        // checks if already have list with name
+        const checkForSameName = this.state.usersList.find((list)=>{
+            return list.key === this.state.userListName;
+        })
+        
+        // check if the list is empty string
+        if(this.state.userListName === ""){
+            alert("please enter a name for your list!")
+        } else if (checkForSameName){
+            alert("You already have a list with that name!");
+        } else {
+            // create new reference point in database
+            const newList = firebase.database().ref(this.state.userListName);
+            // push the name on submit to create node in firebase
+            newList.push(this.state.userListName);
+        }
 
         // set to empty string 
         this.setState({
@@ -70,11 +84,10 @@ class Lists extends Component {
     // make a function that deletes the specific list
     handleDeleteList = (listToDelete) => {
         // deletes the list
-        this.state.dbRef.child(listToDelete).remove();
-    }
-
-    handleReload = (e) => {
-        e.preventDefault()
+        const response = window.confirm(`Are you sure you want to delete list:${listToDelete}?`);
+        if (response === true) {
+            this.state.dbRef.child(listToDelete).remove();
+        } 
     }
 
     handleMovieName = (object) => {
@@ -83,51 +96,105 @@ class Lists extends Component {
             if (object.info[movie] === object.key) {
                 continue;
             }
-            stateToSet.push(object.info[movie].title);
+            stateToSet.push(object.info[movie]);
         }
         return stateToSet;
     }
+
+    handleDeleteMovie = (listName, movieObject) => {
+        // make empty variable to store the reference key in DB 
+        let refKey;
+        // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
+        for (let movie in listName.info) {
+
+            if (listName.info[movie] === listName.key) {
+                continue;
+            }else if (listName.info[movie].id === movieObject.id) {
+                refKey = movie;
+            }
+        }
+        // console.log(refKey);
+        // make variable to get the reference point in the database
+        const reference = firebase.database().ref(listName.key);
+        // delete the movie with the speicifc key
+        reference.child(refKey).remove();
+    }
+
+    handleMovieList = (e) => {
+        //Get variable for button
+        const button = e.currentTarget;
+
+        //Make variables for close and open chevrons.
+        const close = button.querySelector(".closeMovies");
+        const open = button.querySelector(".showMovies");
+
+        //Get variable for movies list by selecting parent and then next sibling.
+        const movieList = button.parentNode.nextElementSibling;
+        //In case lists are loading make sure the the movie list element is not null, so it will not break the code.
+        if(movieList !== null){
+            movieList.classList.toggle("activeMovieList");
+        }
+
+        //Hide Close/Hide Open
+        close.classList.toggle("changeClose");
+        open.classList.toggle("changeClose");
+    }
+
 
     render() {
         return (
             <div className="yourLists">
                 <div className="wrapper">
-                    <h2>Your Lists:</h2>
-                    <form className="listInput" action="" onSubmit={this.handleUserListName}>
-                        <label className="labelHidden" htmlFor="listName">Please enter a list name</label>
-                        <input onChange={this.handleUserInput} type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
-                        <button className="roundButton" type="submit">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </form>
-                    <ul>
+                    <div className="asideContainer">
+                        <h2>Your Lists:</h2>
+                        <form className="listInput" action="" onSubmit={this.handleUserListName}>
+                            <div className="listInputContainer">
+                                <label className="visuallyHidden" htmlFor="listName">Please enter a list name</label>
+                                <input onChange={this.handleUserInput} required type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
+                            </div>
+                            <div className="submitButtonContainer">
+                                <button className="roundButton" type="submit" title="Create a new list"><i className="fas fa-plus"></i></button>
+                            </div>
+                        </form>
+                    </div>
+            
+                    <ul className="movieListContainer">
                         {
                             this.state.usersList.map((list)=>{
                                 return(
-                                    <li className="dropDownList" key={list.key}>
-                                        <h3>{list.key}</h3>
+                                    <li className="movieList" key={list.key}>
+                                        <div className="dropDownContainer">
+                                            <div className="dropDownButton" onClick={this.handleMovieList}>
+                                                <h3>{list.key}</h3>
+                                                <p className="showMovies" title="Open list"><i className="fas fa-chevron-down"></i></p>
+                                                <p className="closeMovies changeClose" title="Close list"><i className="fas fa-times"></i></p>
+                                            </div>
+                                            <button onClick={() => { this.handleDeleteList(list.key) }} className="deleteListButton" title="Delete list"><i className="fas fa-trash-alt"></i></button>
+                                        </div>
                                         <div className="movies">
-                                            <a className="showMovies" href="" onClick={this.handleReload}>
-                                                <i class="fas fa-chevron-down"></i>
-                                            </a>
                                             <ul className="moviesDisplayed">
-                                                {this.handleMovieName(list).map((movie, index) => {
-                                                    return(
+                                                {
+                                                this.handleMovieName(list).length===0 ? 
+                                                <li className="noMoviesText"> No movies in this list</li>:
+                                                this.handleMovieName(list).map((movie, index) => {
+                                                    return (
                                                         <li className="listItem" key={index}>
-                                                            
-                                                                <p>{movie}</p>
-                                                                <button>
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            
+                                                            <p>{movie.title}</p>
+                                                            <button className="deleteButton" onClick={() => { this.handleDeleteMovie(list, movie) }} title="Delete movie"><i className="fas fa-trash-alt"></i></button>
                                                         </li>
                                                     )
-                                                })}
+                                                })
+                                            }
                                             </ul>
+                                            <div className="linkContainer">
+                                                <Link className="watchMovieBtn" to={`/watch-movie/${list.key}`} 
+                                                // onClick={()=>{this.props.updateSpecificListFunc(list)}}
+                                                >Watch Movie</Link> 
+
+                                            </div>
                                         </div>
                                         {/* <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> */}
-                                        {/* <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link>
-                                        <button onClick={() => { this.handleDeleteList(list.key) }}><i class="fas fa-trash-alt"></i></button> */}
+                                        {/* <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link> */}
                                     </li>
                                 )
                             })
