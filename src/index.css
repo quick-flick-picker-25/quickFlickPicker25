@@ -244,3 +244,61 @@ html {
   clip: rect(00 0 0);
   overflow: hidden;
 }
+
+/* VARIABLES */
+
+:root {
+  /* COLOR VARIABLES */
+  --backgroundColor: #fff;
+  --mainColor: #abbeba;
+  --accentColor: #eadbc4;
+  --hoverColor: #b3d5df;
+  --bodyTextColor: #000;
+  /* FONTS */
+  --headingFonts: 'Josefin Sans', sans-serif;
+  --bodyFont: 'Lato', sans-serif;
+  --fav: #5e736b;
+}
+
+/*  GLOBAL */
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: var(--bodyFont);
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+h1, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.App {
+  width: 100%;
+  display: flex;
+}
+
+.wrapper {
+  max-width: 1280px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* .mainLogo {
+  width: 200px;
+  height: 200px;
+} */
