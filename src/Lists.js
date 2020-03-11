@@ -103,22 +103,25 @@ class Lists extends Component {
     }
 
     handleDeleteMovie = (listName, movieObject) => {
-        // make empty variable to store the reference key in DB 
-        let refKey;
-        // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
-        for (let movie in listName.info) {
-
-            if (listName.info[movie] === listName.key) {
-                continue;
-            }else if (listName.info[movie].id === movieObject.id) {
-                refKey = movie;
+        const response = window.confirm(`Are you sure you want to delete the movie ${movieObject.title} from the list :${listName.key}?`);
+        if (response === true) {
+            // make empty variable to store the reference key in DB 
+            let refKey;
+            // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
+            for (let movie in listName.info) {
+                
+                if (listName.info[movie] === listName.key) {
+                    continue;
+                }else if (listName.info[movie].id === movieObject.id) {
+                    refKey = movie;
+                }
             }
-        }
-        // console.log(refKey);
-        // make variable to get the reference point in the database
-        const reference = firebase.database().ref(listName.key);
-        // delete the movie with the speicifc key
-        reference.child(refKey).remove();
+            // console.log(refKey);
+            // make variable to get the reference point in the database
+            const reference = firebase.database().ref(listName.key);
+            // delete the movie with the speicifc key
+            reference.child(refKey).remove();
+        } 
     }
 
 

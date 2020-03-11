@@ -26,39 +26,33 @@ getGenres=()=>{
     })  
 }
 
-getInfo=(prop)=>{
-    const dbRef = firebase.database().ref(prop.match.params.listName);
-    const stateToBeSet = [];
-    dbRef.on('value', (response) => {
-        const dataFromDb = response.val();
-        for (let key in dataFromDb) {
-            if (dataFromDb[key] === prop.match.params.listName) {
-                continue;
-            }
-            const listInfo = {
-                key: key,
-                name: dataFromDb[key]
 
-            }
-            stateToBeSet.push(listInfo)
-        }
-        this.setState({
-            ListMovies: stateToBeSet
-        }, () => {
-            this.getGenres();
-
-        });
-    });
-}
-    UNSAFE_componentWillReceiveProps(nextProp){
-      this.getInfo(nextProp);
-    }
+   
     componentDidMount() {
-        this.getInfo(this.props);
-        // const {specificList} = this.props.location.state;
-        
-        // const dbRef = firebase.database().ref(this.props.specificList);
-     
+        const dbRef = firebase.database().ref(this.props.listName);
+        const stateToBeSet = [];
+        dbRef.on('value', (response) => {
+            const dataFromDb = response.val();
+            for (let key in dataFromDb) {
+                if (dataFromDb[key] === this.props.listName) {
+                    continue;
+                }
+                const listInfo = {
+                    key: key,
+                    name: dataFromDb[key]
+
+                }
+                stateToBeSet.push(listInfo)
+            }
+            if (stateToBeSet.length !== 0) {
+                this.setState({
+                    ListMovies: stateToBeSet
+                }, () => {
+                    this.getGenres();
+
+                });
+            }
+        });
     }
 
 

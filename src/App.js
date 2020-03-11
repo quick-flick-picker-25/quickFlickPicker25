@@ -46,10 +46,12 @@ class App extends Component {
         />
           <Route path="/" exact component={MovieSearch} />
           <Route path="/movies/:movieID" exact component={MovieDetails} />
-          <Route path="/watch-movie/:listName" exact component={WatchMovie} key={this.props.match.params.listName}/>
-            {/* <Route path="./watch-movie/:listName" exact component={WatchMovie} /> */}
-          {/* <Route paWatchMovie specificList ={this.state.specificList}/> */}
-        {/* <Route path="/watch-movie/" render={()=><WatchMovie listName={this.state.specificList}/>} /> */}
+          <Route
+            exact
+            path="/watch-movie/:listName"
+            render={props => <WatchMovie listName={props.match.params.listName} key={props.match.params.listName}
+            history={props.history}  />}
+          />
       </div>
     </Router>  
     );
