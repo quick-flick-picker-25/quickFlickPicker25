@@ -44,8 +44,8 @@ class App extends Component {
         // updateSpecificListFunc={this.handleGetSpecificList}
         />
           <Route path="/quickFlickPicker25" component={MovieSearch} />
-        <Route path="/movies/:movieID" exact component={MovieDetails} />
-        <Route path="/watch-movie/:listName" exact component={WatchMovie}>
+          <Route path="/quickFlickPicker25/movies/:movieID" exact component={MovieDetails} />
+          <Route path="/quickFlickPicker25/watch-movie/:listName" exact component={WatchMovie}>
           {/* <Route paWatchMovie specificList ={this.state.specificList}/> */}
         </Route>
         {/* <Route path="/watch-movie/" render={()=><WatchMovie listName={this.state.specificList}/>} /> */}
