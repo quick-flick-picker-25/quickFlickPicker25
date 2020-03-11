@@ -83,7 +83,7 @@ class AddToLists extends Component{
         return(
             <div className="addToLists">
                 <div className="listMenu">   
-                    <a href="/" className="roundButton" onClick={this.handleReload}>
+                    <a href="/"  onClick={this.handleReload}>
                         <span aria-hidden="true">&#43;</span>
                     </a>
                     <ul className="listSubMenu">
