@@ -4,7 +4,7 @@
     background-color: var(--mainColor);
     min-width: 300px;
     width: 25%;
-    height: 100vh;
+    min-height: 100vh;
     text-align: left;
     overflow-y: scroll;
 }
@@ -44,7 +44,6 @@
     padding: 1rem;
     width: 100%;
 }
-
 
 .roundButton {
     text-align: center;
@@ -152,6 +151,7 @@ h3 {
     border-radius: 20px;
     text-transform: uppercase;
     transition: 0.3s;
+    border: none;
 }
 
 .watchMovieBtn:hover {
@@ -176,7 +176,7 @@ h3 {
     padding: 10px 0;
 }
 
-.listItem p {
+.listItem p, .listItem a {
     font-family: var(--bodyFont);
     margin: 15px 0;
     font-weight: 100;
@@ -232,3 +232,9 @@ h3 {
 } */
 
 /* -------------- */
+
+@media (max-width: 840px) {
+    .yourLists {
+        display: none;
+    }
+}

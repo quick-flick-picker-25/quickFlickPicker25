@@ -1,0 +1,125 @@
+.watchMovie {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--mainColor);
+    font-family: var(--headingFonts);
+    font-size: 2.2rem;
+}
+
+.watchMovieContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+}
+
+.watchMovie h1 {
+    font-size: 5rem;
+    text-transform: uppercase;
+    margin-bottom: 70px;
+}
+
+.watchMovie p {
+    margin: 0 10px;
+}
+
+.watchMovie p:first-child {
+    margin-left: 0;
+}
+
+.genreTimeString {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+}
+
+.firstString, .secondString {
+    display: flex;
+    text-align: center;
+}
+
+.genreTimeString select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
+    font: inherit;
+    font-size: 1.8rem;
+    font-weight: 100;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    max-width: 237px;
+    border-bottom: 2px solid var(--mainColor);
+    cursor: pointer;
+}
+
+.watchMovieContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+.findMovieBtn {
+    align-self: center;
+    cursor: pointer;
+}
+
+@media (max-width: 1216px) {
+    .genreTimeString {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .firstString, .secondString {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+            .firstString {
+                margin-bottom: 30px;
+            }
+}
+
+@media (max-width: 840px) {
+    .watchMovie {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .wrapper {
+        width: 90%;
+    }
+    .genreTimeString {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .firstString, .secondString {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 475px) {
+    .watchMovie h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 390px) {
+    .firstString, .secondString {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+    }
+    .firstString select, .secondString select {
+        align-self: center;
+    }
+}

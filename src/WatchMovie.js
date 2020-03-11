@@ -1,33 +1,34 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
+import './watchMovie.css';
 
 class WatchMovie extends Component {
     constructor() {
         super();
-        this.state={
+        this.state = {
             ListMovies: [],
-            listGenres:[],
-            selectedGenre:'',
-            selectedTime:'',
-            movieToWatch:'',
+            listGenres: [],
+            selectedGenre: '',
+            selectedTime: '',
+            movieToWatch: '',
         };
-        
+
     }
-getGenres=()=>{
-    const genres = [];
-    this.state.ListMovies.forEach((movie) => {
-        movie.name.genre.forEach((genre) => {
-            genres.push(genre);
+    getGenres = () => {
+        const genres = [];
+        this.state.ListMovies.forEach((movie) => {
+            movie.name.genre.forEach((genre) => {
+                genres.push(genre);
+            });
         });
-    });
-    const uniqueGenres = genres.filter((genre, index) => genres.indexOf(genre) === index);
-    this.setState({
-        listGenres: uniqueGenres,
-    })  
-}
+        const uniqueGenres = genres.filter((genre, index) => genres.indexOf(genre) === index);
+        this.setState({
+            listGenres: uniqueGenres,
+        })
+    }
 
 
-   
+
     componentDidMount() {
         const dbRef = firebase.database().ref(this.props.listName);
         const stateToBeSet = [];
@@ -58,78 +59,93 @@ getGenres=()=>{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        
-        const genre=this.state.selectedGenre;
-        if (this.state.selectedTime !==''  && genre !== ''){
-            const movies=this.state.ListMovies;
+
+        const genre = this.state.selectedGenre;
+        if (this.state.selectedTime !== '' && genre !== '') {
+            const movies = this.state.ListMovies;
             const time = parseInt(this.state.selectedTime);
-            const  qualifyingMovies=movies.filter((movie)=>{
-            return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre)>=0) 
-        });
-        if (qualifyingMovies.length === 0){
-            alert("No matches in this list.")
-        }else{
-            const selectedIndex=Math.floor(Math.random()*qualifyingMovies.length);
-        
-       this.setState({
-           movieToWatch: qualifyingMovies[selectedIndex].name.id,
-       },()=>{
-               this.props.history.push(`/movies/${this.state.movieToWatch}`);
-       }
-       );
-            
+            const qualifyingMovies = movies.filter((movie) => {
+                return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre) >= 0)
+            });
+            if (qualifyingMovies.length === 0) {
+                alert("No matches in this list.")
+            } else {
+                const selectedIndex = Math.floor(Math.random() * qualifyingMovies.length);
+
+                this.setState({
+                    movieToWatch: qualifyingMovies[selectedIndex].name.id,
+                }, () => {
+                    this.props.history.push(`/movies/${this.state.movieToWatch}`);
+                }
+                );
+
+            }
         }
-    }
-       else if(genre === '') {
-           alert("Please select a genre!");
-       }
-       else {
+        else if (genre === '') {
+            alert("Please select a genre!");
+        }
+        else {
             alert("Please select a time!");
-       }
+        }
 
     }
-    handleChange= (event) => {
-        const id=event.target.id;
+    handleChange = (event) => {
+        const id = event.target.id;
         const value = event.target.value;
         this.setState({
-            [id]:value,
+            [id]: value,
         })
     }
 
 
     render() {
         return (
-        //   this.state.movieToWatch==='' ?
-              <section>
-                  <h1>
-                      watch a movie
-                </h1>
-                  <form action="" onSubmit={this.handleSubmit}>
-                      <p>I feel like watching a </p>
-                      <select id="selectedGenre" onChange={this.handleChange}>
-                          <option value="">Select a genre</option>
-                          {
-                              this.state.listGenres.map((genre, index) => {
-                                  return (
-                                      <option value={genre} key={index} >{genre}</option>
+            //   this.state.movieToWatch==='' ?
+            <section className="watchMovie">
+                <div className="wrapper">
+                    <div className="watchMovieContainer">
+                        <h1>
+                            watch a movie
+                        </h1>
+                        <form action="" onSubmit={this.handleSubmit}>
 
-                                  )
-                              })
-                          }
-                      </select>
-                      <p> movie and I have </p>
-                      <select id="selectedTime" onChange={this.handleChange}>
-                          <option value="">Select a movie length</option>
-                          <option value="90">Less than 1.5 hours</option>
-                          <option value="120">Less than 2 hours</option>
-                          <option value="240">All the time in the world </option>
-                      </select>
-                      <button type="submit">find movie</button>
+                            <div className="genreTimeString">
 
-                  </form>
-              </section>
+                                <div className="firstString">
+                                    <p>I feel like watching a </p>
+                                    <select id="selectedGenre" onChange={this.handleChange}>
+                                        <option value="">genre</option>
+                                        {
+                                            this.state.listGenres.map((genre, index) => {
+                                                return (
+                                                    <option value={genre} key={index} >{genre}</option>
+
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                </div>
+
+                                <div className="secondString">           
+                                    <p> movie and I have </p>
+                                    <select id="selectedTime" onChange={this.handleChange}>
+                                        <option value="">amount of time</option>
+                                        <option value="90">Less than 1.5 hours</option>
+                                        <option value="120">Less than 2 hours</option>
+                                        <option value="240">All the time in the world </option>
+                                    </select>
+                                </div> 
+
+                            </div>
+
+                            <button className="watchMovieBtn findMovieBtn" type="submit">find movie</button>
+
+                        </form>
+                    </div>
+                </div>
+            </section>
             // :
-                
+
             // <MovieDetails movieId={this.state.movieToWatch} />  
         )
     }
