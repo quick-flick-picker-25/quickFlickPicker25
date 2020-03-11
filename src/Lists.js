@@ -80,7 +80,7 @@ class Lists extends Component {
     // make a function that deletes the specific list
     handleDeleteList = (listToDelete) => {
         // deletes the list
-        const response = window.confirm(`Are you sure you want to delete list:${listToDelete}?`);
+        const response = window.confirm(`Are you sure you want to delete the list: ${listToDelete}?`);
         if (response === true) {
             this.state.dbRef.child(listToDelete).remove();
         } 
@@ -103,7 +103,7 @@ class Lists extends Component {
     }
 
     handleDeleteMovie = (listName, movieObject) => {
-        const response = window.confirm(`Are you sure you want to delete the movie ${movieObject.title} from the list :${listName.key}?`);
+        const response = window.confirm(`Are you sure you want to delete the movie ${movieObject.title} from the list: ${listName.key}?`);
         if (response === true) {
             // make empty variable to store the reference key in DB 
             let refKey;

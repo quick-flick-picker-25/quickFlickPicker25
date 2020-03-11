@@ -10,15 +10,32 @@ class MovieSearch extends Component {
         this.state = {
             keyword: '',
             movies: [],
+
         }
+    }
+    componentDidMount(){
+        if (typeof this.props.match.params.keyword !='undefined')
+        {
+            const keyword = this.props.match.params.keyword;
+            console.log(keyword);
+            // on component did mount, set mounted to true
+            this.setState({
+                // movieId: movieId,
+                keyword: keyword,
+            }, ()=>{
+                this.searchForMovies();
+            });
+            
+
+        }
+      
     }
     handleKeyword = (event) => {
         this.setState({
             keyword: event.target.value,
         })
     }
-    handleSubmit = (event) => {
-        event.preventDefault();
+    searchForMovies = ()=>{
         let moviesWithDetails = [];
         axios({
             url: 'https://api.themoviedb.org/3/search/movie',
@@ -28,8 +45,8 @@ class MovieSearch extends Component {
             }
         }).then((response) => {
             const movies = response.data.results;
-            const promises= movies.map(async (movie) => {
-               const response = await axios({
+            const promises = movies.map(async (movie) => {
+                const response = await axios({
                     url: `https://api.themoviedb.org/3/movie/${movie.id}`,
                     params: {
                         api_key: '8341ba99fae06408554c7e8411e4a4f9',
@@ -37,11 +54,11 @@ class MovieSearch extends Component {
                 });
                 const movieDetails = response.data;
                 moviesWithDetails.push(movieDetails);
-        });
+            });
             Promise.all(promises).then(() => {
-                const filteredMovies= moviesWithDetails.filter((movie)=>{
-                        return (movie.poster_path != null && movie.genres.length>0 && movie.runtime !==null)
-                   });
+                const filteredMovies = moviesWithDetails.filter((movie) => {
+                    return (movie.poster_path != null && movie.genres.length > 0 && movie.runtime !== null)
+                });
                 this.setState({
                     movies: filteredMovies,
                 }, () => {
@@ -49,15 +66,20 @@ class MovieSearch extends Component {
                         alert('No available titles');
                     }
                 });
-            });       
+            });
         }).catch(() => {
             alert('Something went wrong!! Please try again later!!');
         });
     }
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.searchForMovies();
+       
+    }
     render() {
         return (
             <div>
-                {this.state.movies.length === 0 ?
+                {this.state.movies.length === 0 && typeof this.props.match.params.keyword == 'undefined'?
                     <div>
                         <h1>quick flick picker</h1>
                         <form action="" onSubmit={this.handleSubmit}>
@@ -73,7 +95,7 @@ class MovieSearch extends Component {
                                 return (
                                     <li key={movie.id} className="moviePoster">
                                     <AddToLists movieId={movie.id}/> 
-                                        <Link key={movie.id} to={`/movies/${movie.id}`}>
+                                        <Link key={movie.id} to={`/movies/${this.state.keyword}/${movie.id}`}>
                                          <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />   
                                         </Link>
                                     </li>
