@@ -57,31 +57,33 @@ class MovieSearch extends Component {
     render() {
         return (
             <div className="movieSearchArea">
-                {this.state.movies.length === 0 ?
-                    <div className="movieHead"> 
-                        <h1>quick flick picker</h1>
-                        <form className="movieSearchForm" action="" onSubmit={this.handleSubmit}>
-                            <label htmlFor="keywordInput" className="visuallyHidden">enter a keyword to search for a movie</label>
-                            <input className="movieSearchBar" type="text" id="keywordInput" required onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
-                            <button className="movieSearchButton" type="submit">find movie</button>
-                        </form>
-                    </div>
-                    :
-                    <ul className="moviePosterContainer">
-                        {
-                            this.state.movies.map((movie) => {
-                                return (
-                                    <li key={movie.id} className="moviePoster">
-                                    <AddToLists movieId={movie.id}/> 
-                                        <Link key={movie.id} to={`/movies/${movie.id}`}>
-                                         <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />   
-                                        </Link>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                }
+                <div className="wrapper">
+                    {this.state.movies.length === 0 ?
+                        <div className="movieHead"> 
+                            <h1>quick flick picker</h1>
+                            <form className="movieSearchForm" action="" onSubmit={this.handleSubmit}>
+                                <label htmlFor="keywordInput" className="visuallyHidden">enter a keyword to search for a movie</label>
+                                <input className="movieSearchBar" type="text" id="keywordInput" required onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
+                                <button className="movieSearchButton" type="submit">find movie</button>
+                            </form>
+                        </div>
+                        :
+                        <ul className="moviePosterContainer">
+                            {
+                                this.state.movies.map((movie) => {
+                                    return (
+                                        <li key={movie.id} className="moviePoster">
+                                        <AddToLists movieId={movie.id}/> 
+                                            <Link key={movie.id} to={`/movies/${movie.id}`}>
+                                            <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />   
+                                            </Link>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    }
+                </div>
             </div>
         );
     }

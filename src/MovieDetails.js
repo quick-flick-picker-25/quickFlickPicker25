@@ -115,12 +115,12 @@ class MovieDetails extends Component {
             <section className="movieDetails">
                 {/* if the state is mounted, include add to lists, if not make it null; this is to fix and error we were having */}
                 {this.state.movieId !=='' ? 
-                <div>
-                        <AddToLists movieId={this.state.movieId} /> 
-                 <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
+                <div className="addButton">
+                    <AddToLists movieId={this.state.movieId} /> 
+                    <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
                     </div>
                 : null} 
-                <Link to="/quickFlickPicker25">Back to results</Link>
+                <Link className="goBack" to="/quickFlickPicker25">Back to results</Link>
                 <div className="detailsPage">
                     <div>
                         <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
@@ -167,9 +167,11 @@ class MovieDetails extends Component {
                             <h2>Description</h2>
                             <p>{this.state.movieDetails.overview}</p>
                         </div>
-                        {this.state.videoLink === null ? null : 
-                        <a className="watchVideo" target="_blank" rel="noopener noreferrer"  href={this.state.videoLink}>Watch Trailer</a>
-                    }
+                        <div className="trailer">
+                            {this.state.videoLink === null ? null : 
+                            <a className="watchVideo" target="_blank" rel="noopener noreferrer"  href={this.state.videoLink}>Watch Trailer</a>
+                            }   
+                        </div>
                     </div>
                 </div>
             </section>

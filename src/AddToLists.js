@@ -84,7 +84,7 @@ class AddToLists extends Component{
             <div className="addToLists">
                 <div className="listMenu">   
                     <a href="/" onClick={this.handleReload}>
-                        <span aria-hidden="true">&#43;</span>
+                        <span className="addButton" aria-hidden="true">&#43;</span>
                     </a>
                     <ul className="listSubMenu">
                         {userLists.map((list, index) => {

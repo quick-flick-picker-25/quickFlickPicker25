@@ -23,7 +23,6 @@ h1{
     display:flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .movieHead{
@@ -69,4 +68,146 @@ h1{
     background:var(--accentColor)
     
 }
+
+/* MOVIE POSTERS */
+
+.moviePosterContainer{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    height:100vh;
+    width:100%;
+    margin:20rem 0 0 ;
+    justify-content:center;
+}
+
+.moviePoster{
+    width:20rem;
+    margin:1rem 0 0 1rem;
+}
+
+@media(max-width:1050px){
+    .moviePoster{
+        width:15rem;
+    }
+}
+
+@media(max-width:801px){
+    .moviePoster{
+        width:20rem;
+    }
+}
+
+@media(max-width:701px){
+    .moviePoster{
+        width:15rem;
+    }
+}
+
+@media(max-width:535px){
+    .moviePoster{
+        width:20rem
+    }
+}
+
+
+/* MOVIE DETAILS */
+
+.movieDetails{
+    margin:5% 5%;
+}
+
+.movieDetails img{
+    width:40rem;
+    max-height:65rem;
+}
+
+.movieInfo{
+    display:flex;
+    flex-direction: column;
+    width:50%;
+    padding-left: 4rem
+}
+
+.detailTitle{
+    color:var(--mainColor);
+    text-transform: uppercase;
+    font-size: 4rem;
+    font-weight:bold;
+    text-align: left;
+}
+
+.detailsPage{
+    display:flex;
+    flex-direction:row;
+}
+
+.threeDetails{
+    display:flex;
+    flex-direction: row;
+    text-align:left;
+    justify-content: space-between;
+}
+
+.description, .trailer{
+    text-align: left
+}
+
+.trailer, .goBack{
+    background:var(--accentColor);
+    width:fit-content;
+    padding:1rem 1.5rem;
+    border-radius:2rem;
+    color:inherit
+}
+
+.goBack{
+    display:block;
+    position:absolute;
+    right:5rem;
+    top:2rem
+}
+
+.watchVideo{
+color:inherit
+}
+
+.addButton{
+    display:block;
+    width:100%;
+    height:1.5%;
+    margin:1rem 5rem 1rem 0
+}
+
+@media(max-width:1125px){
+    .detailsPage{
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        padding-top:5rem
+    }
+    
+    .movieInfo{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+        padding-left: 0;
+    }
+
+    .addButton{
+        margin:3rem 5rem 1rem 0
+    }
+}
+
+
+@media(max-width:570px){
+    .threeDetails{
+        flex-direction: column;
+    }
+
+}
+
+
+
+
 
