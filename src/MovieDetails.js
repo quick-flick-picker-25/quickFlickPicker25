@@ -22,13 +22,16 @@ class MovieDetails extends Component {
     }
 
     componentDidMount = () => {
+        if (typeof this.props.match.params.keyword != 'undefined'){
+            const keyword = this.props.match.params.keyword;
+            this.setState({
+                keyword: keyword,
+            })
+        }
            const movieId = this.props.match.params.movieID;
-        const keyword = this.props.match.params.keyword;
-           console.log(movieId);
         // on component did mount, set mounted to true
         this.setState({
             movieId:movieId,
-            keyword:keyword,
         })
 
         // get cast and crew
@@ -97,13 +100,12 @@ class MovieDetails extends Component {
     }
 
 
-
-    // on component did unmount set the state to false
-    componentWillUnmount = () => {
-        this.setState({
-            isMounted: false,
-        })
-    }
+    // // on component did unmount set the state to false
+    // componentWillUnmount = () => {
+    //     this.setState({
+    //         isMounted: false,
+    //     })
+    // }
 
     render(){    
         return (
@@ -115,7 +117,7 @@ class MovieDetails extends Component {
                  <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
                     </div>
                 : null} 
-                {this.state.keyword===''?
+                {this.state.keyword!==''?
                 <Link to={`/quickFlickPicker25/${this.state.keyword}`}>Back to results</Link>
             : null}
                 <div>
