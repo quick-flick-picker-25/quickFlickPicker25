@@ -44,7 +44,6 @@ class AddToLists extends Component{
                 stateToBeSet.push(dataFromDb[key].id)
             }
         });
-        console.log(stateToBeSet);
         if(stateToBeSet.indexOf(movieId)>-1) {
             return true;
         }

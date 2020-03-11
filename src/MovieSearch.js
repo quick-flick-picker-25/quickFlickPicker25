@@ -12,8 +12,6 @@ class MovieSearch extends Component {
             movies: [],
         }
     }
-    componentDidMount() {
-    }
     handleKeyword = (event) => {
         this.setState({
             keyword: event.target.value,
@@ -29,26 +27,20 @@ class MovieSearch extends Component {
                 query: this.state.keyword,
             }
         }).then((response) => {
-
             const movies = response.data.results;
-            
-            
-            const promises= movies.map((movie) => {
-            
-               return axios ({
-                url: `https://api.themoviedb.org/3/movie/${movie.id}`,
-                params: {
-                    api_key: '8341ba99fae06408554c7e8411e4a4f9',
-                }
-            }).then(response => {
+            const promises= movies.map(async (movie) => {
+               const response = await axios({
+                    url: `https://api.themoviedb.org/3/movie/${movie.id}`,
+                    params: {
+                        api_key: '8341ba99fae06408554c7e8411e4a4f9',
+                    }
+                });
                 const movieDetails = response.data;
-               moviesWithDetails.push(movieDetails);
-            });
+                moviesWithDetails.push(movieDetails);
         });
             Promise.all(promises).then(() => {
                 const filteredMovies= moviesWithDetails.filter((movie)=>{
                         return (movie.poster_path != null && movie.genres.length>0 && movie.runtime !==null)
-                       
                    });
                 this.setState({
                     movies: filteredMovies,
@@ -56,12 +48,11 @@ class MovieSearch extends Component {
                     if (this.state.movies.length === 0) {
                         alert('No available titles');
                     }
-                })//end of setState
-            })
-        
-        //           
-       
-    }) // end of axios call
+                });
+            });       
+        }).catch(() => {
+            alert('Something went wrong!! Please try again later!!');
+        });
     }
     render() {
         return (
@@ -83,7 +74,6 @@ class MovieSearch extends Component {
                                     <li key={movie.id} className="moviePoster">
                                     <AddToLists movieId={movie.id}/> 
                                         <Link key={movie.id} to={`/movies/${movie.id}`}>
-                                            {/* no need for this because we are showing only the movies that have posters */}
                                          <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />   
                                         </Link>
                                     </li>

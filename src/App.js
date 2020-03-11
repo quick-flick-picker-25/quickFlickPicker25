@@ -12,44 +12,47 @@ import './movieSearchStyle.css'
 
 class App extends Component {
 
-  constructor(){
-    super();
+  // constructor(){
+  //   super();
 
-    this.state = {
-      userLists: [],
-      specificList: '',
-    }
-  }
+  //   this.state = {
+  //     userLists: [],
+  //     specificList: '',
+  //   }
+  // }
 
   // make a function to update state globally (in parent)
-  handleGetLists = (lists) => {
-    // update own state with one from child component
-    this.setState({
-      userLists: lists,
-    })
-  }
+  // handleGetLists = (lists) => {
+  //   // update own state with one from child component
+  //   this.setState({
+  //     userLists: lists,
+  //   })
+  // }
 
   // make a function to update the list that will be filtered through
-  handleGetSpecificList = (listName) => {
-    console.log(listName.key);
-    this.setState({
-      specificList: listName.key,
-    })
-  }
+  // handleGetSpecificList = (listName) => {
+  //   console.log(listName.key);
+  //   this.setState({
+  //     specificList: listName.key,
+  //   })
+  // }
 
   render() {
     return (
     <Router>
       <div className="App">
-        <Lists updateParentListFunc = {this.handleGetLists} 
+        <Lists 
+        // updateParentListFunc = {this.handleGetLists} 
         // updateSpecificListFunc={this.handleGetSpecificList}
         />
-          <Route path="/quickFlickPicker25" exact component={MovieSearch} />
-          <Route path="/quickFlickPicker25/movies/:movieID" exact component={MovieDetails} />
-          <Route path="/quickFlickPicker25/watch-movie/:listName" exact component={WatchMovie}>
-          {/* <Route paWatchMovie specificList ={this.state.specificList}/> */}
-        </Route>
-        {/* <Route path="/watch-movie/" render={()=><WatchMovie listName={this.state.specificList}/>} /> */}
+          <Route path="/quickFlickPicker25/" exact  component={MovieSearch} />
+          <Route path="/movies/:movieID" exact component={MovieDetails} />
+          <Route
+            exact
+            path="/watch-movie/:listName"
+            render={props => <WatchMovie listName={props.match.params.listName} key={props.match.params.listName}
+            history={props.history}  />}
+          />
       </div>
     </Router>  
     );
