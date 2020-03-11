@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import axios from 'axios'
 
 class GetMovieDetails extends Component {
@@ -12,14 +12,14 @@ class GetMovieDetails extends Component {
                 }).then(response => {
                     const movie = response.data;
                     this.props.movieDetails(movie);
-                })
+                }).catch(() => {
+                    alert('Something went wrong!! Please try again later!!');
+                });
         } 
     }
 
     render() {
-        return(
-            null
-        )
+        return(null);
     }
 }
 export default GetMovieDetails

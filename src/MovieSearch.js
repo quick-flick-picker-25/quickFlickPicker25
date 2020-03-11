@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AddToLists from './AddToLists';
+import AddToLists from './AddToLists.js';
 import './addToLists.css';
-// import firebase from './firebase';
-import {
-    BrowserRouter as Router,
-    Route, Link
-} from 'react-router-dom';
-import brokenImage from "./brokenLink-01.png";
-import MovieDetails from './MovieDetails';
-
-
+import {Link} from 'react-router-dom';
 
 class MovieSearch extends Component {
     constructor() {
@@ -20,8 +12,6 @@ class MovieSearch extends Component {
             movies: [],
         }
     }
-    componentDidMount() {
-    }
     handleKeyword = (event) => {
         this.setState({
             keyword: event.target.value,
@@ -29,6 +19,7 @@ class MovieSearch extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
+        let moviesWithDetails = [];
         axios({
             url: 'https://api.themoviedb.org/3/search/movie',
             params: {
@@ -37,17 +28,31 @@ class MovieSearch extends Component {
             }
         }).then((response) => {
             const movies = response.data.results;
-            const filteredMovies=movies.filter((movie)=>{
-                return (movie.poster_path !== null && movie.genre_ids.length>0)
-            })
-            this.setState({
-                movies: filteredMovies,
-            }, ()=>{
+            const promises= movies.map(async (movie) => {
+               const response = await axios({
+                    url: `https://api.themoviedb.org/3/movie/${movie.id}`,
+                    params: {
+                        api_key: '8341ba99fae06408554c7e8411e4a4f9',
+                    }
+                });
+                const movieDetails = response.data;
+                moviesWithDetails.push(movieDetails);
+        });
+            Promise.all(promises).then(() => {
+                const filteredMovies= moviesWithDetails.filter((movie)=>{
+                        return (movie.poster_path != null && movie.genres.length>0 && movie.runtime !==null)
+                   });
+                this.setState({
+                    movies: filteredMovies,
+                }, () => {
                     if (this.state.movies.length === 0) {
                         alert('No available titles');
                     }
-            });
-        })
+                });
+            });       
+        }).catch(() => {
+            alert('Something went wrong!! Please try again later!!');
+        });
     }
     render() {
         return (
@@ -57,7 +62,7 @@ class MovieSearch extends Component {
                         <h1>quick flick picker</h1>
                         <form action="" onSubmit={this.handleSubmit}>
                             <label htmlFor="keywordInput" className="visuallyHidden">enter a keyword to search for a movie</label>
-                            <input type="text" id="keywordInput" onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
+                            <input type="text" id="keywordInput" required onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
                             <button type="submit">find movie</button>
                         </form>
                     </div>
@@ -66,11 +71,10 @@ class MovieSearch extends Component {
                         {
                             this.state.movies.map((movie) => {
                                 return (
-                                    <li key={movie.id} className="listMenu">
+                                    <li key={movie.id} className="moviePoster">
                                     <AddToLists movieId={movie.id}/> 
                                         <Link key={movie.id} to={`/movies/${movie.id}`}>
-                                            { movie.poster_path === null ? <img src={brokenImage} alt="Broken image" /> : <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-                                            }   
+                                         <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />   
                                         </Link>
                                     </li>
                                 )
@@ -78,7 +82,6 @@ class MovieSearch extends Component {
                         }
                     </ul>
                 }
-
             </div>
         );
     }

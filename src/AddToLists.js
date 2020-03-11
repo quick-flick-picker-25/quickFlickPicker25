@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from './firebase.js';
 import './addToLists.css';
-import GetMovieDetails from './GetMovieDetails';
+import GetMovieDetails from './GetMovieDetails.js';
 
 class AddToLists extends Component{
     constructor(){
@@ -44,7 +44,6 @@ class AddToLists extends Component{
                 stateToBeSet.push(dataFromDb[key].id)
             }
         });
-        console.log(stateToBeSet);
         if(stateToBeSet.indexOf(movieId)>-1) {
             return true;
         }
@@ -98,7 +97,7 @@ class AddToLists extends Component{
                             )
                         })}
                     </ul>
-                </div>
+                </div> 
             </div>
         )}
 }
