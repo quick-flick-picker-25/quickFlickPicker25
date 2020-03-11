@@ -131,18 +131,22 @@ class Lists extends Component {
                 <div className="wrapper">
                     <h2>Your Lists:</h2>
                     <form className="listInput" action="" onSubmit={this.handleUserListName}>
-                        <label className="labelHidden" htmlFor="listName">Please enter a list name</label>
-                        <input onChange={this.handleUserInput} required type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
-                        <button className="roundButton" type="submit"><i class="fas fa-plus"></i></button>
+                        <div className="listInputContainer">
+                            <label className="labelHidden" htmlFor="listName">Please enter a list name</label>
+                            <input onChange={this.handleUserInput} required type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
+                        </div>
+                        <div className="submitButtonContainer">
+                            <button className="roundButton" type="submit"><i className="fas fa-plus"></i></button>
+                        </div>
                     </form>
-                    <ul>
+                    <ul className="movieListContainer">
                         {
                             this.state.usersList.map((list)=>{
                                 return(
                                     <li className="dropDownList" key={list.key}>
                                         <h3>{list.key}</h3>
                                         <div className="movies">
-                                            <a className="showMovies" href="/" onClick={this.handleReload}><i class="fas fa-chevron-down"></i></a>
+                                            <a className="showMovies" href="/" onClick={this.handleReload}><i className="fas fa-chevron-down"></i></a>
                                             <ul className="moviesDisplayed">
                                                 {
                                                 this.handleMovieName(list).length===0 ? 
@@ -151,7 +155,7 @@ class Lists extends Component {
                                                     return (
                                                         <li className="listItem" key={index}>
                                                             <p>{movie.title}</p>
-                                                            <button className="deleteButton" onClick={() => { this.handleDeleteMovie(list, movie) }}><i class="fas fa-trash-alt"></i></button>
+                                                            <button className="deleteButton" onClick={() => { this.handleDeleteMovie(list, movie) }}><i className="fas fa-trash-alt"></i></button>
                                                         </li>
                                                     )
                                                 })
@@ -163,7 +167,7 @@ class Lists extends Component {
                                         >Watch Movie</Link> 
                                         {/* <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> */}
                                         {/* <Link to={{ pathname: `/watch-movie/`, state: {specificList: list.key}}}>Watch Movie</Link> */}
-                                        <button onClick={() => { this.handleDeleteList(list.key) }}><i class="fas fa-trash-alt"></i></button>
+                                        <button onClick={() => { this.handleDeleteList(list.key) }}><i className="fas fa-trash-alt"></i></button>
                                     </li>
                                 )
                             })
