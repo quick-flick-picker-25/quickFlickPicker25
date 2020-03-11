@@ -107,21 +107,41 @@ class Lists extends Component {
         if (response === true) {
             // make empty variable to store the reference key in DB 
             let refKey;
-            // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
-            for (let movie in listName.info) {
-                
-                if (listName.info[movie] === listName.key) {
-                    continue;
-                }else if (listName.info[movie].id === movieObject.id) {
-                    refKey = movie;
-                }
+        // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
+        for (let movie in listName.info) {
+
+            if (listName.info[movie] === listName.key) {
+                continue;
+            }else if (listName.info[movie].id === movieObject.id) {
+                refKey = movie;
             }
-            // console.log(refKey);
-            // make variable to get the reference point in the database
-            const reference = firebase.database().ref(listName.key);
-            // delete the movie with the speicifc key
-            reference.child(refKey).remove();
-        } 
+        }
+        // console.log(refKey);
+        // make variable to get the reference point in the database
+        const reference = firebase.database().ref(listName.key);
+        // delete the movie with the specifc key
+        reference.child(refKey).remove();
+        }
+    }
+
+    handleMovieList = (e) => {
+        //Get variable for button
+        const button = e.currentTarget;
+
+        //Make variables for close and open chevrons.
+        const close = button.querySelector(".closeMovies");
+        const open = button.querySelector(".showMovies");
+
+        //Get variable for movies list by selecting parent and then next sibling.
+        const movieList = button.parentNode.nextElementSibling;
+        //In case lists are loading make sure the the movie list element is not null, so it will not break the code.
+        if(movieList !== null){
+            movieList.classList.toggle("activeMovieList");
+        }
+
+        //Hide Close/Hide Open
+        close.classList.toggle("changeClose");
+        open.classList.toggle("changeClose");
     }
 
 
@@ -129,39 +149,55 @@ class Lists extends Component {
         return (
             <div className="yourLists">
                 <div className="wrapper">
-                    <h2>Your Lists:</h2>
-                    <form className="listInput" action="" onSubmit={this.handleUserListName}>
-                        <label className="labelHidden" htmlFor="listName">Please enter a list name</label>
-                        <input onChange={this.handleUserInput} required type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
-                        <button className="roundButton" type="submit"><i class="fas fa-plus"></i></button>
-                    </form>
-                    <ul>
+                    <div className="asideContainer">
+                        <h2>Your Lists:</h2>
+                        <form className="listInput" action="" onSubmit={this.handleUserListName}>
+                            <div className="listInputContainer">
+                                <label className="visuallyHidden" htmlFor="listName">Please enter a list name</label>
+                                <input onChange={this.handleUserInput} required type="text" id="listName" placeholder="New list name" value={this.state.userListName}/>
+                            </div>
+                            <div className="submitButtonContainer">
+                                <button className="roundButton" type="submit" title="Create a new list"><i className="fas fa-plus"></i></button>
+                            </div>
+                        </form>
+                    </div>
+            
+                    <ul className="movieListContainer">
                         {
                             this.state.usersList.map((list)=>{
                                 return(
-                                    <li className="dropDownList" key={list.key}>
-                                        <h3>{list.key}</h3>
+                                    <li className="movieList" key={list.key}>
+                                        <div className="dropDownContainer">
+                                            <div className="dropDownButton" onClick={this.handleMovieList}>
+                                                <h3>{list.key}</h3>
+                                                <p className="showMovies" title="Open list"><i className="fas fa-chevron-down"></i></p>
+                                                <p className="closeMovies changeClose" title="Close list"><i className="fas fa-times"></i></p>
+                                            </div>
+                                            <button onClick={() => { this.handleDeleteList(list.key) }} className="deleteListButton" title="Delete list"><i className="fas fa-trash-alt"></i></button>
+                                        </div>
                                         <div className="movies">
-                                            <a className="showMovies" href="/" onClick={this.handleReload}><i class="fas fa-chevron-down"></i></a>
                                             <ul className="moviesDisplayed">
                                                 {
                                                 this.handleMovieName(list).length===0 ? 
-                                                <li> No movies in this list</li>:
+                                                <li className="noMoviesText"> No movies in this list</li>:
                                                 this.handleMovieName(list).map((movie, index) => {
                                                     return (
                                                         <li className="listItem" key={index}>
                                                             <p>{movie.title}</p>
-                                                            <button className="deleteButton" onClick={() => { this.handleDeleteMovie(list, movie) }}><i class="fas fa-trash-alt"></i></button>
+                                                            <button className="deleteButton" onClick={() => { this.handleDeleteMovie(list, movie) }} title="Delete movie"><i className="fas fa-trash-alt"></i></button>
                                                         </li>
                                                     )
                                                 })
                                             }
                                             </ul>
+                                            <div className="linkContainer">
+                                                {this.handleMovieName(list).length !== 0 ? <Link className="watchMovieBtn" to={`/watch-movie/${list.key}`}>Watch Movie</Link>
+                                                    : null
+                                                }
+
+
+                                            </div>
                                         </div>
-                                        {this.handleMovieName(list).length !== 0 ? <Link to={`/watch-movie/${list.key}`}>Watch Movie</Link> 
-                                     : null
-                                        }
-                                        <button onClick={() => { this.handleDeleteList(list.key) }}><i class="fas fa-trash-alt"></i></button>
                                     </li>
                                 )
                             })
