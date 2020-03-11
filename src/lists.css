@@ -189,7 +189,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 /* VARIABLES */
 
 :root {
-    /* COLOR VARIABLES */
+    /* COLOR VARIABLES */ 
     --backgroundColor: #fff;
     --mainColor: #abbeba;
     --accentColor: #eadbc4;

@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import MovieDetails from './MovieDetails.js';
 import WatchMovie from './WatchMovie.js';
+import './movieSearchStyle.css'
 
 class App extends Component {
 

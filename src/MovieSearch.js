@@ -65,18 +65,18 @@ class MovieSearch extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="movieSearchArea">
                 {this.state.movies.length === 0 ?
-                    <div>
+                    <div className="movieHead"> 
                         <h1>quick flick picker</h1>
                         <form action="" onSubmit={this.handleSubmit}>
                             <label htmlFor="keywordInput" className="visuallyHidden">enter a keyword to search for a movie</label>
-                            <input type="text" id="keywordInput" required onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
-                            <button type="submit">find movie</button>
+                            <input className="movieSearchBar" type="text" id="keywordInput" required onChange={this.handleKeyword} value={this.state.keyword} placeholder="Search for a movie..." />
+                            <button className="movieSearchButton" type="submit">find movie</button>
                         </form>
                     </div>
                     :
-                    <ul>
+                    <ul className="moviePosterContainer">
                         {
                             this.state.movies.map((movie) => {
                                 return (
