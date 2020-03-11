@@ -82,7 +82,7 @@ class MovieSearch extends Component {
                                 return (
                                     <li key={movie.id} className="moviePoster">
                                     <AddToLists movieId={movie.id}/> 
-                                        <Link key={movie.id} to={`/quickFlickPicker25/movies/${movie.id}`}>
+                                        <Link key={movie.id} to={`/movies/${movie.id}`}>
                                             {/* no need for this because we are showing only the movies that have posters */}
                                          <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />   
                                         </Link>
