@@ -8,7 +8,8 @@ import {
 } from 'react-router-dom';
 import MovieDetails from './MovieDetails.js';
 import WatchMovie from './WatchMovie.js';
-import './movieSearchStyle.css'
+import './movieSearchStyle.css';
+import logo from './assets/qfpLogo.png';
 
 class App extends Component {
 
@@ -39,25 +40,25 @@ class App extends Component {
 
   render() {
     return (
-    <Router>
-      <div className="App">
-        {/* <div className="mainLogo" >
-          <img src="./assets/qfpLogo.png" alt=""/>
-        </div> */}
-        <Lists 
-        // updateParentListFunc = {this.handleGetLists} 
-        // updateSpecificListFunc={this.handleGetSpecificList}
-        />
-          <Route path="/quickFlickPicker25/:keyword?"  component={MovieSearch} />
-          <Route path="/movies/:keyword?/:movieID"  component={MovieDetails} />
-          <Route
-            exact
-            path="/watch-movie/:listName"
-            render={props => <WatchMovie listName={props.match.params.listName} key={props.match.params.listName}
-            history={props.history}  />}
-          />
-      </div>
-    </Router>  
+        <Router>
+          <div className="App">
+            <Lists 
+            // updateParentListFunc = {this.handleGetLists} 
+            // updateSpecificListFunc={this.handleGetSpecificList}
+            />
+              <Route path="/quickFlickPicker25/:keyword?"  component={MovieSearch} />
+              <Route path="/movies/:keyword?/:movieID"  component={MovieDetails} />
+              <Route
+                exact
+                path="/watch-movie/:listName"
+                render={props => <WatchMovie listName={props.match.params.listName} key={props.match.params.listName}
+                history={props.history}  />}
+              />
+              {/* <div className="mainLogo" >
+                <img src={logo} alt="" />
+              </div> */}
+          </div>
+        </Router>  
     );
   }
 }

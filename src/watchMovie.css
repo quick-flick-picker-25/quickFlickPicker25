@@ -9,9 +9,9 @@
 }
 
 .watchMovieContainer {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    width: 100%;
     text-align: center;
 }
 
@@ -80,17 +80,17 @@
         display: flex;
         justify-content: center;
     }
-            .firstString {
-                margin-bottom: 30px;
-            }
+    .firstString {
+        margin-bottom: 30px;
+    }
 }
 
-@media (max-width: 840px) {
+@media (max-width: 841px) {
     .watchMovie {
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%;
     }
     .wrapper {
         width: 90%;

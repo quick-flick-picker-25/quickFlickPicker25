@@ -40,4 +40,10 @@
 }
  */
 
-
+.mainLogo {
+  position: absolute;
+  right: 0;
+  margin: 40px;
+  width: 100px;
+  height: 100px;
+}
