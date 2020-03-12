@@ -1,3 +1,5 @@
+/* Movie Search and movie details styles */
+
 .movieSearchArea {
     width: 75%;
     height: 100vh;
@@ -90,33 +92,10 @@
 }
 
 .moviePoster {
-    width: 20rem;
+    width: 180px;
+    height: 40vh;
     margin: 1rem 0 0 1rem;
     position: relative;
-}
-
-@media(max-width:1050px) {
-    .moviePoster {
-        width: 15rem;
-    }
-}
-
-@media(max-width:801px) {
-    .moviePoster {
-        width: 20rem;
-    }
-}
-
-@media(max-width:701px) {
-    .moviePoster {
-        width: 15rem;
-    }
-}
-
-@media(max-width:535px) {
-    .moviePoster {
-        width: 20rem
-    }
 }
 
 /* -------------------------------------MOVIE DETAILS */
@@ -126,8 +105,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: scroll;
+    margin-top: 100px;
+    margin-bottom: 20px;
 }
 
 .detailsPage {
@@ -136,15 +115,24 @@
 
 .movieDetailContainer {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-movieDetailContainer .addToLists{
+.addButton {
+    align-self: flex-end;
+    margin-bottom: 4vh;
+    margin-right: 3%;
+}
+
+.movieDetailContainer .addToLists {
     position: static;
 }
 
 .posterContainer {
     display: flex;
-    width: 40%;
+    width: 500px;
+    height: 450px;
     justify-content: center;
     align-items: center;
 }
@@ -162,6 +150,8 @@ movieDetailContainer .addToLists{
     font-family: var(--headingFonts);
     color: var(--mainColor);
     font-size: 4rem;
+    text-align: center;
+    margin-bottom: 5vh;
 }
 
 .movieInfo h2 {
@@ -213,45 +203,34 @@ movieDetailContainer .addToLists{
 
 .trailer {
     margin: 20px 0;
+    text-align: center;
 }
 
 .goBack {
     display: block;
-    position: absolute;
-    right: 5rem;
-    top: 9rem;
+    width: 150px;
+    align-self: flex-end;
+    margin: 2vh 0;
 }
 
 @media(max-width:1130px) {
-    .movieDetails {
-        padding-top: 400px;
-    }
     .detailsPage {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    .posterContainer {
-        width: 50%;
-    }
     .movieInfo {
         width: 100%;
         display: flex;
         padding: 3px;
     }
-    /* .listMenu {
-        position: relative;
-        top: 75px;
-        right: 50px;
-    } */
 }
 
 @media(max-width:840px) {
     .movieDetails {
         width: 100%;
         text-align: center;
-        padding-top: 650px;
     }
     .threeDetails h2, .genres p, .director p, .cast p {
         text-align: center;

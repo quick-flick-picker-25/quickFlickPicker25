@@ -120,19 +120,19 @@ class MovieDetails extends Component {
             <section className="movieDetails">
                 <div className="wrapper">                   
                     <div className="movieDetailContainer">
-                        {/* if the state is mounted, include add to lists, if not make it null; this is to fix and error we were having */}
+                        {this.state.keyword !== '' ?
+                            <Link className="goBack" to={`/quickFlickPicker25/${this.state.keyword}`}>Back to results</Link>
+                            : null}
+                        {this.state.listName !== '' ?
+                            <Link className="goBack" to={`/watch-movie/${this.state.listName}`}>Watch Another Movie</Link>
+                            : null}
                         {this.state.movieId !=='' ? 
                         <div className="addButton">
                             <AddToLists movieId={this.state.movieId} /> 
                             <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
                             </div>
                         : null} 
-                        {this.state.keyword!==''?
-                        <Link className="goBack"  to={`/quickFlickPicker25/${this.state.keyword}`}>Back to results</Link>
-                        : null}
-                        {this.state.listName !== '' ?
-                            <Link className="goBack" to={`/watch-movie/${this.state.listName}`}>Watch Another Movie</Link>
-                            : null}
+                      
                         <div className="detailsPage">
                             <div className="posterContainer">
                                 <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
