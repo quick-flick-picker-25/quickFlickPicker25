@@ -138,6 +138,10 @@
     width: 100%;
 }
 
+movieDetailContainer .addToLists{
+    position: static;
+}
+
 .posterContainer {
     display: flex;
     width: 40%;

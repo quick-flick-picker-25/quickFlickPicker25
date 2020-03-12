@@ -4,6 +4,9 @@ input[type="checkbox"] {
   display: none;
 }
 
+.listComponent {
+  transition: all 0.8;
+}
 .toggle {
   align-self: start;
   position: fixed;
