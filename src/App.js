@@ -23,7 +23,7 @@ class App extends Component {
 
   // if the window is 860 px then hide the lists by default
   componentDidMount = () => {
-    if(window.innerWidth === 860){
+    if(window.innerWidth <= 840){
       this.handleListsShow(false);
     }
   }
@@ -41,10 +41,14 @@ class App extends Component {
     return (
         <Router>
           <div className="App">
-            <Lists 
-            // updateParentListFunc = {this.handleGetLists} 
-            // updateSpecificListFunc={this.handleGetSpecificList}
-            />
+          <button className="showLists" onClick={() => { this.handleListsShow(true) }}>
+            <i className="fas fa-list"></i></button>
+          {
+            this.state.listsShown ? <Lists
+              hideListsFunc={this.handleListsShow} />
+              : null
+          }
+
               <Route path="/quickFlickPicker25/:keyword?"  component={MovieSearch} />
               <Route path="/movies/:keyword?/:movieID"  component={MovieDetails} />
               <Route

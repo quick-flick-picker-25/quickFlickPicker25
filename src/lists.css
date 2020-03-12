@@ -232,9 +232,24 @@ h3 {
 } */
 
 /* -------------- */
+  .yourLists{
+      position: fixed;
+  }
+  .yourLists .wrapper{
+      position: relative;
+  }
+
+  .hideLists{
+    position: absolute;
+    font-size: 3.5rem;
+    right: -5px;
+    top: 10px;
+    color: white;
+     display: none;
+  }
 
 @media (max-width: 840px) {
-    .yourLists {
-        display: none;
-    }
+    .hideLists{
+        display: block;
+    } 
 }

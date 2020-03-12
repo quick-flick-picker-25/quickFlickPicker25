@@ -3,7 +3,6 @@ import firebase from './firebase';
 import {Link} from 'react-router-dom';
 import './lists.css';
 import swal from 'sweetalert';
-import './sweetAlerts.css';
 
 class Lists extends Component {
     constructor () {

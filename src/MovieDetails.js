@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import AddToLists from './AddToLists.js';
 import GetMovieDetails from './GetMovieDetails.js';
 import swal from 'sweetalert';
-import './sweetAlerts.css';
 
 
 class MovieDetails extends Component {

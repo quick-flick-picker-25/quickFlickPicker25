@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
-import './sweetAlerts.css';
 
 class GetMovieDetails extends Component {
     componentDidMount(){

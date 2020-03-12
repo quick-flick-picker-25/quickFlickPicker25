@@ -302,3 +302,36 @@ img {
   width: 200px;
   height: 200px;
 } */
+
+/* Sweet Alert Styles */
+
+.swal-title{
+  font-family: var(--headingFonts);
+  font-size: 2rem;
+}
+
+.swal-text,
+.swal-button{
+    font-family: var(--bodyFont);
+    font-weight: 300;
+}
+
+.swal-footer{
+    text-align: center;
+}
+
+.swal-button {
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-color: #eadbc4;
+    color: black;
+    width: 120px;
+    border-radius: 25px;
+  }
+  
+  .swal-button:not([disabled]):hover,
+  .swal-button:not([disabled]):focus {
+    background-color:#b3d5df;
+    cursor: pointer;
+  }
+

@@ -39,7 +39,32 @@
   }
 }
  */
+/* HAM NAV STYLES */
+  .showLists,
+  .hideLists{
+      background-color: transparent;
+      border: none;
+      transition: all 0.5s ease;
+      cursor: pointer;
+      padding: 5px;
+     
+  }
 
+  .showLists{
+    font-size: 4rem;
+    color: #ABBEBA;
+    position: fixed;
+    top: 30px;
+    left: 30px;
+  }
+
+  .showLists:hover,
+  .showLists:focus,
+  .hideLists:hover,
+  .hideLists:focus{
+      color: #B3D5DF;
+  }
+  
 .mainLogo {
   position: absolute;
   right: 0;

@@ -3,7 +3,6 @@ import firebase from './firebase.js';
 import './addToLists.css';
 import GetMovieDetails from './GetMovieDetails.js';
 import swal from 'sweetalert';
-import './sweetAlerts.css';
 
 class AddToLists extends Component{
     constructor(){

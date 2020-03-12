@@ -4,7 +4,6 @@ import AddToLists from './AddToLists.js';
 import './addToLists.css';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert';
-import './sweetAlerts.css';
 
 class MovieSearch extends Component {
     constructor() {
