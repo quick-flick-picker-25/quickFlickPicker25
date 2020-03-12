@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "26d39d1c62908e55d473cec3b11bab48",
+    "revision": "824ffece4929598fa83d32feaffd8a7f",
     "url": "/quickFlickPicker25/index.html"
   },
   {
-    "revision": "eba1c336e8f16e6d4f07",
-    "url": "/quickFlickPicker25/static/css/main.e1a59ac8.chunk.css"
+    "revision": "7978ab0f69e614d9743d",
+    "url": "/quickFlickPicker25/static/css/main.81a2a471.chunk.css"
   },
   {
     "revision": "e5e0ed686ed6f9cfd196",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/quickFlickPicker25/static/js/2.87647e9f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "eba1c336e8f16e6d4f07",
-    "url": "/quickFlickPicker25/static/js/main.1f019ce9.chunk.js"
+    "revision": "7978ab0f69e614d9743d",
+    "url": "/quickFlickPicker25/static/js/main.3d173af4.chunk.js"
   },
   {
     "revision": "2db411ed65f03820ceec",
