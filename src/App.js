@@ -10,6 +10,7 @@ import MovieDetails from './MovieDetails.js';
 import WatchMovie from './WatchMovie.js';
 import './movieSearchStyle.css';
 import logo from './assets/qfpLogo.png';
+import './sweetAlerts.css';
 
 class App extends Component {
 
@@ -29,7 +30,6 @@ class App extends Component {
   }
 
 
-
 // handles whether the list is shown or hidden
   handleListsShow = (listState) => {
     this.setState({
@@ -45,8 +45,9 @@ class App extends Component {
             <i className="fas fa-list"></i></button>
           {
             this.state.listsShown ? <Lists
-              hideListsFunc={this.handleListsShow} />
-              : null
+              hideListsFunc={this.handleListsShow} isHidden="false"/>
+              : <Lists
+              hideListsFunc={this.handleListsShow} isHidden="true"/>
           }
 
               <Route path="/quickFlickPicker25/:keyword?"  component={MovieSearch} />
