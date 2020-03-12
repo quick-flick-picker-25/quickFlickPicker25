@@ -1,45 +1,37 @@
-ul {
-    list-style: none;
-  }
-  a {
-    text-decoration: none;
-    font: inherit;
-    color: inherit;
-  }
- 
-  /* move to main */
-  .addToLists {
-position: absolute;
-right: 0;
+/* addToList styles */
+.addToLists {
+  position: absolute;
+  right: 0;
 }
- a.roundButton{
-      display: flex;
-      font-size: 3rem;
-      justify-content: center;
-      align-items: center;
-  }
-  .listMenu {
-    position: relative;
-    top: 20px;
-    right: 20px;
-  }
 
-  .listMenu:active ul.listSubMenu,
-  .listMenu:focus-within ul.listSubMenu {
-    display: block;
-  }
-  ul.listSubMenu {
-    display: none;
-    position: absolute;
-    right: 0;
-    width: 150px;
+a.roundButton {
+  display: flex;
+  font-size: 3rem;
+  justify-content: center;
+  align-items: center;
+}
 
-  }
+.listMenu {
+  position: relative;
+  top: 10px;
+  right: 10px;
+}
 
-.listMenu .listItem a{
- margin: 15px auto;
+.listMenu:active ul.listSubMenu, .listMenu:focus-within ul.listSubMenu {
+  display: block;
+}
+
+ul.listSubMenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 150px;
+}
+
+.listMenu .listItem a {
+  margin: 15px auto;
 }
 
 .listMenu .listItem {
- cursor: pointer;
+  cursor: pointer;
 }

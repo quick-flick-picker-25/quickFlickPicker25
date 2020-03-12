@@ -223,38 +223,7 @@ h3 {
     display: block;
 }
 
-/* .dropDownContainer:active + .movies, .dropDownContainer:focus + .movies{
-    display: block;
-} */
-
-/* .movies:active .moviesDisplayed, .movies:focus-within .moviesDisplayed {
-    display: block;
-} */
-
-/* -------------- */
-
-/* .yourLists{
-      position: fixed;
-  } */
-
 .yourLists .wrapper {
     position: relative;
 }
 
-.hideLists {
-    position: absolute;
-    font-size: 3.5rem;
-    right: -5px;
-    top: 10px;
-    color: white;
-    display: none;
-}
-
-@media (max-width: 840px) {
-    .hideLists {
-        display: block;
-    }
-    .yourLists {
-        position: fixed;
-    }
-}

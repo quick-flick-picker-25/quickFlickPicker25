@@ -12,61 +12,43 @@ import './movieSearchStyle.css';
 import logo from './assets/qfpLogo.png';
 
 class App extends Component {
-
-  constructor(){
-    super();
-
-    this.state = {
-      listsShown: true,
+  changeIcon=(event)=>{
+    if (event.target.tagName ==="LABEL"){
+      event.target.classList.toggle("change");
     }
-  }
-
-  // if the window is 860 px then hide the lists by default
-  componentDidMount = () => {
-    if(window.innerWidth <= 840){
-      this.handleListsShow(false);
+    else {
+      event.target.parentElement.classList.toggle("change");
     }
-  }
-
-
-
-// handles whether the list is shown or hidden
-  handleListsShow = (listState) => {
-    this.setState({
-      listsShown: listState,
-    })
   }
 
   render() {
     return (
         <Router>
           <div className="App">
-          <button className="showLists" onClick={() => { this.handleListsShow(true) }}>
-            <i className="fas fa-list"></i></button>
-          {
-            this.state.listsShown ? <Lists
-              hideListsFunc={this.handleListsShow} />
-              : null
-          }
-
+          {/* <!-- hamburger menu icon --> */}
+            <label htmlFor="toggle" aria-hidden="true" className="toggle" onClick={this.changeIcon}>
+            <div className="bar1" ></div>
+            <div className="bar2" ></div>
+            <div className="bar3"></div>
+            </label>
+            <span className="srOnly">main menu</span>
+            <input type="checkbox" id="toggle" autoComplete="off" />
+          <div className="listComponent"><Lists /></div>
+          {/* <!-- end of hamburger menu icon --> */}
               <Route path="/quickFlickPicker25/:keyword?"  component={MovieSearch} />
-              <Route path="/movies/:keyword?/:movieID"  component={MovieDetails} />
+              <Route path="/movies/:keyword?/:listName?/:movieID"  component={MovieDetails} />
               <Route
                 exact
                 path="/watch-movie/:listName"
                 render={props => <WatchMovie listName={props.match.params.listName} key={props.match.params.listName}
                 history={props.history}  />}
               />
-              
-
-              <div className="logoAndSearch" >
-                <a href="/quickFlickPicker25/" title="Search Movies"><i className="fas fa-search"></i></a>
-                <div className="logoImg">
-                  <img src={logo} alt="" />
-                </div>
-              </div>
-
-
+          <div className="logoAndSearch" >
+            <a href="/quickFlickPicker25/" title="Search Movies"><i className="fas fa-search"></i></a>
+            <div className="logoImg">
+              <img src={logo} alt="" />
+            </div>
+          </div>  
           </div>
         </Router>  
     );

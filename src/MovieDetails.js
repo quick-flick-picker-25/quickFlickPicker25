@@ -18,20 +18,28 @@ class MovieDetails extends Component {
             videoLink:'',
             movieId:'',
             keyword:'',
-        }
-
-        
+            listName:'',
+        } 
     }
 
     componentDidMount = () => {
         if (typeof this.props.match.params.keyword != 'undefined'){
             const keyword = this.props.match.params.keyword;
+            if(keyword!==' ') {
+                this.setState({
+                    keyword: keyword,
+                });
+            }
+        }
+        if (typeof this.props.match.params.listName != 'undefined') {
+            const listName = this.props.match.params.listName;
+            if (listName !== ' ') {
             this.setState({
-                keyword: keyword,
+                listName: listName,
             })
         }
-           const movieId = this.props.match.params.movieID;
-        // on component did mount, set mounted to true
+        }
+        const movieId = this.props.match.params.movieID;
         this.setState({
             movieId:movieId,
         })
@@ -106,14 +114,6 @@ class MovieDetails extends Component {
             movieGenre: movieDetails.genres,
         })
     }
-
-
-    // // on component did unmount set the state to false
-    // componentWillUnmount = () => {
-    //     this.setState({
-    //         isMounted: false,
-    //     })
-    // }
 
     render(){    
         return (
