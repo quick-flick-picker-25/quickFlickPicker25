@@ -246,7 +246,6 @@ html {
 }
 
 /* VARIABLES */
-
 :root {
   /* COLOR VARIABLES */
   --backgroundColor: #fff;
@@ -261,7 +260,6 @@ html {
 }
 
 /*  GLOBAL */
-
 html {
   font-size: 62.5%;
 }
@@ -298,40 +296,43 @@ img {
   margin: 0 auto;
 }
 
-/* .mainLogo {
-  width: 200px;
-  height: 200px;
-} */
+label {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  font: inherit;
+  color: inherit;
+}
 
 /* Sweet Alert Styles */
 
-.swal-title{
+.swal-title {
   font-family: var(--headingFonts);
   font-size: 2rem;
 }
 
-.swal-text,
-.swal-button{
-    font-family: var(--bodyFont);
-    font-weight: 300;
+.swal-text, .swal-button {
+  font-family: var(--bodyFont);
+  font-weight: 300;
 }
 
-.swal-footer{
-    text-align: center;
+.swal-footer {
+  text-align: center;
 }
 
 .swal-button {
-    -webkit-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    background-color: #eadbc4;
-    color: black;
-    width: 120px;
-    border-radius: 25px;
-  }
-  
-  .swal-button:not([disabled]):hover,
-  .swal-button:not([disabled]):focus {
-    background-color:#b3d5df;
-    cursor: pointer;
-  }
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background-color: #eadbc4;
+  color: black;
+  width: 120px;
+  border-radius: 25px;
+}
 
+.swal-button:not([disabled]):hover, .swal-button:not([disabled]):focus {
+  background-color: #b3d5df;
+  cursor: pointer;
+}

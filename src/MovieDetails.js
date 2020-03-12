@@ -19,15 +19,12 @@ class MovieDetails extends Component {
             movieId:'',
             keyword:'',
             listName:'',
-        }
-
-        
+        } 
     }
 
     componentDidMount = () => {
         if (typeof this.props.match.params.keyword != 'undefined'){
             const keyword = this.props.match.params.keyword;
-
             if(keyword!==' ') {
                 this.setState({
                     keyword: keyword,
@@ -117,14 +114,6 @@ class MovieDetails extends Component {
             movieGenre: movieDetails.genres,
         })
     }
-
-
-    // // on component did unmount set the state to false
-    // componentWillUnmount = () => {
-    //     this.setState({
-    //         isMounted: false,
-    //     })
-    // }
 
     render(){    
         return (

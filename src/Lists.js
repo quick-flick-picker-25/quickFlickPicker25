@@ -20,12 +20,12 @@ class Lists extends Component {
         this.state.dbRef.on('value', (response) => {
             const data = response.val();
             //make empty array
-            const stateToSet = []
+            const stateToSet = [];
             //loop through our data
             for (let key in data) {
                 const listData = {
                     key: key,
-                    info: data[key]
+                    info: data[key],
                 }
                 //push each piece of data to our empty array
                 stateToSet.push(listData);
@@ -99,7 +99,6 @@ class Lists extends Component {
 
     handleReload = (e) => {
         e.preventDefault();
-    
     }
 
     handleMovieName = (object) => {
@@ -160,17 +159,14 @@ class Lists extends Component {
         open.classList.toggle("changeClose");
     }
 
-    // function to hide the lists
-    hideLists = () => {
-        this.props.hideListsFunc(false);
-    }
-
+hideLists =(event)=>{
+    event.preventDefault();
+}
 
     render() {
         return (
             <div className="yourLists" id={this.props.isHidden}>
                 <div className="wrapper">
-                    <button className="hideLists" onClick={this.hideLists}><i className="fas fa-times"></i></button>
                     <div className="asideContainer">
                         <h2>Your Lists:</h2>
                         <form className="listInput" action="" onSubmit={this.handleUserListName}>
