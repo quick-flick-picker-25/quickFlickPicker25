@@ -109,7 +109,7 @@ class Lists extends Component {
             let refKey;
         // loop through and see if the id of the movie in DB matches the movie selected, make the reference key that specific movie
         for (let movie in listName.info) {
-
+            
             if (listName.info[movie] === listName.key) {
                 continue;
             }else if (listName.info[movie].id === movieObject.id) {
@@ -121,6 +121,7 @@ class Lists extends Component {
         const reference = firebase.database().ref(listName.key);
         // delete the movie with the specifc key
         reference.child(refKey).remove();
+        
         }
     }
 
