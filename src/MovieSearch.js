@@ -107,7 +107,7 @@ class MovieSearch extends Component {
                                         return (
                                             <li key={movie.id} className="moviePoster">
                                                 <AddToLists movieId={movie.id} />
-                                                <Link key={movie.id} to={`/movies/${this.state.keyword}/${movie.id}`}>
+                                                <Link key={movie.id} to={`/movies/${this.state.keyword}/ /${movie.id}`}>
                                                     <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
                                                 </Link>
                                             </li>

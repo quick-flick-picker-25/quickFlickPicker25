@@ -39,36 +39,73 @@
   }
 }
  */
+
 /* HAM NAV STYLES */
-  .showLists,
-  .hideLists{
-      background-color: transparent;
-      border: none;
-      transition: all 0.5s ease;
-      cursor: pointer;
-      padding: 5px;
-     
-  }
 
-  .showLists{
-    font-size: 4rem;
-    color: #ABBEBA;
-    position: fixed;
-    top: 30px;
-    left: 30px;
-  }
+.showLists, .hideLists {
+  background-color: transparent;
+  border: none;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  padding: 5px;
+}
 
-  .showLists:hover,
-  .showLists:focus,
-  .hideLists:hover,
-  .hideLists:focus{
-      color: #B3D5DF;
-  }
-  
+.showLists {
+  font-size: 4rem;
+  color: #ABBEBA;
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  display: none;
+  display: none;
+}
+
+.showLists:hover, .showLists:focus, .hideLists:hover, .hideLists:focus {
+  color: #B3D5DF;
+}
+
 .mainLogo {
   position: absolute;
   right: 0;
   margin: 40px;
   width: 100px;
   height: 100px;
+}
+
+/* LOGO & Movie Search Magnifying Glass Styling */
+
+.logoAndSearch {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 0;
+  margin: 40px;
+  color: #5F746C;
+  transition: 0.3s;
+}
+
+.logoAndSearch a:hover {
+  color: var(--hoverColor);
+  cursor: pointer;
+}
+
+.logoAndSearch a:active {
+  color: var(--accentColor);
+}
+
+.logoImg {
+  width: 115px;
+  margin-left: 30px;
+}
+
+@media (max-width: 840px) {
+  .showLists, .hideLists {
+    display: block;
+  }
+  ​ .yourLists {
+    display: none;
+  }
+  ​ #false {
+    display: block;
+  }
 }

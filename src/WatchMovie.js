@@ -12,6 +12,7 @@ class WatchMovie extends Component {
             selectedGenre: '',
             selectedTime: '',
             movieToWatch: '',
+
         };
 
     }
@@ -78,7 +79,7 @@ class WatchMovie extends Component {
                 this.setState({
                     movieToWatch: qualifyingMovies[selectedIndex].name.id,
                 }, () => {
-                    this.props.history.push(`/movies/${this.state.movieToWatch}`);
+                        this.props.history.push(`/movies/ /${this.props.listName}/${this.state.movieToWatch}`);
                 }
                 );
             }

@@ -18,6 +18,7 @@ class MovieDetails extends Component {
             videoLink:'',
             movieId:'',
             keyword:'',
+            listName:'',
         }
 
         
@@ -26,12 +27,22 @@ class MovieDetails extends Component {
     componentDidMount = () => {
         if (typeof this.props.match.params.keyword != 'undefined'){
             const keyword = this.props.match.params.keyword;
+
+            if(keyword!==' ') {
+                this.setState({
+                    keyword: keyword,
+                });
+            }
+        }
+        if (typeof this.props.match.params.listName != 'undefined') {
+            const listName = this.props.match.params.listName;
+            if (listName !== ' ') {
             this.setState({
-                keyword: keyword,
+                listName: listName,
             })
         }
-           const movieId = this.props.match.params.movieID;
-        // on component did mount, set mounted to true
+        }
+        const movieId = this.props.match.params.movieID;
         this.setState({
             movieId:movieId,
         })
@@ -128,6 +139,9 @@ class MovieDetails extends Component {
                 {this.state.keyword!==''?
                 <Link className="goBack"  to={`/quickFlickPicker25/${this.state.keyword}`}>Back to results</Link>
             : null}
+                {this.state.listName !== '' ?
+                    <Link className="goBack" to={`/watch-movie/${this.state.listName}`}>Watch A Different Movie</Link>
+                    : null}
                 <div className="detailsPage">
                     <div>
                         <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>

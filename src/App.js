@@ -4,7 +4,8 @@ import Lists from './Lists.js';
 import MovieSearch from './MovieSearch.js';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Link
 } from 'react-router-dom';
 import MovieDetails from './MovieDetails.js';
 import WatchMovie from './WatchMovie.js';
@@ -45,12 +46,13 @@ class App extends Component {
             <i className="fas fa-list"></i></button>
           {
             this.state.listsShown ? <Lists
-              hideListsFunc={this.handleListsShow} />
-              : null
+              hideListsFunc={this.handleListsShow} isHidden="false" />
+              : <Lists
+                hideListsFunc={this.handleListsShow} isHidden="true" />
           }
 
               <Route path="/quickFlickPicker25/:keyword?"  component={MovieSearch} />
-              <Route path="/movies/:keyword?/:movieID"  component={MovieDetails} />
+              <Route path="/movies/:keyword?/:listName?/:movieID"  component={MovieDetails} />
               <Route
                 exact
                 path="/watch-movie/:listName"
@@ -60,6 +62,12 @@ class App extends Component {
               {/* <div className="mainLogo" >
                 <img src={logo} alt="" />
               </div> */}
+          <div className="logoAndSearch" >
+            <a href="/quickFlickPicker25/" title="Search Movies"><i className="fas fa-search"></i></a>
+            <div className="logoImg">
+              <img src={logo} alt="" />
+            </div>
+          </div>  
           </div>
         </Router>  
     );

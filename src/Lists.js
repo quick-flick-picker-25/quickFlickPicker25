@@ -168,7 +168,7 @@ class Lists extends Component {
 
     render() {
         return (
-            <div className="yourLists">
+            <div className="yourLists" id={this.props.isHidden}>
                 <div className="wrapper">
                     <button className="hideLists" onClick={this.hideLists}><i className="fas fa-times"></i></button>
                     <div className="asideContainer">
