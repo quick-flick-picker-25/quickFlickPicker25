@@ -7,9 +7,7 @@
 }
 
 .movieSearchContainer {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    width: 100%;
 }
 
 .movieSearchArea h1 {
@@ -19,6 +17,7 @@
     font-weight: bold;
     font-family: var(--headingFonts);
     margin-bottom: 70px;
+    text-align: center;
 }
 
 .movieSearchForm {
@@ -46,7 +45,6 @@
 .movieSearchButton:active {
     background: var(--accentColor)
 }
-
 
 /* Media Queries for MOVIE SEARCH */
 

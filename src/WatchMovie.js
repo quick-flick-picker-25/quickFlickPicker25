@@ -114,43 +114,40 @@ class WatchMovie extends Component {
             <section className="watchMovie">
                 <div className="wrapper">
                     <div className="watchMovieContainer">
-                        <h1>
-                            watch a movie
-                        </h1>
-                        <form action="" onSubmit={this.handleSubmit}>
+                        <div className="watchMovieHead">
+                            <h1>
+                                watch a movie
+                            </h1>
+                            <form action="" onSubmit={this.handleSubmit}>
+                                <div className="genreTimeString">
+                                    <div className="firstString">
+                                        <p>I feel like watching a </p>
+                                        <select id="selectedGenre" onChange={this.handleChange}>
+                                            <option value="">genre</option>
+                                            {
+                                                this.state.listGenres.map((genre, index) => {
+                                                    return (
+                                                        <option value={genre} key={index} >{genre}</option>
 
-                            <div className="genreTimeString">
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                    </div>
 
-                                <div className="firstString">
-                                    <p>I feel like watching a </p>
-                                    <select id="selectedGenre" onChange={this.handleChange}>
-                                        <option value="">genre</option>
-                                        {
-                                            this.state.listGenres.map((genre, index) => {
-                                                return (
-                                                    <option value={genre} key={index} >{genre}</option>
-
-                                                )
-                                            })
-                                        }
-                                    </select>
+                                    <div className="secondString">           
+                                        <p> movie and I have </p>
+                                        <select id="selectedTime" onChange={this.handleChange}>
+                                            <option value="">amount of time</option>
+                                            <option value="90">Less than 1.5 hours</option>
+                                            <option value="120">Less than 2 hours</option>
+                                            <option value="240">All the time in the world </option>
+                                        </select>
+                                    </div> 
                                 </div>
-
-                                <div className="secondString">           
-                                    <p> movie and I have </p>
-                                    <select id="selectedTime" onChange={this.handleChange}>
-                                        <option value="">amount of time</option>
-                                        <option value="90">Less than 1.5 hours</option>
-                                        <option value="120">Less than 2 hours</option>
-                                        <option value="240">All the time in the world </option>
-                                    </select>
-                                </div> 
-
-                            </div>
-
-                            <button className="watchMovieBtn findMovieBtn" type="submit">find movie</button>
-
-                        </form>
+                                <button className="watchMovieBtn findMovieBtn" type="submit">find movie</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </section>
