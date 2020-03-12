@@ -92,6 +92,7 @@
 .moviePoster {
     width: 20rem;
     margin: 1rem 0 0 1rem;
+    position: relative;
 }
 
 @media(max-width:1050px) {

@@ -2,6 +2,8 @@ import { Component } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 
+// this component is used only to get the movie details by passing the movie id 
+// this component is created for reusabilty purpose and it does not returen any visual items
 class GetMovieDetails extends Component {
     componentDidMount(){
         if(typeof this.props.movieID != "undefined"){

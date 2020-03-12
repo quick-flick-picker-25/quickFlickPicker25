@@ -15,6 +15,8 @@ class WatchMovie extends Component {
         };
 
     }
+
+    // to load all the genres in the list
     getGenres = () => {
         const genres = [];
         this.state.ListMovies.forEach((movie) => {
@@ -28,8 +30,7 @@ class WatchMovie extends Component {
         })
     }
 
-
-
+    //to get all the movies in the list
     componentDidMount() {
         const dbRef = firebase.database().ref(this.props.listName);
         const stateToBeSet = [];
@@ -42,7 +43,6 @@ class WatchMovie extends Component {
                 const listInfo = {
                     key: key,
                     name: dataFromDb[key]
-
                 }
                 stateToBeSet.push(listInfo);
             }
@@ -51,54 +51,53 @@ class WatchMovie extends Component {
                     ListMovies: stateToBeSet,
                 }, () => {
                     this.getGenres();
-
                 });
             }
         });
     }
 
-
+    //to handle searching for a movie in the list
     handleSubmit = (event) => {
         event.preventDefault();
-
         const genre = this.state.selectedGenre;
         if (this.state.selectedTime !== '' && genre !== '') {
             const movies = this.state.ListMovies;
             const time = parseInt(this.state.selectedTime);
-            const  qualifyingMovies=movies.filter((movie)=>{
-            return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre)>=0) 
-        });
-        if (qualifyingMovies.length === 0){
-            swal({
-                title: 'No matches in this list',
-                button: 'OK',
-            }) 
-        }else{
-            const selectedIndex=Math.floor(Math.random()*qualifyingMovies.length);
-        
-       this.setState({
-           movieToWatch: qualifyingMovies[selectedIndex].name.id,
-       },()=>{
-               this.props.history.push(`/movies/${this.state.movieToWatch}`);
-       }
-       );
-            
+            const qualifyingMovies = movies.filter((movie) => {
+                return (parseInt(movie.name.runtime) <= time && movie.name.genre.indexOf(genre) >= 0)
+            });
+            if (qualifyingMovies.length === 0) {
+                swal({
+                    title: 'No matches in this list',
+                    button: 'OK',
+                })
+            }
+            else {
+                //to generate a random index => random movie
+                const selectedIndex = Math.floor(Math.random() * qualifyingMovies.length);
+                this.setState({
+                    movieToWatch: qualifyingMovies[selectedIndex].name.id,
+                }, () => {
+                    this.props.history.push(`/movies/${this.state.movieToWatch}`);
+                }
+                );
+            }
         }
-    }
-       else if(genre === '') {
+        else if (genre === '') {
             swal({
                 title: 'Please select a genre!',
                 button: 'OK',
-            }) 
-       }
-       else {
+            })
+        }
+        else {
             swal({
                 title: 'Please select a time!',
                 button: 'OK',
-            }) 
-       }
-
+            })
+        }
     }
+
+    // to handle the changes of both Genre and time select elemnts
     handleChange = (event) => {
         const id = event.target.id;
         const value = event.target.value;
@@ -110,7 +109,6 @@ class WatchMovie extends Component {
 
     render() {
         return (
-            //   this.state.movieToWatch==='' ?
             <section className="watchMovie">
                 <div className="wrapper">
                     <div className="watchMovieContainer">
@@ -118,9 +116,7 @@ class WatchMovie extends Component {
                             watch a movie
                         </h1>
                         <form action="" onSubmit={this.handleSubmit}>
-
                             <div className="genreTimeString">
-
                                 <div className="firstString">
                                     <p>I feel like watching a </p>
                                     <select id="selectedGenre" onChange={this.handleChange}>
@@ -135,28 +131,21 @@ class WatchMovie extends Component {
                                         }
                                     </select>
                                 </div>
-
-                                <div className="secondString">           
+                                <div className="secondString">
                                     <p> movie and I have </p>
                                     <select id="selectedTime" onChange={this.handleChange}>
                                         <option value="">amount of time</option>
                                         <option value="90">Less than 1.5 hours</option>
                                         <option value="120">Less than 2 hours</option>
-                                        <option value="240">All the time in the world </option>
+                                        <option value="1000">All the time in the world </option>
                                     </select>
-                                </div> 
-
+                                </div>
                             </div>
-
                             <button className="watchMovieBtn findMovieBtn" type="submit">find movie</button>
-
                         </form>
                     </div>
                 </div>
             </section>
-            // :
-
-            // <MovieDetails movieId={this.state.movieToWatch} />  
         )
     }
 }
