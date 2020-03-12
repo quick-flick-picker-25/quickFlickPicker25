@@ -33,11 +33,7 @@ class Lists extends Component {
             //set state to our array
             this.setState({
                 usersList: stateToSet,
-            }, 
-            // ()=>{
-            //     this.props.updateParentListFunc(this.state.usersList);
-            // }
-            )
+            })
         })
     }
 

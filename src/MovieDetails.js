@@ -130,6 +130,9 @@ class MovieDetails extends Component {
                         {this.state.keyword!==''?
                         <Link className="goBack"  to={`/quickFlickPicker25/${this.state.keyword}`}>Back to results</Link>
                         : null}
+                        {this.state.listName !== '' ?
+                            <Link className="goBack" to={`/watch-movie/${this.state.listName}`}>Watch Another Movie</Link>
+                            : null}
                         <div className="detailsPage">
                             <div className="posterContainer">
                                 <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>

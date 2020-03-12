@@ -1,4 +1,5 @@
 /* addToList styles */
+
 .addToLists {
   position: absolute;
   right: 0;
@@ -15,6 +16,7 @@ a.roundButton {
   position: relative;
   top: 10px;
   right: 10px;
+
 }
 
 .listMenu:active ul.listSubMenu, .listMenu:focus-within ul.listSubMenu {
@@ -25,7 +27,10 @@ ul.listSubMenu {
   display: none;
   position: absolute;
   right: 0;
-  width: 150px;
+  width: 120px;
+  z-index: 100;
+  font-size: 1.3rem;
+   box-shadow: 0 10px 10px -5px;
 }
 
 .listMenu .listItem a {
