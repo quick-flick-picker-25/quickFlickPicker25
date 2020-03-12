@@ -118,68 +118,75 @@ class MovieDetails extends Component {
     render(){    
         return (
             <section className="movieDetails">
-                {/* if the state is mounted, include add to lists, if not make it null; this is to fix and error we were having */}
-                {this.state.movieId !=='' ? 
-                <div className="addButton">
-                    <AddToLists movieId={this.state.movieId} /> 
-                    <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
-                    </div>
-                : null} 
-                {this.state.keyword!==''?
-                <Link className="goBack"  to={`/quickFlickPicker25/${this.state.keyword}`}>Back to results</Link>
-            : null}
-                <div className="detailsPage">
-                    <div>
-                        <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
-                    </div>
-                    <div className="movieInfo">
-                        <h1 className="detailTitle">{this.state.movieDetails.title}</h1>
-                        <div className="threeDetails">
-                            <div className="genres">
-                                <h2>Genres</h2>
-                                {/* map through the genres, and display them */}
-                                {
-                                    this.state.movieGenre.map((genre, index) => {
-                                        return (
-                                            <p key={index}>{genre.name}</p>
-                                            )
-                                        })
-                                    }
+                <div className="wrapper">                   
+                    <div className="movieDetailContainer">
+                        {/* if the state is mounted, include add to lists, if not make it null; this is to fix and error we were having */}
+                        {this.state.movieId !=='' ? 
+                        <div className="addButton">
+                            <AddToLists movieId={this.state.movieId} /> 
+                            <GetMovieDetails movieDetails={this.getMovieDetails} movieID={this.state.movieId}/>
                             </div>
-                            <div className="director">
-                                <h2>Director</h2>
-                                {/* map through the directors and display them */}
-                                {
-                                    this.state.directors.map((director)=>{
-                                        return(
-                                            <p key={director.credit_id}>{director.name}</p>
-                                            )
-                                        })
-                                    }
+                        : null} 
+                        {this.state.keyword!==''?
+                        <Link className="goBack"  to={`/quickFlickPicker25/${this.state.keyword}`}>Back to results</Link>
+                        : null}
+                        <div className="detailsPage">
+                            <div className="posterContainer">
+                                <img src={`http://image.tmdb.org/t/p/w500/${this.state.movieDetails.poster_path}`} alt=""/>
                             </div>
-                            <div className="cast">
-                                <h2>Cast</h2>
-                                {/* map through the cast members and display */}
-                                {
-                                    this.state.cast.map((actor)=>{
-                                        return(
-                                            <p key={actor.credit_id}>{actor.name}</p>
-                                            )
-                                        })
-                                    }
+                            <div className="movieInfo">
+
+                                <h1 className="detailTitle">{this.state.movieDetails.title}</h1>
+                                
+                                <div className="threeDetails">
+                                    <div className="genres">
+                                        <h2>Genres</h2>
+                                        {/* map through the genres, and display them */}
+                                        {
+                                            this.state.movieGenre.map((genre, index) => {
+                                                return (
+                                                    <p key={index}>{genre.name}</p>
+                                                    )
+                                                })
+                                            }
+                                    </div>
+                                    <div className="director">
+                                        <h2>Director</h2>
+                                        {/* map through the directors and display them */}
+                                        {
+                                            this.state.directors.map((director)=>{
+                                                return(
+                                                    <p key={director.credit_id}>{director.name}</p>
+                                                    )
+                                                })
+                                            }
+                                    </div>
+                                    <div className="cast">
+                                        <h2>Cast</h2>
+                                        {/* map through the cast members and display */}
+                                        {
+                                            this.state.cast.map((actor)=>{
+                                                return(
+                                                    <p key={actor.credit_id}>{actor.name}</p>
+                                                    )
+                                                })
+                                            }
+                                    </div>
+                                </div>
+                                <div className="description">
+                                    <h2>Description</h2>
+                                    <p>{this.state.movieDetails.overview}</p>
+                                </div>
+                                <div className="trailer">
+                                    {this.state.videoLink === null ? null : 
+                                    <a className="watchVideo" target="_blank" rel="noopener noreferrer"  href={this.state.videoLink}>Watch Trailer</a>
+                                    }   
+                                </div>
                             </div>
                         </div>
-                        <div className="description">
-                            <h2>Description</h2>
-                            <p>{this.state.movieDetails.overview}</p>
-                        </div>
-                        <div className="trailer">
-                            {this.state.videoLink === null ? null : 
-                            <a className="watchVideo" target="_blank" rel="noopener noreferrer"  href={this.state.videoLink}>Watch Trailer</a>
-                            }   
-                        </div>
                     </div>
-                </div>
+                </div> 
+
             </section>
         )
     }

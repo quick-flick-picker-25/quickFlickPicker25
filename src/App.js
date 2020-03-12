@@ -57,9 +57,16 @@ class App extends Component {
                 render={props => <WatchMovie listName={props.match.params.listName} key={props.match.params.listName}
                 history={props.history}  />}
               />
-              {/* <div className="mainLogo" >
-                <img src={logo} alt="" />
-              </div> */}
+              
+
+              <div className="logoAndSearch" >
+                <a href="/quickFlickPicker25/" title="Search Movies"><i className="fas fa-search"></i></a>
+                <div className="logoImg">
+                  <img src={logo} alt="" />
+                </div>
+              </div>
+
+
           </div>
         </Router>  
     );

@@ -75,6 +75,8 @@
     }
 }
 
+/* --MOVIE POSTERS */
+
 /* MOVIE POSTERS */
 
 .moviePosterContainer {
@@ -116,98 +118,137 @@
     }
 }
 
-/* MOVIE DETAILS */
+/* -------------------------------------MOVIE DETAILS */
 
 .movieDetails {
-    margin: 5% 5%;
-}
-
-.movieDetails img {
-    width: 40rem;
-    max-height: 65rem;
-}
-
-.movieInfo {
+    width: 75%;
     display: flex;
-    flex-direction: column;
-    width: 50%;
-    padding-left: 4rem
-}
-
-.detailTitle {
-    color: var(--mainColor);
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: bold;
-    text-align: left;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: scroll;
 }
 
 .detailsPage {
     display: flex;
-    flex-direction: row;
+}
+
+.movieDetailContainer {
+    width: 100%;
+}
+
+.posterContainer {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+}
+
+.movieInfo {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 3px 3px 3px 20px;
+    position: relative;
+}
+
+.movieInfo h1 {
+    margin: 20px 0;
+    font-family: var(--headingFonts);
+    color: var(--mainColor);
+    font-size: 4rem;
+}
+
+.movieInfo h2 {
+    margin-bottom: 5px;
+    font-family: var(--headingFonts);
+    color: var(--mainColor);
 }
 
 .threeDetails {
     display: flex;
-    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.genres, .director, .cast {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
     text-align: left;
-    justify-content: space-between;
 }
 
-.description {
-    text-align: left
+.genres p, .director p, .cast p {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
 }
 
-.trailer {
-    margin-top: 3rem
+.description p {
+    margin-top: 5px;
+}
+
+.listMenu {
+    position: relative;
+    top: 10px;
+    right: 10px;
 }
 
 .watchVideo, .goBack {
+    text-align: center;
     background: var(--accentColor);
-    width: fit-content;
-    padding: 1rem 1.5rem;
-    border-radius: 2rem;
-    color: inherit
+    font-family: var(--bodyFont);
+    color: var(--bodyTextColor);
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    transition: 0.3s;
+    border: none;
+}
+
+.trailer {
+    margin: 20px 0;
 }
 
 .goBack {
     display: block;
     position: absolute;
     right: 5rem;
-    top: 2rem
+    top: 9rem;
 }
 
-.watchVideo {
-    color: inherit;
-}
-
-.addButton {
-    display: block;
-    width: 100%;
-    height: 1.5%;
-    margin: 1rem 5rem 1rem 0
-}
-
-@media(max-width:1125px) {
+@media(max-width:1130px) {
+    .movieDetails {
+        padding-top: 400px;
+    }
     .detailsPage {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        padding-top: 5rem
+    }
+    .posterContainer {
+        width: 50%;
     }
     .movieInfo {
-        display: flex;
-        flex-direction: column;
         width: 100%;
-        padding-left: 0;
+        display: flex;
+        padding: 3px;
     }
-    .addButton {
-        margin: 3rem 5rem 1rem 0
-    }
+    /* .listMenu {
+        position: relative;
+        top: 75px;
+        right: 50px;
+    } */
 }
 
-@media(max-width:750px) {
-    .threeDetails {
-        flex-direction: column;
+@media(max-width:840px) {
+    .movieDetails {
+        width: 100%;
+        text-align: center;
+        padding-top: 650px;
+    }
+    .threeDetails h2, .genres p, .director p, .cast p {
+        text-align: center;
     }
 }
