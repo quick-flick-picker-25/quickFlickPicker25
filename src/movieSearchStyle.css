@@ -103,9 +103,7 @@
     height: 270px;
 }
 
-.moviePoster img{
-    height: 100%;
-}
+
 
 /* -------------------------------------MOVIE DETAILS */
 
@@ -117,8 +115,7 @@
     margin-top: 100px;
     margin-bottom: 20px;
     overflow-y: scroll;
-    height: 100vh;
-    padding-top: 100px;
+    margin-left: 25%;
 }
 
 .detailsPage {
@@ -143,7 +140,6 @@
 
 .posterContainer {
     display: flex;
-    width: 500px;
     height: 450px;
     justify-content: center;
     align-items: center;
@@ -243,6 +239,7 @@
     .movieDetails {
         width: 100%;
         text-align: center;
+        margin-left: 0;
     }
     .threeDetails h2, .genres p, .director p, .cast p {
         text-align: center;
