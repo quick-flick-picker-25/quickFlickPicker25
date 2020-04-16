@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/quickFlickPicker25/static/css/main.7c152ca4.chunk.css",
+    "main.css": "/quickFlickPicker25/static/css/main.64e12311.chunk.css",
     "main.js": "/quickFlickPicker25/static/js/main.cef3283b.chunk.js",
     "main.js.map": "/quickFlickPicker25/static/js/main.cef3283b.chunk.js.map",
     "runtime-main.js": "/quickFlickPicker25/static/js/runtime-main.8cbaaf37.js",
@@ -8,16 +8,16 @@
     "static/js/2.c7bd4778.chunk.js": "/quickFlickPicker25/static/js/2.c7bd4778.chunk.js",
     "static/js/2.c7bd4778.chunk.js.map": "/quickFlickPicker25/static/js/2.c7bd4778.chunk.js.map",
     "index.html": "/quickFlickPicker25/index.html",
-    "precache-manifest.e20dc593bd5ccdbf6094b26997b72b8e.js": "/quickFlickPicker25/precache-manifest.e20dc593bd5ccdbf6094b26997b72b8e.js",
+    "precache-manifest.0709be06c578c4316caf88d5561acf68.js": "/quickFlickPicker25/precache-manifest.0709be06c578c4316caf88d5561acf68.js",
     "service-worker.js": "/quickFlickPicker25/service-worker.js",
-    "static/css/main.7c152ca4.chunk.css.map": "/quickFlickPicker25/static/css/main.7c152ca4.chunk.css.map",
+    "static/css/main.64e12311.chunk.css.map": "/quickFlickPicker25/static/css/main.64e12311.chunk.css.map",
     "static/js/2.c7bd4778.chunk.js.LICENSE.txt": "/quickFlickPicker25/static/js/2.c7bd4778.chunk.js.LICENSE.txt",
     "static/media/qfpLogo.png": "/quickFlickPicker25/static/media/qfpLogo.48b3d236.png"
   },
   "entrypoints": [
     "static/js/runtime-main.8cbaaf37.js",
     "static/js/2.c7bd4778.chunk.js",
-    "static/css/main.7c152ca4.chunk.css",
+    "static/css/main.64e12311.chunk.css",
     "static/js/main.cef3283b.chunk.js"
   ]
 }
