@@ -91,6 +91,6 @@ input[type="checkbox"] {
   .listComponent {
     position: fixed;
     z-index: 10;
-    left: -100%;
+    left: -200%;
   }
 }

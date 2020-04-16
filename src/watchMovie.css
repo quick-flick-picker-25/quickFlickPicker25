@@ -1,6 +1,8 @@
 /* watch movie styles */
+
 .watchMovie {
-    width: 75%;
+    width: calc(100% - 400px);
+    margin-left: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,6 +92,7 @@
 @media (max-width: 840px) {
     .watchMovie {
         width: 100%;
+        margin-left: 0;
     }
     .wrapper {
         width: 90%;
@@ -117,6 +120,9 @@
 @media (max-width: 475px) {
     .watchMovie h1 {
         font-size: 3rem;
+    }
+    .yourLists {
+        width: 300px;
     }
 }
 

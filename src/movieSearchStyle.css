@@ -1,12 +1,12 @@
 /* Movie Search and movie details styles */
 
 .movieSearchArea {
-    width: 75%;
+    width: calc(100% - 400px);
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 25%;
+    margin-left: 400px;
     overflow-y: scroll;
 }
 
@@ -105,19 +105,17 @@
     height: 270px;
 }
 
-
-
 /* -------------------------------------MOVIE DETAILS */
 
 .movieDetails {
-    width: 75%;
+    width: calc(100% - 400px);
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 100px;
     margin-bottom: 20px;
     overflow-y: scroll;
-    margin-left: 25%;
+    margin-left: 400px;
 }
 
 .detailsPage {
