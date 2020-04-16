@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import AddToLists from './AddToLists.js';
-import './addToLists.css';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 

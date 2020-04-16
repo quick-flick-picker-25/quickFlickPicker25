@@ -7,6 +7,8 @@
     height: 100vh;
     text-align: left;
     overflow-y: scroll;
+    z-index: 1000;
+    position: relative;
 }
 
 .yourLists h2 {
@@ -226,4 +228,3 @@ h3 {
 .yourLists .wrapper {
     position: relative;
 }
-

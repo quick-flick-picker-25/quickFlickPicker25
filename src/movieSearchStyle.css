@@ -1,11 +1,12 @@
 /* Movie Search and movie details styles */
 
 .movieSearchArea {
-    width: 75%;
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: scroll;
 }
 
 .movieSearchContainer {
@@ -37,6 +38,10 @@
     background: #e2ecea;
     padding: 2rem;
     border: none;
+}
+
+.movieSearchBar::placeholder {
+    font-style: italic;
 }
 
 .movieSearchButton {
@@ -93,9 +98,13 @@
 
 .moviePoster {
     width: 180px;
-    height: 40vh;
     margin: 1rem 0 0 1rem;
     position: relative;
+    height: 270px;
+}
+
+.moviePoster img{
+    height: 100%;
 }
 
 /* -------------------------------------MOVIE DETAILS */
@@ -107,6 +116,9 @@
     align-items: center;
     margin-top: 100px;
     margin-bottom: 20px;
+    overflow-y: scroll;
+    height: 100vh;
+    padding-top: 100px;
 }
 
 .detailsPage {

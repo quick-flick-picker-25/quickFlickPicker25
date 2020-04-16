@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
 import {Link} from 'react-router-dom';
-import './lists.css';
 import swal from 'sweetalert';
 
 class Lists extends Component {
@@ -93,9 +92,6 @@ class Lists extends Component {
           });
     }
 
-    handleReload = (e) => {
-        e.preventDefault();
-    }
 
     handleMovieName = (object) => {
         const stateToSet = [];
@@ -135,24 +131,32 @@ class Lists extends Component {
         }); 
     }
 
+    handleEnter =(e)=>{
+        if (e.key === 'Enter') {
+            this.handleMovieList(e);
+        }
+
+
+    }
     handleMovieList = (e) => {
         //Get variable for button
         const button = e.currentTarget;
 
-        //Make variables for close and open chevrons.
-        const close = button.querySelector(".closeMovies");
-        const open = button.querySelector(".showMovies");
+            //Make variables for close and open chevrons.
+            const close = button.querySelector(".closeMovies");
+            const open = button.querySelector(".showMovies");
+    
+            //Get variable for movies list by selecting parent and then next sibling.
+            const movieList = button.parentNode.nextElementSibling;
+            //In case lists are loading make sure the the movie list element is not null, so it will not break the code.
+            if(movieList !== null){
+                movieList.classList.toggle("activeMovieList");
+            }
+    
+            //Hide Close/Hide Open
+            close.classList.toggle("changeClose");
+            open.classList.toggle("changeClose");
 
-        //Get variable for movies list by selecting parent and then next sibling.
-        const movieList = button.parentNode.nextElementSibling;
-        //In case lists are loading make sure the the movie list element is not null, so it will not break the code.
-        if(movieList !== null){
-            movieList.classList.toggle("activeMovieList");
-        }
-
-        //Hide Close/Hide Open
-        close.classList.toggle("changeClose");
-        open.classList.toggle("changeClose");
     }
 
 hideLists =(event)=>{
@@ -180,9 +184,9 @@ hideLists =(event)=>{
                         {
                             this.state.usersList.map((list)=>{
                                 return(
-                                    <li className="movieList" key={list.key}>
+                                    <li className="movieList" key={list.key} >
                                         <div className="dropDownContainer">
-                                            <div className="dropDownButton" onClick={this.handleMovieList}>
+                                            <div className="dropDownButton" tabIndex="0" onKeyDown={this.handleEnter} onClick={this.handleMovieList}>
                                                 <h3>{list.key}</h3>
                                                 <p className="showMovies" title="Open list"><i className="fas fa-chevron-down"></i></p>
                                                 <p className="closeMovies changeClose" title="Close list"><i className="fas fa-times"></i></p>

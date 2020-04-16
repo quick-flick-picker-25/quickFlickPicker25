@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
-import './watchMovie.css';
 import swal from 'sweetalert';
 
 class WatchMovie extends Component {

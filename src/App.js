@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Lists from './Lists.js';
 import MovieSearch from './MovieSearch.js';
 import {
@@ -8,7 +7,6 @@ import {
 } from 'react-router-dom';
 import MovieDetails from './MovieDetails.js';
 import WatchMovie from './WatchMovie.js';
-import './movieSearchStyle.css';
 import logo from './assets/qfpLogo.png';
 
 class App extends Component {
@@ -26,13 +24,13 @@ class App extends Component {
         <Router>
           <div className="App">
           {/* <!-- hamburger menu icon --> */}
+            <span className="srOnly">main menu</span>
+            <input type="checkbox" id="toggle" autoComplete="off" />
             <label htmlFor="toggle" aria-hidden="true" className="toggle" onClick={this.changeIcon}>
             <div className="bar1" ></div>
             <div className="bar2" ></div>
             <div className="bar3"></div>
             </label>
-            <span className="srOnly">main menu</span>
-            <input type="checkbox" id="toggle" autoComplete="off" />
           <div className="listComponent"><Lists /></div>
           {/* <!-- end of hamburger menu icon --> */}
               <Route path="/quickFlickPicker25/:keyword?"  component={MovieSearch} />

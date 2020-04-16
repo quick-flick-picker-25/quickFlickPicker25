@@ -1,12 +1,14 @@
 /* HAM NAV STYLES */
+
 input[type="checkbox"] {
   /*hide the input, we don't need to see it */
   display: none;
 }
 
 .listComponent {
-  transition: all 0.8;
+  transition: all 0.8s;
 }
+
 .toggle {
   align-self: start;
   position: fixed;
@@ -41,14 +43,17 @@ input[type="checkbox"] {
 }
 
 /* LOGO & Movie Search Magnifying Glass Styling */
+
 .logoAndSearch {
-  position: absolute;
+  position: fixed;
   display: flex;
   align-items: center;
   right: 0;
-  margin: 40px;
   color: #5F746C;
   transition: 0.3s;
+  width: 100%;
+  justify-content: flex-end;
+  background-color: white;
 }
 
 .logoAndSearch a:hover {
@@ -63,14 +68,24 @@ input[type="checkbox"] {
 .logoImg {
   width: 115px;
   margin-left: 30px;
+  margin: 20px;
+}
+.logoImg img {
+  height: auto;
 }
 
 @media (max-width: 840px) {
   .toggle {
-    display:block;
+    display: block;
   }
   input[type="checkbox"]:checked~.listComponent {
     left: 0;
+    /*when the checkbox is checked, show the menu*/
+  }
+  input[type="checkbox"]:checked+.toggle {
+    left: 0;
+    top:0;
+    /* right: 5%; */
     /*when the checkbox is checked, show the menu*/
   }
   .listComponent {

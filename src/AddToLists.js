@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
-import './addToLists.css';
 import GetMovieDetails from './GetMovieDetails.js';
 import swal from 'sweetalert';
 
