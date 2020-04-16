@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/quickFlickPicker25/precache-manifest.313f0095e35b94acaf1a726f405a7e6e.js"
+  "/quickFlickPicker25/precache-manifest.b773f03a3ac3e7a66e168eb5a3f6992f.js"
 );
 
 self.addEventListener('message', (event) => {
